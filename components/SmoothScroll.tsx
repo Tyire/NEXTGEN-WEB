@@ -11,6 +11,9 @@ import { useEffect } from "react";
 export function SmoothScroll() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Desktop pointers only — mobile/touch keeps 100% native scroll so Lenis can
+    // never interfere with touch gestures (the recurring mobile-scroll culprit).
+    if (!window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches) return;
 
     let lenis: { raf: (t: number) => void; destroy: () => void } | null = null;
     let raf = 0;

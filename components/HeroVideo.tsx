@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-// Fibre-data hero clip (Pexels 3130284, see public/videos/ATTRIBUTION.md).
+// Landing hero clip (New-Banner, transcoded to webm+mp4, see ATTRIBUTION.md).
 // Autoplays muted/looping; pauses for users who prefer reduced motion.
 export function HeroVideo({ className = "" }: { className?: string }) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -32,7 +32,6 @@ export function HeroVideo({ className = "" }: { className?: string }) {
       // mobile) without touching the file, so playback stays smooth.
       style={{ backgroundColor: "#0a0d0c", filter: "brightness(1.08) contrast(1.07) saturate(1.18)" }}
     >
-      <source src="/videos/hero-video.webm" type="video/webm" />
       <source src="/videos/hero-video.mp4" type="video/mp4" />
     </video>
   );
