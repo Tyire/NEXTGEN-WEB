@@ -8,6 +8,7 @@ import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/JsonLd";
 import { RegisterSW } from "@/components/RegisterSW";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { BackToTop } from "@/components/BackToTop";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space",
@@ -89,6 +90,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
+        <SmoothScroll />
         <OrganizationJsonLd />
         <WebsiteJsonLd />
         <RegisterSW />

@@ -6,7 +6,19 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 import { HumanMoment } from "@/components/sections/HumanMoment";
 import { PlansJsonLd } from "@/components/JsonLd";
 import { HeroVideo } from "@/components/HeroVideo";
+import { Reveal } from "@/components/Reveal";
 import { coverageZones, site } from "@/lib/site";
+
+const marqueeItems = [
+  "GPON Fibre",
+  "99.9% Uptime",
+  "Symmetrical Speeds",
+  "3-Day Install",
+  "Carrier-Grade Core",
+  "No Data Caps",
+  "Lagos-Wide Coverage",
+  "Low-Latency Core",
+];
 
 const why = [
   { k: "Fiber, not fixed-wireless", d: "GPON glass to your premises means no weather drops, no shared-tower congestion at 8pm." },
@@ -36,26 +48,27 @@ export default function Home() {
         {/* No dark overlay — the video stays bright. Text legibility comes from
             .hero-pop text-shadow + a faint bottom fade for the stat row only. */}
         <div className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-t from-[#060807]/45 to-transparent" />
-        <span className="pointer-events-none absolute -top-32 left-[-10%] -z-10 h-[480px] w-[480px] rounded-full bg-[var(--color-brand-red)] opacity-[0.18] blur-[150px]" />
+        <span className="aurora pointer-events-none absolute -top-32 left-[-10%] -z-10 h-[520px] w-[520px] rounded-full bg-[var(--color-brand-red)] opacity-[0.22] blur-[150px]" />
+        <span className="aurora pointer-events-none absolute -bottom-24 right-[-8%] -z-10 h-[440px] w-[440px] rounded-full bg-[var(--color-brand-amber)] opacity-[0.16] blur-[150px] [animation-delay:-6s]" />
 
         <Container>
           <div className="hero-pop max-w-3xl py-28 md:py-32">
-            <h1 className="display mt-6 text-5xl font-semibold text-[var(--color-fg)] sm:text-6xl md:text-7xl">
+            <h1 className="display rise mt-6 text-6xl font-semibold leading-[0.95] text-[var(--color-fg)] [animation-delay:0.1s] sm:text-7xl md:text-8xl">
               Say goodbye to
               <br />
-              <span className="brand-text">buffering.</span>
+              <span className="text-flow">buffering.</span>
             </h1>
-            <p className="mt-7 max-w-md text-lg leading-relaxed text-[var(--color-fg-muted)]">
+            <p className="rise mt-7 max-w-md text-lg leading-relaxed text-[var(--color-fg-muted)] [animation-delay:0.28s]">
               Fast, unlimited fibre for Lagos homes and businesses — stream, work and game
               with no caps and no drama.
             </p>
-            <div className="mt-9 flex flex-wrap items-center gap-3">
+            <div className="rise mt-9 flex flex-wrap items-center gap-3 [animation-delay:0.42s]">
               <Button href={site.selfcare.onboard} variant="solid">Check Coverage <Arrow /></Button>
               <Button href="/plans" variant="outline">See fibre plans</Button>
             </div>
 
             {/* inline speed proof */}
-            <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 font-mono text-xs uppercase tracking-[0.16em] text-[var(--color-fg-faint)]">
+            <div className="rise mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 font-mono text-xs uppercase tracking-[0.16em] text-[var(--color-fg-faint)] [animation-delay:0.56s]">
               <span>↑↓ Symmetrical</span>
               <span className="hidden h-3 w-px bg-[var(--color-hairline)] sm:block" />
               <span>STM-16 capable</span>
@@ -66,12 +79,31 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* ── CREDENTIALS MARQUEE — infinite scrolling proof strip ─────── */}
+      <div className="marquee-mask relative overflow-hidden border-y border-[var(--color-hairline)] bg-[var(--color-void)] py-4">
+        <div className="marquee-track">
+          {[0, 1].map((dup) => (
+            <div key={dup} className="flex shrink-0 items-center" aria-hidden={dup === 1}>
+              {marqueeItems.map((m) => (
+                <span
+                  key={m}
+                  className="flex items-center gap-5 whitespace-nowrap px-5 font-mono text-sm uppercase tracking-[0.18em] text-[var(--color-fg-muted)]"
+                >
+                  {m}
+                  <span className="h-1.5 w-1.5 rounded-full brand-gradient" />
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
       <TrustBand />
 
       {/* ── SERVICES ─────────────────────────────────────────── */}
       <section className="relative py-24">
         <Container>
-          <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <Reveal className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div className="max-w-xl">
               <Eyebrow>What we run</Eyebrow>
               <h2 className="display mt-4 text-4xl font-semibold text-[var(--color-fg)] md:text-5xl">
@@ -82,8 +114,10 @@ export default function Home() {
               No bundled clutter. Fiber internet, voice and enterprise transport — each built
               on the same carrier-grade fiber core.
             </p>
-          </div>
-          <ServiceGrid />
+          </Reveal>
+          <Reveal delay={0.12}>
+            <ServiceGrid />
+          </Reveal>
         </Container>
       </section>
 
@@ -102,7 +136,7 @@ export default function Home() {
       {/* ── WHY ──────────────────────────────────────────────── */}
       <section className="relative border-y border-[var(--color-hairline)] bg-[var(--color-void)] py-24">
         <Container>
-          <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+          <Reveal className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
               <Eyebrow>Why NextGen</Eyebrow>
               <h2 className="display mt-4 text-4xl font-semibold text-[var(--color-fg)] md:text-5xl">
@@ -124,14 +158,14 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* ── COVERAGE TEASER ──────────────────────────────────── */}
       <section className="py-24">
         <Container>
-          <div className="rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 md:p-12">
+          <Reveal className="rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 md:p-12 lift hover:border-[var(--color-brand-orange)]/40 hover:shadow-[0_24px_60px_-30px_rgba(0,0,0,0.5)]">
             <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
               <div>
                 <Eyebrow>Live coverage</Eyebrow>
@@ -159,7 +193,7 @@ export default function Home() {
                 + your estate?
               </a>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
 

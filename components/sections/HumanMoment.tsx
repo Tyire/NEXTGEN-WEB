@@ -1,5 +1,6 @@
 import { Container, Eyebrow } from "@/components/ui";
 import { PeopleImage } from "@/components/PeopleImage";
+import { Reveal } from "@/components/Reveal";
 import { imagery } from "@/data/imagery";
 
 /**
@@ -25,16 +26,16 @@ export function HumanMoment({
   return (
     <section className={`py-20 ${bg}`}>
       <Container>
-        <div className="grid items-center gap-10 lg:grid-cols-2">
+        <Reveal className="grid items-center gap-10 lg:grid-cols-2">
           <div className={side === "left" ? "lg:order-2" : ""}>
             <Eyebrow>{eyebrow}</Eyebrow>
             <h2 className="display mt-4 text-3xl font-semibold text-[var(--color-fg)] md:text-4xl">{title}</h2>
             <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--color-fg-muted)]">{body}</p>
           </div>
-          <div className={`relative overflow-hidden aspect-[4/3] rounded-[calc(var(--radius)+4px)] border border-[var(--color-hairline)] ${side === "left" ? "lg:order-1" : ""}`}>
-            <PeopleImage slot={slot} className="h-full w-full object-cover" sizes="(max-width: 1024px) 100vw, 50vw" />
+          <div className={`lift group relative overflow-hidden aspect-[4/3] rounded-[calc(var(--radius)+4px)] border border-[var(--color-hairline)] ${side === "left" ? "lg:order-1" : ""}`}>
+            <PeopleImage slot={slot} className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-105" sizes="(max-width: 1024px) 100vw, 50vw" />
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

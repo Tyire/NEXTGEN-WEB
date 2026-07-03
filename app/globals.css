@@ -135,6 +135,95 @@ a, button, [role="button"], select, summary, label {
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
 }
+/* ── Motion & showcase (mobile-safe, reduced-motion-aware) ───────────────── */
+/* Every hiding state here is opacity/transform only — never clip-path/height —
+   so IntersectionObserver always sees the element and content can't get stuck. */
+
+/* On-load staggered entrance (hero). Ends fully visible; use inline
+   `animation-delay` for the stagger. */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
+}
+.rise { animation: rise-in 0.85s var(--ease-out) both; }
+
+/* Scroll reveal — Reveal.tsx adds .is-in when the block enters view. */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 28px));
+  transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+.reveal-up.is-in { opacity: 1; transform: none; }
+
+/* Animated flowing brand gradient on text (the hero accent word). */
+.text-flow {
+  background: linear-gradient(
+    100deg,
+    var(--color-brand-red),
+    var(--color-brand-orange) 42%,
+    var(--color-brand-amber) 66%,
+    var(--color-brand-orange) 90%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: text-flow 5.5s linear infinite;
+}
+@keyframes text-flow { to { background-position: 220% center; } }
+
+/* Slow-drifting aurora glow (hero / CTA background blobs). GPU-only transform. */
+@keyframes aurora-drift {
+  0%,  100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%       { transform: translate3d(5%, -4%, 0) scale(1.16); }
+}
+.aurora { animation: aurora-drift 16s ease-in-out infinite; }
+
+/* Infinite marquee ticker (credentials band). Track duplicates its content, so
+   translating -50% loops seamlessly. */
+@keyframes marquee-x { to { transform: translateX(-50%); } }
+.marquee-track {
+  display: inline-flex;
+  width: max-content;
+  animation: marquee-x 30s linear infinite;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* Card hover lift utility (composes with existing card borders). */
+.lift {
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out);
+}
+.lift:hover { transform: translateY(-5px); }
+
+/* Featured-plan breathing glow. */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 12px 40px -16px rgba(255, 90, 44, 0.45); }
+  50%      { box-shadow: 0 20px 60px -18px rgba(255, 90, 44, 0.75); }
+}
+.glow-pulse { animation: glow-pulse 3.6s ease-in-out infinite; }
+
+/* Animated gradient hairline (section dividers). */
+.gradient-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-brand-orange), transparent);
+  background-size: 200% 100%;
+  animation: rule-slide 6s linear infinite;
+}
+@keyframes rule-slide { to { background-position: 200% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rise, .aurora, .marquee-track, .glow-pulse, .gradient-rule { animation: none !important; }
+  .text-flow { animation: none; }
+  .reveal-up { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
 ::selection { background: var(--color-brand-orange); color: #1a0d05; }
 
 :where(a, button, input, textarea, select, [tabindex]):focus-visible {

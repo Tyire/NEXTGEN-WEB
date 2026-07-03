@@ -1,4 +1,5 @@
 import { Container, Eyebrow, Arrow } from "@/components/ui";
+import { Reveal } from "@/components/Reveal";
 import { plans, formatNaira, plansUpdatedNote, type Plan } from "@/data/plans";
 
 export function PlansSection({
@@ -27,11 +28,11 @@ export function PlansSection({
           </p>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
+        <Reveal className="grid gap-5 md:grid-cols-3">
           {items.map((p) => (
             <PlanCard key={p.id} plan={p} />
           ))}
-        </div>
+        </Reveal>
 
         {!showAll && (
           <div className="mt-10">
@@ -51,10 +52,10 @@ export function PlansSection({
 function PlanCard({ plan }: { plan: Plan }) {
   return (
     <div
-      className={`relative flex flex-col rounded-[var(--radius)] border bg-[var(--color-surface)] p-7 ${
+      className={`lift relative flex flex-col rounded-[var(--radius)] border bg-[var(--color-surface)] p-7 hover:border-[var(--color-brand-orange)]/60 ${
         plan.featured
-          ? "border-[var(--color-brand-orange)]/60 shadow-[0_12px_40px_-16px_rgba(255,90,44,0.5)]"
-          : "border-[var(--color-hairline)]"
+          ? "glow-pulse border-[var(--color-brand-orange)]/60"
+          : "border-[var(--color-hairline)] hover:shadow-[0_18px_44px_-24px_rgba(0,0,0,0.5)]"
       }`}
     >
       {plan.featured && (

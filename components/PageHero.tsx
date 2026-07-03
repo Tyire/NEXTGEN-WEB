@@ -65,11 +65,13 @@ export function PageHero({
             ))}
           </ol>
         </nav>
-        <Eyebrow>{eyebrow}</Eyebrow>
-        <h1 className="display mt-5 max-w-3xl text-4xl font-semibold text-[var(--color-fg)] sm:text-5xl md:text-6xl">
-          {title} {highlight && <span className="brand-text">{highlight}</span>}
+        <div className="rise [animation-delay:0.05s]">
+          <Eyebrow>{eyebrow}</Eyebrow>
+        </div>
+        <h1 className="display rise mt-5 max-w-3xl text-4xl font-semibold text-[var(--color-fg)] [animation-delay:0.15s] sm:text-5xl md:text-6xl">
+          {title} {highlight && <span className="text-flow">{highlight}</span>}
         </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-fg-muted)]">{sub}</p>
+        <p className="rise mt-6 max-w-2xl text-lg leading-relaxed text-[var(--color-fg-muted)] [animation-delay:0.3s]">{sub}</p>
       </Container>
     </section>
   );
