@@ -1,0 +1,10 @@
+<svg viewBox="0 0 340 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="telcomGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF1F4D"/>
+      <stop offset="100%" stop-color="#FFA70F"/>
+    </linearGradient>
+  </defs>
+  <text x="0" y="62" font-family="Poppins, 'Arial Black', Helvetica, sans-serif" font-weight="800" font-size="58" fill="#000000" letter-spacing="-1">NextGen</text>
+  <text x="3" y="100" font-family="Poppins, 'Arial Black', Helvetica, sans-serif" font-weight="700" font-size="22" fill="url(#telcomGrad)" letter-spacing="4">TELCOM</text>
+</svg>

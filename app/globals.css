@@ -1,26 +1,144 @@
 @import "tailwindcss";
 
+/* Manual dark mode driven by [data-theme="dark"] on <html> (not prefers-color-scheme). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ── NextGen Telcoms — dual-theme design system ─────────────────────── */
+/* Semantic tokens are CSS variables that FLIP per theme. Components read
+   var(--color-ink) etc. directly, so the whole UI re-themes from here. */
+
+/* Constant tokens registered with Tailwind (brand colors, fonts) — NOT theme-flipping. */
+@theme {
+  --color-brand-red: #ff1f4d;
+  --color-brand-orange: #ff6b2c;
+  --color-brand-amber: #ffa70f;
+  --color-brand: #ff5a2c;
+  --font-display: var(--font-space), "Segoe UI", system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-space), ui-monospace, monospace; /* labels/numbers use Space Grotesk (no separate mono) */
+  --radius: 14px;
+}
+
+/* Theme-flipping semantic tokens — read via var(--color-*) in arbitrary utilities. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* LIGHT THEME (default) — bright, warm, professional */
+  --color-ink: #faf8f4;      /* page background */
+  --color-void: #f1ede4;     /* alt bands / footer */
+  --color-surface: #ffffff;  /* cards */
+  --color-surface-2: #f6f2ea;
+  --color-hairline: #e6e0d6; /* borders */
+  --color-fg: #17150f;       /* primary text */
+  --color-fg-muted: #544f48;
+  --color-fg-faint: #837d74;
+  --color-paper: #ffffff;
+  --color-fg-ink: #17150f;
+  --color-success: #2e9e6b;
+  color-scheme: light;
+
+  /* Emil easing curves — stronger than the built-in CSS easings (theme-agnostic). */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+[data-theme="dark"] {
+  /* DARK THEME — near-black industrial-editorial */
+  --color-ink: #0e1211;
+  --color-void: #0a0d0c;
+  --color-surface: #141a18;
+  --color-surface-2: #1b2320;
+  --color-hairline: #283330;
+  --color-fg: #f4f1ec;
+  --color-fg-muted: #a7b0ac;
+  --color-fg-faint: #6c7773;
+  --color-paper: #141a18;
+  --color-fg-ink: #f4f1ec;
+  --color-success: #46c08a;
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--color-hairline);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ── Utilities ──────────────────────────────────────────────────────── */
+/* ponytail: gradient pulled back to accent-only — solid brand fill everywhere;
+   the 3-stop gradient survives only on the featured-plan badge (.brand-gradient-accent). */
+.brand-gradient {
+  background-color: var(--color-brand);
+}
+.brand-gradient-accent {
+  background-image: linear-gradient(100deg, var(--color-brand-red), var(--color-brand-orange) 50%, var(--color-brand-amber));
+}
+.brand-text {
+  color: var(--color-brand-orange);
+}
+/* Hero text legibility over a bright (un-overlaid) video — shadow, not a scrim. */
+.hero-pop { text-shadow: 0 2px 22px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.6); }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-fg-faint);
+}
+.display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+  text-wrap: balance; /* avoid heading widows */
+}
+
+/* Snappier taps: kill the 300ms double-tap delay + set an intentional tap highlight. */
+a, button, [role="button"], select, summary, label {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.grid-bg {
+  background-image:
+    linear-gradient(var(--color-hairline) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-hairline) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+}
+::selection { background: var(--color-brand-orange); color: #1a0d05; }
+
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand-orange);
+  outline-offset: 2px;
+  border-radius: 4px;
 }

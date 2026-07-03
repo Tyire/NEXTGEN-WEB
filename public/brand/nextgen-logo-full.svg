@@ -1,0 +1,38 @@
+<svg viewBox="0 0 460 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradH" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF1F4D"/>
+      <stop offset="100%" stop-color="#FFA70F"/>
+    </linearGradient>
+    <linearGradient id="gradV" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FFA70F"/>
+      <stop offset="100%" stop-color="#FF1F4D"/>
+    </linearGradient>
+    <linearGradient id="gradTail" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFA70F"/>
+      <stop offset="100%" stop-color="#FF1F4D"/>
+    </linearGradient>
+    <linearGradient id="gradFold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0481A"/>
+      <stop offset="100%" stop-color="#C7350F"/>
+    </linearGradient>
+    <linearGradient id="telcomGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF1F4D"/>
+      <stop offset="100%" stop-color="#FFA70F"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ICON MARK -->
+  <g>
+    <rect x="64" y="8" width="30" height="70" rx="15" fill="url(#gradV)"/>
+    <rect x="30" y="42" width="32" height="68" rx="16" fill="url(#gradTail)"/>
+    <rect x="5" y="18" width="86" height="40" rx="20" fill="url(#gradH)"/>
+    <path d="M54 45 C64 42 75 45 83 51 C75 61 62 64 52 58 C48 55 49 49 54 45 Z" fill="url(#gradFold)"/>
+  </g>
+
+  <!-- WORDMARK (offset to sit beside icon) -->
+  <g transform="translate(118, 0)">
+    <text x="0" y="62" font-family="Poppins, 'Arial Black', Helvetica, sans-serif" font-weight="800" font-size="58" fill="#000000" letter-spacing="-1">NextGen</text>
+    <text x="3" y="100" font-family="Poppins, 'Arial Black', Helvetica, sans-serif" font-weight="700" font-size="22" fill="url(#telcomGrad)" letter-spacing="4">TELCOM</text>
+  </g>
+</svg>

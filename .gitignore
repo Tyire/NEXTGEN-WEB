@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# graphify knowledge-graph output (regenerable)
+/graphify-out/
+
+# packaged deploy artifact (regenerable from `npm run build`)
+/nextgen-deploy.zip

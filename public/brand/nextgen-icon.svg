@@ -1,0 +1,32 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradH" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF1F4D"/>
+      <stop offset="100%" stop-color="#FFA70F"/>
+    </linearGradient>
+    <linearGradient id="gradV" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FFA70F"/>
+      <stop offset="100%" stop-color="#FF1F4D"/>
+    </linearGradient>
+    <linearGradient id="gradTail" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFA70F"/>
+      <stop offset="100%" stop-color="#FF1F4D"/>
+    </linearGradient>
+    <linearGradient id="gradFold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0481A"/>
+      <stop offset="100%" stop-color="#C7350F"/>
+    </linearGradient>
+  </defs>
+
+  <!-- vertical capsule top-right (back layer) -->
+  <rect x="64" y="8" width="30" height="70" rx="15" fill="url(#gradV)"/>
+
+  <!-- tail capsule (back layer) -->
+  <rect x="30" y="42" width="32" height="68" rx="16" fill="url(#gradTail)"/>
+
+  <!-- main horizontal capsule (front layer) -->
+  <rect x="5" y="18" width="86" height="40" rx="20" fill="url(#gradH)"/>
+
+  <!-- fold shadow flap (front-most) -->
+  <path d="M54 45 C64 42 75 45 83 51 C75 61 62 64 52 58 C48 55 49 49 54 45 Z" fill="url(#gradFold)"/>
+</svg>
