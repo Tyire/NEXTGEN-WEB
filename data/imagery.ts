@@ -54,53 +54,53 @@ export const imagery: Record<string, ImageSlot> = {
   },
   "banner-connectivity": {
     "id": "banner-connectivity",
-    "query": "fiber optic",
+    "query": "fiber optic patch panel",
     "orientation": "landscape",
     "src": "/images/people/banner-connectivity",
-    "alt": "Close-up of illuminated fiber optic lights in blue and green colors, showcasing modern technology.",
-    "avgColor": "#0C3A4A",
-    "photographer": "Atlantic Ambience",
-    "photographerUrl": "https://www.pexels.com/@freestockpro"
+    "alt": "Fiber-optic patch panel with teal and yellow LC connectors plugged into a network switch.",
+    "avgColor": "#080808",
+    "photographer": "Brett Sayles",
+    "photographerUrl": "https://www.pexels.com/@brett-sayles"
   },
   "banner-voice": {
     "id": "banner-voice",
-    "query": "communication tower",
+    "query": "light trails signal motion",
     "orientation": "landscape",
     "src": "/images/people/banner-voice",
-    "alt": "A low-angle shot of a tall metal communications tower with multiple antennas against a clear blue sky.",
-    "avgColor": "#66829A",
-    "photographer": "Edouard Matte",
-    "photographerUrl": "https://www.pexels.com/@edouard-matte-50967295"
+    "alt": "Long-exposure orange light trails swirling against a deep blue background.",
+    "avgColor": "#586878",
+    "photographer": "Jorge Ural",
+    "photographerUrl": "https://www.pexels.com/@jorgeural"
   },
   "banner-enterprise": {
     "id": "banner-enterprise",
-    "query": "server room data center",
+    "query": "abstract data center circuitry",
     "orientation": "landscape",
     "src": "/images/people/banner-enterprise",
-    "alt": "Close-up of server racks in a data center highlighting modern technology infrastructure.",
-    "avgColor": "#244D4F",
-    "photographer": "panumas nikhomkhai",
-    "photographerUrl": "https://www.pexels.com/@cookiecutter"
+    "alt": "Abstract 3D render of glowing orange data-center towers and circuitry.",
+    "avgColor": "#080808",
+    "photographer": "Pachon in Motion",
+    "photographerUrl": "https://www.pexels.com/@pachon-in-motion-426015731"
   },
   "banner-plans": {
     "id": "banner-plans",
-    "query": "lagos nigeria city skyline",
+    "query": "fiber cables warm gradient",
     "orientation": "landscape",
     "src": "/images/people/banner-plans",
-    "alt": "Scenic view of Lagos skyline featuring modern buildings and a motorboat in the lagoon under a bright sky.",
-    "avgColor": "#A7B1A8",
-    "photographer": "Onakoya Opeyemi",
-    "photographerUrl": "https://www.pexels.com/@onakoya-opeyemi-316476857"
+    "alt": "Slender fiber-optic cables curving across a warm pink and orange gradient.",
+    "avgColor": "#f89898",
+    "photographer": "Marek Piwnicki",
+    "photographerUrl": "https://www.pexels.com/@marek-piwnicki-3907296"
   },
   "banner-contact": {
     "id": "banner-contact",
-    "query": "abstract network connection technology",
+    "query": "fiber optic starburst",
     "orientation": "landscape",
     "src": "/images/people/banner-contact",
-    "alt": "A robotic hand reaching into a digital network on a blue background, symbolizing AI technology.",
-    "avgColor": "#0F3F6D",
-    "photographer": "Tara Winstead",
-    "photographerUrl": "https://www.pexels.com/@tara-winstead"
+    "alt": "Fiber-optic strands radiating outward in a dark starburst of blue and red light.",
+    "avgColor": "#181828",
+    "photographer": "Photograph",
+    "photographerUrl": "https://www.pexels.com/@photograph"
   }
 };
 
