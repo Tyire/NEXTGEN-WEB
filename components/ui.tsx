@@ -50,7 +50,7 @@ export function Button({ href, variant = "primary", className = "", children, ..
     "group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold tracking-wide transition-[transform,box-shadow,border-color,color] duration-200 ease-[var(--ease-out)] will-change-transform active:scale-[0.97]";
   const styles = {
     primary:
-      "brand-gradient text-[#180a04] shadow-[0_8px_30px_-8px_rgba(255,90,44,0.6)] hover:-translate-y-0.5 hover:shadow-[0_14px_44px_-10px_rgba(255,90,44,0.75)]",
+      "brand-gradient text-white shadow-[0_8px_30px_-8px_rgba(255,90,44,0.6)] hover:-translate-y-0.5 hover:shadow-[0_14px_44px_-10px_rgba(255,90,44,0.75)]",
     outline:
       "border border-[var(--color-hairline)] text-[var(--color-fg)] hover:border-[var(--color-brand-orange)] hover:text-[var(--color-brand-amber)]",
     ghost: "text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]",

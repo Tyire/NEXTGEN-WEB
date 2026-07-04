@@ -41,18 +41,20 @@
 }
 
 [data-theme="dark"] {
-  /* DARK THEME — near-black industrial-editorial */
-  --color-ink: #0e1211;
-  --color-void: #0a0d0c;
-  --color-surface: #141a18;
-  --color-surface-2: #1b2320;
-  --color-hairline: #283330;
-  --color-fg: #f4f1ec;
-  --color-fg-muted: #a7b0ac;
-  --color-fg-faint: #6c7773;
-  --color-paper: #141a18;
-  --color-fg-ink: #f4f1ec;
-  --color-success: #46c08a;
+  /* DARK THEME — warm, lifted "espresso" charcoal (not flat near-black). Slight
+     warmth complements the orange brand; surfaces sit clearly above the base for
+     depth, hairlines are visible, so the UI reads rich rather than muddy. */
+  --color-ink: #181410;      /* page background — lifted warm charcoal */
+  --color-void: #120f0c;     /* deepest bands (why / plans) */
+  --color-surface: #241f19;  /* cards — clearly elevated above ink */
+  --color-surface-2: #2e2820;
+  --color-hairline: #3d352c; /* warmer, more visible borders */
+  --color-fg: #f8f4ee;
+  --color-fg-muted: #b8afa4;
+  --color-fg-faint: #877d72;
+  --color-paper: #241f19;
+  --color-fg-ink: #f8f4ee;
+  --color-success: #4ac491;
   color-scheme: dark;
 }
 
@@ -197,19 +199,6 @@ a, button, [role="button"], select, summary, label {
 }
 .aurora { animation: aurora-drift 16s ease-in-out infinite; }
 
-/* Infinite marquee ticker (credentials band). Track duplicates its content, so
-   translating -50% loops seamlessly. */
-@keyframes marquee-x { to { transform: translateX(-50%); } }
-.marquee-track {
-  display: inline-flex;
-  width: max-content;
-  animation: marquee-x 30s linear infinite;
-}
-.marquee-mask {
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-
 /* Card hover lift utility (composes with existing card borders). */
 .lift {
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out),
@@ -234,7 +223,7 @@ a, button, [role="button"], select, summary, label {
 @keyframes rule-slide { to { background-position: 200% 0; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .rise, .aurora, .marquee-track, .glow-pulse, .gradient-rule { animation: none !important; }
+  .rise, .aurora, .glow-pulse, .gradient-rule { animation: none !important; }
   .text-flow { animation: none; }
   .reveal-up { opacity: 1 !important; transform: none !important; transition: none !important; }
 }

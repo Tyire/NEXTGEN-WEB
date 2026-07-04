@@ -17,8 +17,9 @@ ErrorDocument 404 /404.html
   <FilesMatch "\.(js|css|woff2?)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
-  # Media — 30 days
-  <FilesMatch "\.(avif|webp|png|jpe?g|gif|svg|ico|mp4|webm)$">
+  # Media — 30 days (.vid = mp4 bytes fetched as a blob to dodge IDM; keep its
+  # default octet-stream type so IDM ignores it — do NOT add a video MIME type).
+  <FilesMatch "\.(avif|webp|png|jpe?g|gif|svg|ico|mp4|webm|vid)$">
     Header set Cache-Control "public, max-age=2592000"
   </FilesMatch>
   # HTML — always revalidate so deploys go live immediately

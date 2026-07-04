@@ -9,17 +9,6 @@ import { HeroVideo } from "@/components/HeroVideo";
 import { Reveal } from "@/components/Reveal";
 import { coverageZones, site } from "@/lib/site";
 
-const marqueeItems = [
-  "GPON Fibre",
-  "99.9% Uptime",
-  "Symmetrical Speeds",
-  "3-Day Install",
-  "Carrier-Grade Core",
-  "No Data Caps",
-  "Lagos-Wide Coverage",
-  "Low-Latency Core",
-];
-
 const why = [
   { k: "Fiber, not fixed-wireless", d: "GPON glass to your premises means no weather drops, no shared-tower congestion at 8pm." },
   { k: "Symmetrical by design", d: "Upload as fast as you download — built for creators, video calls and backups." },
@@ -49,6 +38,8 @@ export default function Home() {
             the bright-orange accent word both pop, while the vivid teal right side
             fades to transparent and stays fully visible. */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#050706]/92 via-[#050706]/62 via-55% to-transparent" />
+        {/* Gentle overall veil so the whole hero reads calmly behind the copy. */}
+        <div className="absolute inset-0 -z-10 bg-[#050706]/28" />
         <div className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-t from-[#060807]/45 to-transparent" />
         <span className="aurora pointer-events-none absolute -top-32 left-[-10%] -z-10 h-[520px] w-[520px] rounded-full bg-[var(--color-brand-red)] opacity-[0.22] blur-[150px]" />
         <span className="aurora pointer-events-none absolute -bottom-24 right-[-8%] -z-10 h-[440px] w-[440px] rounded-full bg-[var(--color-brand-amber)] opacity-[0.16] blur-[150px] [animation-delay:-6s]" />
@@ -80,25 +71,6 @@ export default function Home() {
           </div>
         </Container>
       </section>
-
-      {/* ── CREDENTIALS MARQUEE — infinite scrolling proof strip ─────── */}
-      <div className="marquee-mask relative overflow-hidden border-y border-[var(--color-hairline)] bg-[var(--color-void)] py-4">
-        <div className="marquee-track">
-          {[0, 1].map((dup) => (
-            <div key={dup} className="flex shrink-0 items-center" aria-hidden={dup === 1}>
-              {marqueeItems.map((m) => (
-                <span
-                  key={m}
-                  className="flex items-center gap-5 whitespace-nowrap px-5 font-mono text-sm uppercase tracking-[0.18em] text-[var(--color-fg-muted)]"
-                >
-                  {m}
-                  <span className="h-1.5 w-1.5 rounded-full brand-gradient" />
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
 
       <TrustBand />
 
