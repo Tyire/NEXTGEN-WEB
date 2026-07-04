@@ -3,9 +3,13 @@
 /* Manual dark mode driven by [data-theme="dark"] on <html> (not prefers-color-scheme). */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* ── NextGen Telcoms — dual-theme design system ─────────────────────── */
-/* Semantic tokens are CSS variables that FLIP per theme. Components read
-   var(--color-ink) etc. directly, so the whole UI re-themes from here. */
+/* ══ NEXTGEN — "LAGOS ENERGY" design system ═══════════════════════════
+   Vivid sunset gradient (red → orange → amber) as the brand voice,
+   oversized Unbounded display type, sticker-bold shapes.
+
+   IRON RULE: no content is EVER hidden waiting for JavaScript. Scroll
+   reveals are CSS scroll-driven animations behind @supports — browsers
+   without support simply show everything. JS only adds polish.        */
 
 /* Constant tokens registered with Tailwind (brand colors, fonts) — NOT theme-flipping. */
 @theme {
@@ -13,67 +17,54 @@
   --color-brand-orange: #ff6b2c;
   --color-brand-amber: #ffa70f;
   --color-brand: #ff5a2c;
-  --font-display: var(--font-space), "Segoe UI", system-ui, sans-serif;
-  --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-mono: var(--font-space), ui-monospace, monospace; /* labels/numbers use Space Grotesk (no separate mono) */
-  --radius: 14px;
+  --font-display: var(--font-unbounded), "Arial Black", system-ui, sans-serif;
+  --font-sans: var(--font-instrument), "Segoe UI", system-ui, sans-serif;
+  --radius: 20px;
 }
 
 /* Theme-flipping semantic tokens — read via var(--color-*) in arbitrary utilities. */
 :root {
-  /* LIGHT THEME (default) — bright, warm, professional */
-  --color-ink: #faf8f4;      /* page background */
-  --color-void: #f1ede4;     /* alt bands / footer */
-  --color-surface: #ffffff;  /* cards */
-  --color-surface-2: #f6f2ea;
-  --color-hairline: #e6e0d6; /* borders */
-  --color-fg: #17150f;       /* primary text */
-  --color-fg-muted: #544f48;
-  --color-fg-faint: #837d74;
-  --color-paper: #ffffff;
-  --color-fg-ink: #17150f;
-  --color-success: #2e9e6b;
+  /* LIGHT — warm cream gallery with hot color pops */
+  --color-ink: #fff7ee;        /* page background */
+  --color-ink-glass: rgba(255, 247, 238, 0.92); /* header glass (explicit rgba — no color-mix dependency) */
+  --color-void: #ffedd9;       /* deep warm bands */
+  --color-surface: #ffffff;    /* cards */
+  --color-surface-2: #fff1e1;
+  --color-hairline: #f0dbc6;
+  --color-fg: #221016;
+  --color-fg-muted: #6d5a55;
+  --color-fg-faint: #a08b81;
+  --color-success: #1fa564;
+  --shadow-pop: 0 24px 48px -24px rgba(255, 60, 40, 0.35);
   color-scheme: light;
 
-  /* Emil easing curves — stronger than the built-in CSS easings (theme-agnostic). */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --grad-sunset: linear-gradient(115deg, #ff1f4d, #ff6b2c 48%, #ffa70f);
 }
 
 [data-theme="dark"] {
-  /* DARK THEME — warm, lifted "espresso" charcoal (not flat near-black). Slight
-     warmth complements the orange brand; surfaces sit clearly above the base for
-     depth, hairlines are visible, so the UI reads rich rather than muddy. */
-  --color-ink: #181410;      /* page background — lifted warm charcoal */
-  --color-void: #120f0c;     /* deepest bands (why / plans) */
-  --color-surface: #241f19;  /* cards — clearly elevated above ink */
-  --color-surface-2: #2e2820;
-  --color-hairline: #3d352c; /* warmer, more visible borders */
-  --color-fg: #f8f4ee;
-  --color-fg-muted: #b8afa4;
-  --color-fg-faint: #877d72;
-  --color-paper: #241f19;
-  --color-fg-ink: #f8f4ee;
-  --color-success: #4ac491;
+  /* DARK — plum-black night market, colors run hotter */
+  --color-ink: #180b12;
+  --color-ink-glass: rgba(24, 11, 18, 0.9);
+  --color-void: #0f050b;
+  --color-surface: #251320;
+  --color-surface-2: #2f1a29;
+  --color-hairline: #40263a;
+  --color-fg: #fff3ea;
+  --color-fg-muted: #c9b0ac;
+  --color-fg-faint: #91797a;
+  --color-success: #3ecf8e;
+  --shadow-pop: 0 24px 56px -20px rgba(255, 60, 60, 0.45);
   color-scheme: dark;
 }
 
-* {
-  border-color: var(--color-hairline);
-}
+* { border-color: var(--color-hairline); }
 
 html {
   scroll-behavior: smooth;
   background: var(--color-ink);
 }
-
-/* Lenis smooth-scroll runtime classes (desktop only; JS attaches these to <html>). */
-html.lenis,
-html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-.lenis.lenis-stopped { overflow: hidden; }
-.lenis.lenis-smooth iframe { pointer-events: none; }
 
 body {
   background: var(--color-ink);
@@ -81,151 +72,195 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  overflow-x: clip;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-  }
-}
-
-/* ── Utilities ──────────────────────────────────────────────────────── */
-/* ponytail: gradient pulled back to accent-only — solid brand fill everywhere;
-   the 3-stop gradient survives only on the featured-plan badge (.brand-gradient-accent). */
-.brand-gradient {
-  background-color: var(--color-brand);
-}
-.brand-gradient-accent {
-  background-image: linear-gradient(100deg, var(--color-brand-red), var(--color-brand-orange) 50%, var(--color-brand-amber));
-}
-.brand-text {
-  color: var(--color-brand-orange);
-}
-/* Hero text legibility over a bright (un-overlaid) video — shadow, not a scrim. */
-.hero-pop { text-shadow: 0 2px 22px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.6); }
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-fg-faint);
-}
-.display {
-  font-family: var(--font-display);
-  font-optical-sizing: auto;
-  letter-spacing: -0.02em;
-  line-height: 0.98;
-  text-wrap: balance; /* avoid heading widows */
-}
-
-/* Snappier taps: kill the 300ms double-tap delay + set an intentional tap highlight. */
+/* Snappier taps: kill the 300ms double-tap delay + intentional tap highlight. */
 a, button, [role="button"], select, summary, label {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
+
+/* ── Typography ─────────────────────────────────────────────────────── */
+.display {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+.eyebrow {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-fg-faint);
+}
+/* Sunset gradient text (headline accent words, prices). */
+.grad-text {
+  background-image: var(--grad-sunset);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+/* Giant ghost word behind sections — outline only, purely decorative. */
+.ghost {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-hairline);
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ── Brand surfaces ─────────────────────────────────────────────────── */
+.grad-sunset { background-image: var(--grad-sunset); }
+.grad-border {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+    var(--grad-sunset) border-box;
+}
+/* Hero text legibility over the un-scrimmed video. */
+.hero-pop { text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.6); }
+
 .grain::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.05;
   z-index: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.grid-bg {
-  background-image:
-    linear-gradient(var(--color-hairline) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-hairline) 1px, transparent 1px);
-  background-size: 64px 64px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
-}
-/* ── Motion & showcase (mobile-safe, reduced-motion-aware) ───────────────── */
-/* Every hiding state here is opacity/transform only — never clip-path/height —
-   so IntersectionObserver always sees the element and content can't get stuck. */
 
-/* On-load staggered entrance (hero). Ends fully visible; use inline
-   `animation-delay` for the stagger. */
+/* Pre-blurred radial "energy blob" — NO filter:blur (mobile-GPU safe). */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(closest-side, var(--blob-c, rgba(255, 107, 44, 0.35)), transparent 70%);
+}
+
+/* ── Motion (all compositor-only: opacity/transform) ────────────────── */
+/* Hero entrance — ENDS VISIBLE, safe everywhere. Stagger via animation-delay. */
 @keyframes rise-in {
-  from { opacity: 0; transform: translateY(26px); }
+  from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: none; }
 }
-.rise { animation: rise-in 0.85s var(--ease-out) both; }
+.rise { animation: rise-in 0.9s var(--ease-out) both; }
 
-/* Scroll reveal — Reveal.tsx adds .is-in when the block enters view. */
-.reveal-up {
-  opacity: 0;
-  transform: translateY(var(--reveal-y, 28px));
-  transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out);
-  transition-delay: var(--reveal-delay, 0s);
-  will-change: opacity, transform;
+/* Scroll reveals — CSS scroll-driven only. Unsupported browsers (and any
+   JS failure — there IS no JS here) simply show the content. */
+@supports (animation-timeline: view()) {
+  @keyframes sr-in {
+    from { opacity: 0.001; transform: translateY(36px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .sr {
+    animation: sr-in 1ms linear both;
+    animation-timeline: view();
+    animation-range: entry 5% entry 45%;
+  }
+  @keyframes sr-pop {
+    from { opacity: 0.001; transform: translateY(28px) scale(0.96); }
+    to   { opacity: 1; transform: none; }
+  }
+  .sr-pop {
+    animation: sr-pop 1ms linear both;
+    animation-timeline: view();
+    animation-range: entry 5% entry 40%;
+  }
 }
-.reveal-up.is-in { opacity: 1; transform: none; }
 
-/* Animated flowing brand gradient on text (the hero accent word). */
+/* Marquee ticker — the signature Lagos Energy strip. Track holds TWO copies
+   of the content; sliding -50% loops seamlessly. */
+@keyframes ticker-slide { to { transform: translate3d(-50%, 0, 0); } }
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-slide var(--ticker-speed, 28s) linear infinite;
+  will-change: transform;
+}
+
+/* Slow-drifting glow (transform-only). */
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(4%, -5%, 0) scale(1.12); }
+}
+.drift { animation: drift 14s ease-in-out infinite; }
+
+/* Animated flowing gradient on text (hero accent word). */
 .text-flow {
-  background: linear-gradient(
-    100deg,
-    #ffb14a,
-    #ffc766 38%,
-    #ffe49a 66%,
-    #ffbe58 90%
-  );
-  background-size: 220% auto;
+  background-image: linear-gradient(100deg, #ff1f4d, #ff6b2c 30%, #ffc14a 55%, #ff6b2c 80%, #ff1f4d);
+  background-size: 240% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  /* Kill the inherited .hero-pop text-shadow — on a background-clip:text word it
-     paints a dark cloud that greys the gradient fill. The filter below replaces it. */
   text-shadow: none;
-  /* Soft DOWNWARD shadow only — an all-around (0 0) halo bleeds onto the strokes
-     and greys the fill. Offsetting it down keeps the orange bright while still
-     lifting the word off the video (the hero's left scrim does the heavy lifting). */
-  filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.6));
-  animation: text-flow 5.5s linear infinite;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55));
+  animation: text-flow 6s linear infinite;
 }
-@keyframes text-flow { to { background-position: 220% center; } }
+@keyframes text-flow { to { background-position: 240% center; } }
 
-/* Slow-drifting aurora glow (hero / CTA background blobs). GPU-only transform. */
-@keyframes aurora-drift {
-  0%,  100% { transform: translate3d(0, 0, 0) scale(1); }
-  50%       { transform: translate3d(5%, -4%, 0) scale(1.16); }
-}
-.aurora { animation: aurora-drift 16s ease-in-out infinite; }
-
-/* Card hover lift utility (composes with existing card borders). */
+/* Card hover lift. */
 .lift {
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out),
     border-color 0.4s var(--ease-out);
 }
-.lift:hover { transform: translateY(-5px); }
+@media (hover: hover) {
+  .lift:hover { transform: translateY(-6px); box-shadow: var(--shadow-pop); }
+}
 
 /* Featured-plan breathing glow. */
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 12px 40px -16px rgba(255, 90, 44, 0.45); }
-  50%      { box-shadow: 0 20px 60px -18px rgba(255, 90, 44, 0.75); }
+  0%, 100% { box-shadow: 0 14px 44px -16px rgba(255, 90, 44, 0.5); }
+  50%      { box-shadow: 0 22px 64px -18px rgba(255, 31, 77, 0.75); }
 }
 .glow-pulse { animation: glow-pulse 3.6s ease-in-out infinite; }
 
-/* Animated gradient hairline (section dividers). */
-.gradient-rule {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-brand-orange), transparent);
-  background-size: 200% 100%;
-  animation: rule-slide 6s linear infinite;
+/* ── Header: CSS-only mobile menu (checkbox hack — zero JS required) ── */
+#nav-open:checked ~ .nav-panel { grid-template-rows: 1fr; }
+.nav-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s var(--ease-out);
 }
-@keyframes rule-slide { to { background-position: 200% 0; } }
+.nav-panel > div { overflow: hidden; }
+/* Burger morphs to X when checked. */
+#nav-open:checked ~ div .burger .l1 { transform: translateY(7px) rotate(45deg); }
+#nav-open:checked ~ div .burger .l2 { opacity: 0; }
+#nav-open:checked ~ div .burger .l3 { transform: translateY(-7px) rotate(-45deg); }
+.burger .bl {
+  display: block;
+  height: 2px;
+  width: 20px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 0.3s var(--ease-out), opacity 0.2s ease;
+}
+.burger .bl + .bl { margin-top: 5px; }
 
+/* Theme toggle: CSS shows the right icon; a tiny inline script flips the attr. */
+[data-theme="dark"] .icon-moon { display: none; }
+.icon-sun { display: none; }
+[data-theme="dark"] .icon-sun { display: block; }
+
+/* ── Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .rise, .aurora, .glow-pulse, .gradient-rule { animation: none !important; }
-  .text-flow { animation: none; }
-  .reveal-up { opacity: 1 !important; transform: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  .rise, .sr, .sr-pop, .drift, .glow-pulse, .ticker-track, .text-flow { animation: none !important; }
+  .sr, .sr-pop { opacity: 1 !important; transform: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
 ::selection { background: var(--color-brand-orange); color: #1a0d05; }

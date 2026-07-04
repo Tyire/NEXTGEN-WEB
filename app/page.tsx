@@ -1,180 +1,145 @@
-import { Container, Button, Arrow, Eyebrow } from "@/components/ui";
-import { TrustBand } from "@/components/sections/TrustBand";
-import { ServiceGrid } from "@/components/sections/ServiceGrid";
-import { PlansSection } from "@/components/sections/PlansSection";
-import { CtaBanner } from "@/components/sections/CtaBanner";
-import { HumanMoment } from "@/components/sections/HumanMoment";
-import { PlansJsonLd } from "@/components/JsonLd";
+import { Container, Button, Arrow, SectionHead } from "@/components/ui";
 import { HeroVideo } from "@/components/HeroVideo";
-import { Reveal } from "@/components/Reveal";
-import { coverageZones, site } from "@/lib/site";
+import { Ticker } from "@/components/sections/Ticker";
+import { PlansGrid } from "@/components/sections/PlansGrid";
+import { ServicesGrid } from "@/components/sections/ServicesGrid";
+import { StatsBand } from "@/components/sections/StatsBand";
+import { CtaBanner } from "@/components/sections/CtaBanner";
+import { CoverageChecker } from "@/components/CoverageChecker";
+import { site } from "@/lib/site";
 
-const why = [
-  { k: "Fiber, not fixed-wireless", d: "GPON glass to your premises means no weather drops, no shared-tower congestion at 8pm." },
-  { k: "Symmetrical by design", d: "Upload as fast as you download — built for creators, video calls and backups." },
-  { k: "Honest install windows", d: "3-day install after a site survey. Faster where we already have estate presence." },
-  { k: "Carrier-grade core", d: "IP/MPLS backbone with 99.9% uptime and SLAs that hold up for business." },
-];
+const chips = ["↑↓ Symmetrical", "STM-16 capable", "Low-latency core"];
 
 export default function Home() {
   return (
     <>
-      {/* ── HERO — full-bleed fibre-data video background ───────── */}
-      <section
-        id="hero"
-        className="relative isolate flex min-h-[100svh] items-center overflow-hidden md:min-h-[88vh]"
-        /* scope light-on-dark tokens so text reads over the video in BOTH themes */
-        style={
-          {
-            "--color-fg": "#ffffff",
-            "--color-fg-muted": "rgba(255,255,255,0.82)",
-            "--color-fg-faint": "rgba(255,255,255,0.64)",
-            "--color-hairline": "rgba(255,255,255,0.24)",
-          } as React.CSSProperties
-        }
-      >
+      {/* ── HERO ─────────────────────────────────────────────────────────
+          The gradient/blob backdrop below is the DESIGNED hero — the video
+          fades in over it when ready. Slow phone, dead JS, reduced motion:
+          the hero still looks intentional, never broken. */}
+      <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#140710] md:min-h-[92vh]">
+        {/* designed fallback backdrop */}
+        <div aria-hidden="true" className="absolute inset-0 -z-30">
+          <div className="blob drift -left-24 -top-24 h-[480px] w-[480px]" style={{ "--blob-c": "rgba(255,31,77,0.35)" } as React.CSSProperties} />
+          <div className="blob -bottom-32 right-[-10%] h-[520px] w-[520px]" style={{ "--blob-c": "rgba(255,167,15,0.28)", animationDelay: "-7s" } as React.CSSProperties} />
+          <div className="blob left-1/3 top-1/3 h-[420px] w-[640px]" style={{ "--blob-c": "rgba(255,107,44,0.22)" } as React.CSSProperties} />
+        </div>
         <HeroVideo className="absolute inset-0 -z-20 h-full w-full object-cover" />
-        {/* Left-anchored dark scrim: darkens the copy side so the white heading and
-            the bright-orange accent word both pop, while the vivid teal right side
-            fades to transparent and stays fully visible. */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#050706]/92 via-[#050706]/62 via-55% to-transparent" />
-        {/* Gentle overall veil so the whole hero reads calmly behind the copy. */}
-        <div className="absolute inset-0 -z-10 bg-[#050706]/28" />
-        <div className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-t from-[#060807]/45 to-transparent" />
-        <span className="aurora pointer-events-none absolute -top-32 left-[-10%] -z-10 h-[520px] w-[520px] rounded-full bg-[var(--color-brand-red)] opacity-[0.22] blur-[150px]" />
-        <span className="aurora pointer-events-none absolute -bottom-24 right-[-8%] -z-10 h-[440px] w-[440px] rounded-full bg-[var(--color-brand-amber)] opacity-[0.16] blur-[150px] [animation-delay:-6s]" />
+        {/* left scrim for copy legibility over the bright clip */}
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(12,4,9,0.85)_10%,rgba(12,4,9,0.45)_55%,transparent_85%)]" />
+        <div aria-hidden="true" className="grain absolute inset-0 -z-10" />
 
-        <Container>
-          <div className="hero-pop max-w-3xl py-28 md:py-32">
-            <h1 className="display rise mt-6 text-6xl font-semibold leading-[0.95] text-[var(--color-fg)] [animation-delay:0.1s] sm:text-7xl md:text-8xl">
-              Say goodbye to
-              <br />
-              <span className="text-flow">buffering.</span>
-            </h1>
-            <p className="rise mt-7 max-w-md text-lg leading-relaxed text-[var(--color-fg-muted)] [animation-delay:0.28s]">
-              Fast, unlimited fibre for Lagos homes and businesses — stream, work and game
-              with no caps and no drama.
-            </p>
-            <div className="rise mt-9 flex flex-wrap items-center gap-3 [animation-delay:0.42s]">
-              <Button href={site.selfcare.onboard} variant="solid">Check Coverage <Arrow /></Button>
-              <Button href="/plans" variant="outline">See fibre plans</Button>
-            </div>
+        <Container className="relative pb-24 pt-32 md:pb-28 md:pt-36">
+          <p className="rise eyebrow" style={{ "--color-fg-faint": "rgba(255,255,255,0.75)" } as React.CSSProperties}>
+            GPON fiber — Lekki · Ikate · Ilasan · Ajah
+          </p>
+          <h1 className="display rise hero-pop mt-5 max-w-4xl text-[2.9rem] font-extrabold leading-[1.02] text-white sm:text-6xl md:text-7xl lg:text-[5.2rem]" style={{ animationDelay: "0.08s" }}>
+            No buffering.
+            <br />
+            No caps.
+            <br />
+            <span className="text-flow">No stories.</span>
+          </h1>
+          <p className="rise hero-pop mt-7 max-w-xl text-base leading-relaxed text-white/90 md:text-lg" style={{ animationDelay: "0.18s" }}>
+            Unlimited fiber internet for Lagos homes and businesses — stream, work and game at full
+            speed, installed within 3 days of survey.
+          </p>
+          <div className="rise mt-10 flex flex-wrap items-center gap-4" style={{ animationDelay: "0.28s" }}>
+            <Button href={site.selfcare.onboard} external>
+              Check Coverage <Arrow />
+            </Button>
+            <a
+              href="/plans"
+              className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
+            >
+              See fiber plans <Arrow />
+            </a>
+          </div>
+          <ul className="rise mt-12 flex flex-wrap gap-2.5" style={{ animationDelay: "0.38s" }} aria-label="Network highlights">
+            {chips.map((c) => (
+              <li key={c} className="display rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-white/90">
+                {c}
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
 
-            {/* inline speed proof */}
-            <div className="rise mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 font-mono text-xs uppercase tracking-[0.16em] text-[var(--color-fg-faint)] [animation-delay:0.56s]">
-              <span>↑↓ Symmetrical</span>
-              <span className="hidden h-3 w-px bg-[var(--color-hairline)] sm:block" />
-              <span>STM-16 capable</span>
-              <span className="hidden h-3 w-px bg-[var(--color-hairline)] sm:block" />
-              <span>Low-latency core</span>
-            </div>
+      {/* signature marquee, overlapping the hero seam */}
+      <Ticker className="-mt-7 md:-mt-8" />
+
+      {/* ── PLANS ──────────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden py-20 md:py-28" id="plans">
+        <span aria-hidden="true" className="ghost absolute right-0 top-4 text-[20vw] opacity-60 md:text-[11rem]">
+          SPEED
+        </span>
+        <Container className="relative">
+          <SectionHead
+            eyebrow="Fiber plans"
+            title={
+              <>
+                Unlimited. <span className="grad-text">Prepaid.</span>
+                <br />
+                No contracts.
+              </>
+            }
+            lede="Real prices from our onboarding portal — what you see is what you pay. Every plan is unlimited data on true GPON fiber."
+          />
+          <div className="mt-12 md:mt-16">
+            <PlansGrid />
+          </div>
+          <p className="sr mt-8 text-sm text-[var(--color-fg-muted)]">
+            Installation fees and first-month-free offers vary by estate —{" "}
+            <a href="/plans" className="font-semibold text-[var(--color-brand-orange)] underline underline-offset-2 hover:text-[var(--color-brand-red)]">
+              check yours below
+            </a>
+            .
+          </p>
+        </Container>
+      </section>
+
+      {/* ── COVERAGE ───────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-[var(--color-void)] py-20 md:py-28" id="coverage">
+        <span aria-hidden="true" className="ghost absolute -top-3 left-0 text-[20vw] opacity-50 md:text-[11rem]">
+          LIVE IN
+        </span>
+        <Container className="relative">
+          <SectionHead
+            eyebrow="Coverage"
+            title={
+              <>
+                Already lit in <span className="grad-text">your estate?</span>
+              </>
+            }
+            lede="We build estate by estate across Lekki, Ikate, Ilasan, Orchid and Ajah. Pick yours to see live plans and the exact installation cost."
+          />
+          <div className="sr-pop mt-12 md:mt-16">
+            <CoverageChecker />
           </div>
         </Container>
       </section>
 
-      <TrustBand />
-
-      {/* ── SERVICES ─────────────────────────────────────────── */}
-      <section className="relative py-24">
+      {/* ── SERVICES ───────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden py-20 md:py-28">
         <Container>
-          <Reveal className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div className="max-w-xl">
-              <Eyebrow>What we run</Eyebrow>
-              <h2 className="display mt-4 text-4xl font-semibold text-[var(--color-fg)] md:text-5xl">
-                Three things, done properly.
-              </h2>
-            </div>
-            <p className="max-w-sm text-sm leading-relaxed text-[var(--color-fg-muted)]">
-              No bundled clutter. Fiber internet, voice and enterprise transport — each built
-              on the same carrier-grade fiber core.
-            </p>
-          </Reveal>
-          <Reveal delay={0.12}>
-            <ServiceGrid />
-          </Reveal>
+          <SectionHead
+            eyebrow="What we do"
+            title={
+              <>
+                One network.
+                <br />
+                <span className="grad-text">Three superpowers.</span>
+              </>
+            }
+            lede="Home fiber, business voice, and carrier-grade transport — all running on infrastructure we own and operate ourselves."
+          />
+          <div className="mt-12 md:mt-16">
+            <ServicesGrid />
+          </div>
         </Container>
       </section>
 
-      {/* ── HUMAN MOMENT ─────────────────────────────────────── */}
-      <HumanMoment
-        slot="hero"
-        eyebrow="Made for real life in Lagos"
-        title="Internet that fits how your home actually lives."
-        body="Movie nights that don't buffer, work calls that hold, kids learning online — all on one fiber line built to keep up with a busy Nigerian household."
-      />
-
-      {/* ── OUR PLANS ────────────────────────────────────────── */}
-      <PlansJsonLd />
-      <PlansSection />
-
-      {/* ── WHY ──────────────────────────────────────────────── */}
-      <section className="relative border-y border-[var(--color-hairline)] bg-[var(--color-void)] py-24">
-        <Container>
-          <Reveal className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
-              <Eyebrow>Why NextGen</Eyebrow>
-              <h2 className="display mt-4 text-4xl font-semibold text-[var(--color-fg)] md:text-5xl">
-                Built for people who can&apos;t afford to buffer.
-              </h2>
-              <p className="mt-6 max-w-md text-base leading-relaxed text-[var(--color-fg-muted)]">
-                We obsess over the boring parts — peak-hour stability, real upload speed,
-                install honesty — because that&apos;s what reliable internet actually is.
-              </p>
-              <Button href="/enterprise" variant="outline" className="mt-8">
-                Enterprise solutions <Arrow />
-              </Button>
-            </div>
-            <ul className="grid gap-px overflow-hidden rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-hairline)] sm:grid-cols-2">
-              {why.map((w) => (
-                <li key={w.k} className="bg-[var(--color-ink)] p-7">
-                  <h3 className="display text-xl font-semibold text-[var(--color-fg)]">{w.k}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg-muted)]">{w.d}</p>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* ── COVERAGE TEASER ──────────────────────────────────── */}
-      <section className="py-24">
-        <Container>
-          <Reveal className="rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 md:p-12 lift hover:border-[var(--color-brand-orange)]/40 hover:shadow-[0_24px_60px_-30px_rgba(0,0,0,0.5)]">
-            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-              <div>
-                <Eyebrow>Live coverage</Eyebrow>
-                <h2 className="display mt-4 max-w-md text-3xl font-semibold text-[var(--color-fg)] md:text-4xl">
-                  We&apos;re already lit across Lagos.
-                </h2>
-              </div>
-              <Button href={site.selfcare.onboard} variant="outline">Check your address <Arrow /></Button>
-            </div>
-            <div className="mt-9 flex flex-wrap gap-2.5">
-              {coverageZones.map((z) => (
-                <span
-                  key={z}
-                  className="rounded-full border border-[var(--color-hairline)] bg-[var(--color-ink)] px-4 py-2 font-mono text-xs tracking-wide text-[var(--color-fg-muted)]"
-                >
-                  {z}
-                </span>
-              ))}
-              <a
-                href={site.selfcare.onboard}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full brand-gradient px-4 py-2 font-mono text-xs font-semibold tracking-wide text-[#180a04]"
-              >
-                + your estate?
-              </a>
-            </div>
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* Social-proof testimonials removed 2026-07-01 — the previous quotes were
-          fabricated. Reinstate this section only with real, consented customer
-          quotes. */}
-
+      <StatsBand />
       <CtaBanner />
     </>
   );

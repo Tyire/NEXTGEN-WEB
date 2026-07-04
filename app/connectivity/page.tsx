@@ -1,132 +1,134 @@
 import type { Metadata } from "next";
-import { Container, Button, Arrow, Eyebrow } from "@/components/ui";
-import { PageHero } from "@/components/PageHero";
+import { Container, Button, Arrow, SectionHead } from "@/components/ui";
+import { PageHero } from "@/components/sections/PageHero";
 import { CtaBanner } from "@/components/sections/CtaBanner";
-import { HumanMoment } from "@/components/sections/HumanMoment";
-import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
-import { speedTiers, services } from "@/lib/site";
+import { BreadcrumbJsonLd, ServiceJsonLd } from "@/components/JsonLd";
+import { site, speedTiers, services } from "@/lib/site";
 
-const crumbs = [
-  { name: "Home", href: "/" },
-  { name: "Fiber Internet", href: "/connectivity" },
-];
+const svc = services.find((s) => s.slug === "connectivity")!;
 
 export const metadata: Metadata = {
-  title: "GPON Fiber Internet in Lagos — 2 Mbps to 2.5 Gbps",
-  description:
-    "GPON / FTTx fiber broadband in Lagos and across Nigeria. Symmetrical, low-latency dedicated bandwidth from 2 Mbps up to 2.5 Gbps (STM-16) for homes, enterprise, education and carriers.",
+  title: "Fiber Internet — GPON Broadband in Lagos",
+  description: svc.short,
   alternates: { canonical: "/connectivity" },
 };
 
-const facts = [
-  { k: "GPON / FTTx", d: "Passive optical fiber run all the way to your premises — not copper from a roadside cabinet." },
-  { k: "Symmetrical", d: "Equal upload and download. Backups, video calls and live uploads stop being the bottleneck." },
-  { k: "Dedicated options", d: "From contended home plans to fully dedicated business bandwidth with guaranteed throughput." },
-  { k: "STM-16 capable", d: "Scale a single delivery up to 2.5 Gbps for data centers, campuses and content providers." },
-];
-
 export default function ConnectivityPage() {
-  const s = services.find((x) => x.slug === "connectivity")!;
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Home", href: "/" }, { name: "Fiber Internet", href: "/connectivity" }]} />
       <ServiceJsonLd slug="connectivity" />
-      <BreadcrumbJsonLd items={crumbs} />
+
       <PageHero
-        eyebrow="GPON / FTTx Fiber"
-        title="Fiber broadband for Nigeria,"
-        highlight="done right."
-        sub="GPON fiber for homes, businesses, schools and carriers across Lagos. Dedicated bandwidth from 2 Mbps to 2.5 Gbps — symmetrical, low-latency, and steady when everyone else slows down."
-        crumbs={crumbs}
+        eyebrow={svc.eyebrow}
+        title={
+          <>
+            Fiber that hits
+            <br />
+            <span className="text-flow">different.</span>
+          </>
+        }
+        lede="True GPON fiber to your door — symmetrical speeds, low latency, and bandwidth that doesn't fold at 9pm. From 2 Mbps starter lines to 2.5 Gbps carrier tiers."
         image="banner-connectivity"
-      />
+        ghost="FIBER"
+      >
+        <Button href={site.selfcare.onboard} external>
+          Check Coverage <Arrow />
+        </Button>
+        <a href="/plans" className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10">
+          See plans <Arrow />
+        </a>
+      </PageHero>
 
-      <HumanMoment
-        slot="fiber"
-        eyebrow="Real homes, real speed"
-        title="Streaming, gaming, calls — all at once."
-        body="GPON fiber to the premises means the whole household can stream in 4K, hop on video calls and game online at the same time, even at 8pm when everyone's online."
-      />
-
-      {/* Facts grid */}
-      <section className="py-20">
+      {/* Speed tiers */}
+      <section className="relative overflow-hidden py-20 md:py-28">
         <Container>
-          <div className="grid gap-px overflow-hidden rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-hairline)] md:grid-cols-2">
-            {facts.map((f) => (
-              <div key={f.k} className="bg-[var(--color-ink)] p-8">
-                <h2 className="display text-xl font-semibold text-[var(--color-fg)]">{f.k}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg-muted)]">{f.d}</p>
-              </div>
+          <SectionHead
+            eyebrow="Speed tiers"
+            title={
+              <>
+                From starter to <span className="grad-text">STM-16.</span>
+              </>
+            }
+            lede="One network, every scale — the same fiber that feeds a studio apartment can feed a data center."
+          />
+          <ul className="mt-12 grid gap-4 md:mt-16">
+            {speedTiers.map((t, i) => (
+              <li
+                key={t.name}
+                className={`sr lift flex flex-wrap items-center justify-between gap-4 rounded-[var(--radius)] border p-6 md:p-7 ${
+                  "featured" in t && t.featured
+                    ? "grad-border bg-[var(--color-surface)]"
+                    : "border-[var(--color-hairline)] bg-[var(--color-surface)]"
+                }`}
+                style={{ animationDelay: `${i * 0.04}s` }}
+              >
+                <div className="flex items-center gap-5">
+                  <span aria-hidden="true" className="display grad-text w-12 text-3xl font-extrabold">
+                    0{i + 1}
+                  </span>
+                  <div>
+                    <h3 className="display text-lg font-bold">{t.name}</h3>
+                    <p className="mt-1 text-sm text-[var(--color-fg-muted)]">{t.use}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="display text-xl font-extrabold md:text-2xl">{t.speed}</span>
+                  <span className="display rounded-full border border-[var(--color-hairline)] px-3 py-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-fg-faint)]">
+                    {t.tier}
+                  </span>
+                </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </section>
 
-      {/* Speed tiers table */}
-      <section className="border-y border-[var(--color-hairline)] bg-[var(--color-void)] py-20">
-        <Container>
-          <div className="mb-10 max-w-xl">
-            <Eyebrow>Speed tiers</Eyebrow>
-            <h2 className="display mt-4 text-3xl font-semibold text-[var(--color-fg)] md:text-4xl">
-              Pick the lane that fits.
-            </h2>
-            <p className="mt-4 text-sm leading-relaxed text-[var(--color-fg-muted)]">
-              From a single home line to carrier-grade STM delivery. Final pricing depends on your
-              location and a quick site survey.
-            </p>
+      {/* Why GPON */}
+      <section className="relative overflow-hidden bg-[var(--color-void)] py-20 md:py-28">
+        <span aria-hidden="true" className="ghost absolute -top-3 right-0 text-[18vw] opacity-50 md:text-[10rem]">
+          GPON
+        </span>
+        <Container className="relative grid items-center gap-12 lg:grid-cols-2">
+          <div className="sr-pop relative order-2 lg:order-1">
+            <picture>
+              <source type="image/avif" srcSet="/images/people/fiber-640.avif 640w, /images/people/fiber-1024.avif 1024w" sizes="(min-width:1024px) 45vw, 92vw" />
+              <source type="image/webp" srcSet="/images/people/fiber-640.webp 640w, /images/people/fiber-1024.webp 1024w" sizes="(min-width:1024px) 45vw, 92vw" />
+              <img
+                src="/images/people/fiber-1024.webp"
+                alt="Fiber optic strands lit up"
+                loading="lazy"
+                className="aspect-[4/3] w-full rounded-[var(--radius)] border border-[var(--color-hairline)] object-cover shadow-[var(--shadow-pop)]"
+              />
+            </picture>
           </div>
-
-          <div className="overflow-hidden rounded-[var(--radius)] border border-[var(--color-hairline)]">
-            <table className="w-full border-collapse text-left">
-              <thead>
-                <tr className="bg-[var(--color-surface)] font-mono text-xs uppercase tracking-[0.14em] text-[var(--color-fg-faint)]">
-                  <th className="px-5 py-4 font-medium">Plan</th>
-                  <th className="px-5 py-4 font-medium">Speed</th>
-                  <th className="hidden px-5 py-4 font-medium sm:table-cell">Best for</th>
-                  <th className="px-5 py-4 font-medium">Segment</th>
-                </tr>
-              </thead>
-              <tbody>
-                {speedTiers.map((t) => (
-                  <tr
-                    key={t.name}
-                    className={`border-t border-[var(--color-hairline)] ${
-                      "featured" in t && t.featured ? "bg-[color-mix(in_srgb,var(--color-brand-orange)_8%,transparent)]" : ""
-                    }`}
-                  >
-                    <td className="px-5 py-5">
-                      <span className="font-semibold text-[var(--color-fg)]">{t.name}</span>
-                      {"featured" in t && t.featured && (
-                        <span className="ml-2 rounded-full brand-gradient px-2 py-0.5 align-middle font-mono text-[0.6rem] font-bold uppercase text-[#180a04]">
-                          Popular
-                        </span>
-                      )}
-                    </td>
-                    <td className="px-5 py-5 font-display text-lg font-semibold brand-text">{t.speed}</td>
-                    <td className="hidden px-5 py-5 text-sm text-[var(--color-fg-muted)] sm:table-cell">{t.use}</td>
-                    <td className="px-5 py-5">
-                      <span className="rounded-full border border-[var(--color-hairline)] px-3 py-1 font-mono text-xs capitalize text-[var(--color-fg-muted)]">
-                        {t.tier}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="sr order-1 lg:order-2">
+            <SectionHead
+              eyebrow="Why it's different"
+              title={
+                <>
+                  Glass to your door, <span className="grad-text">not copper.</span>
+                </>
+              }
+            />
+            <ul className="mt-8 grid gap-5 text-base leading-relaxed text-[var(--color-fg-muted)]">
+              <li><strong className="text-[var(--color-fg)]">Symmetrical up and down.</strong> Uploads matter — video calls, cloud backups, content. GPON gives you both directions at full speed.</li>
+              <li><strong className="text-[var(--color-fg)]">Low latency, steady at peak.</strong> Our own core network, engineered headroom — no evening congestion collapse.</li>
+              <li><strong className="text-[var(--color-fg)]">For {svc.audience.join(", ").toLowerCase()}.</strong> {svc.benefit}</li>
+            </ul>
           </div>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button href="/plans">Check availability <Arrow /></Button>
-            <Button href="/contact" variant="outline">Talk to sales</Button>
-          </div>
-          <p className="mt-6 font-mono text-xs text-[var(--color-fg-faint)]">
-            Audience: {s.audience.join(" · ")}
-          </p>
         </Container>
       </section>
 
       <CtaBanner
-        title="See if GPON fiber is live at your address."
-        sub="Coverage check takes 30 seconds. Where NextGen already has estate presence, install can land in as little as 3 days after a site survey."
+        title={
+          <>
+            Your estate
+            <br />
+            could be next.
+          </>
+        }
+        lede="Check coverage now — if we're lit in your estate, you're 3 days from full-speed fiber."
       />
     </>
   );

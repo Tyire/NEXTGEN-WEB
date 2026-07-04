@@ -1,127 +1,104 @@
 import type { Metadata } from "next";
-import { Container, Button, Arrow, Eyebrow } from "@/components/ui";
-import { PageHero } from "@/components/PageHero";
+import { Container, Button, Arrow, SectionHead } from "@/components/ui";
+import { PageHero } from "@/components/sections/PageHero";
 import { CtaBanner } from "@/components/sections/CtaBanner";
-import { HumanMoment } from "@/components/sections/HumanMoment";
-import { ServiceJsonLd, BreadcrumbJsonLd } from "@/components/JsonLd";
-import { site } from "@/lib/site";
+import { BreadcrumbJsonLd, ServiceJsonLd } from "@/components/JsonLd";
+import { site, services } from "@/lib/site";
 
-const crumbs = [
-  { name: "Home", href: "/" },
-  { name: "Voice", href: "/voice" },
-];
+const svc = services.find((s) => s.slug === "voice")!;
 
 export const metadata: Metadata = {
-  title: "Business & Home VoIP in Nigeria — Crystal-Clear Calling",
-  description:
-    "HD VoIP for homes and businesses in Lagos on the 01-640xxxx number range. Calls ride your NextGen fiber line — no separate copper, no dropouts. Hosted PBX and call-center ready.",
+  title: "Voice — Business & Home VoIP over Fiber",
+  description: svc.short,
   alternates: { canonical: "/voice" },
 };
 
-const home = [
-  "A proper Lagos landline on the 01-640xxxx range",
-  "HD voice quality over your existing fiber line",
-  "Keep calling during power and copper outages",
-  "One simple bill alongside your broadband",
-];
-
-const business = [
-  "Hosted PBX — extensions, IVR menus and call routing",
-  "Scale from a single line to a full call center",
-  "Number ranges and DID blocks for your team",
-  "SLA-backed voice on carrier-grade infrastructure",
+const features = [
+  {
+    t: "HD voice, zero copper",
+    d: "Calls ride your fiber line end-to-end — no crackle, no dropouts, no NITEL-era wiring between you and the person you're talking to.",
+  },
+  {
+    t: "A real Lagos number",
+    d: "Numbers on the 01-640xxxx Lagos range — local presence for your business, reachable from any network.",
+  },
+  {
+    t: "From one line to a call center",
+    d: "A single home line, a small office PBX, or hundreds of concurrent channels for support floors — same platform, same clarity.",
+  },
 ];
 
 export default function VoicePage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: "Home", href: "/" }, { name: "Voice", href: "/voice" }]} />
       <ServiceJsonLd slug="voice" />
-      <BreadcrumbJsonLd items={crumbs} />
+
       <PageHero
-        eyebrow="VoIP · Voice"
-        title="Calls that ride your"
-        highlight="fiber."
-        sub="Crystal-clear voice for home and business on the 01-640xxxx Lagos number range. Because it rides your NextGen fiber, there's no separate copper line to fail — just HD calls that stay up."
-        crumbs={crumbs}
+        eyebrow={svc.eyebrow}
+        title={
+          <>
+            Loud &amp; clear.
+            <br />
+            <span className="text-flow">Every call.</span>
+          </>
+        }
+        lede={svc.benefit + " Crystal-clear calling for homes, SMEs and corporate PBX on the 01-640 Lagos number range."}
         image="banner-voice"
-      />
+        ghost="VOICE"
+      >
+        <Button href="/contact">
+          Get a number <Arrow />
+        </Button>
+        <a href={`tel:${site.phoneHref}`} className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10">
+          Call {site.phoneDisplay}
+        </a>
+      </PageHero>
 
-      <HumanMoment
-        slot="voice"
-        side="left"
-        eyebrow="Calls that just work"
-        title="Hear every word — at home or at the desk."
-        body="Because your line rides NextGen fiber, there's no copper to crackle or drop. HD voice for family calls and a PBX your whole team can scale into."
-      />
-
-      <section className="py-20">
+      <section className="relative overflow-hidden py-20 md:py-28">
         <Container>
-          <div className="grid gap-5 lg:grid-cols-2">
-            <VoiceCard tag="For homes" title="A landline that finally works" items={home} />
-            <VoiceCard tag="For business" title="Voice infrastructure that scales" items={business} featured />
-          </div>
-
-          <div className="mt-16 grid gap-6 rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 sm:grid-cols-3 md:p-10">
-            <Stat value="01-640" label="Lagos number range" />
-            <Stat value="HD" label="Wideband voice codec" />
-            <Stat value="1 line → ∞" label="Scales to call-center" />
-          </div>
-
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Button href="/contact">Get a voice line <Arrow /></Button>
-            <Button href={`tel:${site.phoneHref}`} variant="outline">Call {site.phoneDisplay}</Button>
-          </div>
+          <SectionHead
+            eyebrow="Why fiber voice"
+            title={
+              <>
+                Your number, on <span className="grad-text">01-640.</span>
+              </>
+            }
+            lede="Voice built into the network itself — not an app fighting your bandwidth."
+          />
+          <ul className="mt-12 grid gap-6 md:mt-16 md:grid-cols-3">
+            {features.map((f, i) => (
+              <li
+                key={f.t}
+                className="sr-pop lift rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 md:p-8"
+                style={{ animationDelay: `${i * 0.06}s` }}
+              >
+                <span aria-hidden="true" className="display grad-text text-3xl font-extrabold">0{i + 1}</span>
+                <h3 className="display mt-4 text-xl font-bold">{f.t}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg-muted)]">{f.d}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="sr mt-10 flex flex-wrap gap-2.5">
+            {svc.audience.map((a) => (
+              <span key={a} className="display rounded-full border border-[var(--color-hairline)] px-4 py-2 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-fg-faint)]">
+                {a}
+              </span>
+            ))}
+          </p>
         </Container>
       </section>
 
       <CtaBanner
-        title="Put your business on a line that doesn't drop."
-        sub="Bundle VoIP with NextGen fiber and run home or office calls over one reliable connection."
+        title={
+          <>
+            Say it
+            <br />
+            in HD.
+          </>
+        }
+        lede="Tell us how many lines you need — we'll have you talking on fiber this week."
       />
     </>
-  );
-}
-
-function VoiceCard({
-  tag,
-  title,
-  items,
-  featured,
-}: {
-  tag: string;
-  title: string;
-  items: string[];
-  featured?: boolean;
-}) {
-  return (
-    <div
-      className={`rounded-[var(--radius)] border p-8 ${
-        featured
-          ? "border-[var(--color-brand-orange)]/40 bg-[color-mix(in_srgb,var(--color-brand-orange)_6%,var(--color-surface))]"
-          : "border-[var(--color-hairline)] bg-[var(--color-surface)]"
-      }`}
-    >
-      <Eyebrow>{tag}</Eyebrow>
-      <h2 className="display mt-4 text-2xl font-semibold text-[var(--color-fg)]">{title}</h2>
-      <ul className="mt-6 space-y-3">
-        {items.map((it) => (
-          <li key={it} className="flex gap-3 text-sm leading-relaxed text-[var(--color-fg-muted)]">
-            <svg viewBox="0 0 24 24" className="mt-0.5 h-5 w-5 shrink-0 stroke-[var(--color-success)]" fill="none" strokeWidth="2">
-              <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            {it}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div>
-      <div className="display brand-text text-3xl font-bold">{value}</div>
-      <div className="mt-1 font-mono text-xs uppercase tracking-wider text-[var(--color-fg-faint)]">{label}</div>
-    </div>
   );
 }

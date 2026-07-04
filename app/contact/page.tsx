@@ -1,81 +1,78 @@
 import type { Metadata } from "next";
-import { Container, Eyebrow } from "@/components/ui";
-import { PageHero } from "@/components/PageHero";
+import { Container, SectionHead } from "@/components/ui";
+import { PageHero } from "@/components/sections/PageHero";
 import { ContactForm } from "@/components/ContactForm";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 import { site } from "@/lib/site";
 
-const crumbs = [
-  { name: "Home", href: "/" },
-  { name: "Contact", href: "/contact" },
-];
-
 export const metadata: Metadata = {
-  title: "Contact NextGen Telcoms — Sales & Support in Lagos",
-  description:
-    "Talk to NextGen Telcoms about GPON fiber, business VoIP or Metro Ethernet in Lagos. Call our sales line, message on WhatsApp or send an enquiry — we'll arrange a site survey.",
+  title: "Contact — Talk to NextGen",
+  description: `Call ${site.phoneDisplay}, WhatsApp ${site.whatsapp}, or send an enquiry — fiber, voice and enterprise connectivity across Lagos.`,
   alternates: { canonical: "/contact" },
 };
+
+const wa = `https://wa.me/${site.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(
+  "Hi NextGen, I'd like to get connected."
+)}`;
+
+const channels = [
+  { t: "Call us", v: site.phoneDisplay, s: `also ${site.phoneDisplayAlt}`, href: `tel:${site.phoneHref}` },
+  { t: "WhatsApp", v: "+234 916 640 5000", s: "fastest response", href: wa, external: true },
+  { t: "Email", v: site.email, s: "quotes & partnerships", href: `mailto:${site.email}` },
+  { t: "Self-care portal", v: "selfcare.nextgen.ng", s: "manage your account", href: site.selfcare.login, external: true },
+];
 
 export default function ContactPage() {
   return (
     <>
-      <BreadcrumbJsonLd items={crumbs} />
+      <BreadcrumbJsonLd items={[{ name: "Home", href: "/" }, { name: "Contact", href: "/contact" }]} />
+
       <PageHero
-        eyebrow="Talk to us"
-        title="Let's get you"
-        highlight="connected."
-        sub="Tell us what you need and where you are. Our team will check the nearest fiber, arrange a site survey and come back with honest options."
-        crumbs={crumbs}
+        eyebrow="Contact"
+        title={
+          <>
+            Talk to a
+            <br />
+            <span className="text-flow">human.</span>
+          </>
+        }
+        lede="Sales, support, surveys, partnerships — real people in Lagos, on channels you actually use."
         image="banner-contact"
+        ghost="HELLO"
       />
 
-      <section className="py-20">
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 md:p-9">
-              <ContactForm />
-            </div>
+      <section className="relative overflow-hidden py-20 md:py-28">
+        <Container className="grid gap-14 lg:grid-cols-[1fr_1.2fr]">
+          <div>
+            <SectionHead eyebrow="Channels" title={<>Reach us <span className="grad-text">anywhere.</span></>} />
+            <ul className="mt-10 grid gap-4">
+              {channels.map((c, i) => (
+                <li key={c.t} className="sr" style={{ animationDelay: `${i * 0.05}s` }}>
+                  <a
+                    href={c.href}
+                    {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="lift flex items-baseline justify-between gap-4 rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-6 py-5"
+                  >
+                    <div>
+                      <p className="eyebrow">{c.t}</p>
+                      <p className="display mt-1.5 text-lg font-bold text-[var(--color-fg)]">{c.v}</p>
+                    </div>
+                    <span className="shrink-0 text-xs text-[var(--color-fg-faint)]">{c.s}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-sm text-[var(--color-fg-faint)]">{site.address.region}, Nigeria</p>
+          </div>
 
-            <div className="flex flex-col gap-8">
-              <ContactItem label="Sales line" value={site.phoneDisplay} href={`tel:${site.phoneHref}`} />
-              <ContactItem label="Email" value={site.email} href={`mailto:${site.email}`} />
-              <ContactItem
-                label="WhatsApp"
-                value="Chat with sales"
-                href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`}
-              />
-              <div>
-                <Eyebrow>Office</Eyebrow>
-                <address className="mt-3 not-italic leading-relaxed text-[var(--color-fg-muted)]">
-                  {[site.address.street, site.address.city, site.address.region].filter(Boolean).join(", ")}
-                  <br />
-                  Nigeria
-                </address>
-              </div>
-              <div className="rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-void)] p-6">
-                <p className="font-mono text-xs uppercase tracking-wider text-[var(--color-fg-faint)]">
-                  Install promise
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--color-fg-muted)]">
-                  3-day install after a site survey — faster where we already have estate presence.
-                </p>
-              </div>
+          <div className="sr-pop">
+            <div className="grad-border rounded-[var(--radius)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-pop)] sm:p-8 md:p-10">
+              <h2 className="display mb-7 text-2xl font-bold">Send an enquiry</h2>
+              <ContactForm />
             </div>
           </div>
         </Container>
       </section>
     </>
-  );
-}
-
-function ContactItem({ label, value, href }: { label: string; value: string; href: string }) {
-  return (
-    <div>
-      <Eyebrow>{label}</Eyebrow>
-      <a href={href} className="display mt-2 block text-xl font-semibold text-[var(--color-fg)] transition-colors hover:text-[var(--color-brand-amber)]">
-        {value}
-      </a>
-    </div>
   );
 }

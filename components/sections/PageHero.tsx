@@ -1,0 +1,68 @@
+import { Container, Eyebrow } from "@/components/ui";
+
+/**
+ * Subpage hero: real fiber imagery + ghost word + sunset accents.
+ * `image` is a public/images/people basename, e.g. "banner-voice".
+ */
+export function PageHero({
+  eyebrow,
+  title,
+  lede,
+  image,
+  ghost,
+  children,
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  lede: string;
+  image: string;
+  ghost: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <section className="relative isolate overflow-hidden pt-16 md:pt-20">
+      {/* Banner image — <picture> with avif/webp at 3 widths, eager (it IS the LCP). */}
+      <picture>
+        <source
+          type="image/avif"
+          srcSet={`/images/people/${image}-640.avif 640w, /images/people/${image}-1024.avif 1024w, /images/people/${image}-1600.avif 1600w`}
+          sizes="100vw"
+        />
+        <source
+          type="image/webp"
+          srcSet={`/images/people/${image}-640.webp 640w, /images/people/${image}-1024.webp 1024w, /images/people/${image}-1600.webp 1600w`}
+          sizes="100vw"
+        />
+        <img
+          src={`/images/people/${image}-1024.webp`}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+        />
+      </picture>
+      {/* Scrim so type always reads. */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(105deg,rgba(10,4,8,0.88)_20%,rgba(10,4,8,0.55)_60%,rgba(255,60,44,0.25))]" />
+
+      <Container className="relative py-20 md:py-28">
+        <span aria-hidden="true" className="ghost absolute -bottom-6 right-0 text-[20vw] opacity-25 md:text-[11rem]" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.35)" }}>
+          {ghost}
+        </span>
+        <div className="max-w-3xl" style={{ "--color-fg-faint": "rgba(255,255,255,0.75)" } as React.CSSProperties}>
+          <Eyebrow className="rise">{eyebrow}</Eyebrow>
+          <h1 className="display rise hero-pop text-4xl font-extrabold text-white sm:text-6xl md:text-7xl" style={{ animationDelay: "0.08s" }}>
+            {title}
+          </h1>
+          <p className="rise hero-pop mt-6 max-w-xl text-base leading-relaxed text-white/90 md:text-lg" style={{ animationDelay: "0.16s" }}>
+            {lede}
+          </p>
+          {children && (
+            <div className="rise mt-9 flex flex-wrap items-center gap-4" style={{ animationDelay: "0.24s" }}>
+              {children}
+            </div>
+          )}
+        </div>
+      </Container>
+    </section>
+  );
+}

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Unbounded, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { Header } from "@/components/Header";
@@ -7,17 +7,15 @@ import { Footer } from "@/components/Footer";
 import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/JsonLd";
 import { RegisterSW } from "@/components/RegisterSW";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
-import { BackToTop } from "@/components/BackToTop";
-import { SmoothScroll } from "@/components/SmoothScroll";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space",
+const unbounded = Unbounded({
+  variable: "--font-unbounded",
   subsets: ["latin"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const instrument = Instrument_Sans({
+  variable: "--font-instrument",
   subsets: ["latin"],
   display: "swap",
 });
@@ -60,19 +58,35 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#faf8f4" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e1211" },
+    { media: "(prefers-color-scheme: light)", color: "#fff7ee" },
+    { media: "(prefers-color-scheme: dark)", color: "#180b12" },
   ],
   colorScheme: "light dark",
 };
 
+/* Tiny vanilla enhancements (ES5, no React dependency — they run even if
+   hydration never happens): theme toggle + active nav marking. */
+const enhance = `(function(){
+  var btns=document.querySelectorAll('.theme-toggle');
+  for(var i=0;i<btns.length;i++){btns[i].addEventListener('click',function(){
+    var d=document.documentElement.getAttribute('data-theme')==='dark';
+    if(d){document.documentElement.removeAttribute('data-theme');}
+    else{document.documentElement.setAttribute('data-theme','dark');}
+    try{localStorage.setItem('theme',d?'light':'dark');}catch(e){}
+  });}
+  try{
+    var p=location.pathname.replace(/\\/+$/,'')||'/';
+    var links=document.querySelectorAll('[data-nav] a[href]');
+    for(var j=0;j<links.length;j++){
+      var h=(links[j].getAttribute('href')||'').replace(/\\/+$/,'')||'/';
+      if(h===p){links[j].setAttribute('data-active','');links[j].setAttribute('aria-current','page');}
+    }
+  }catch(e){}
+})();`;
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${spaceGrotesk.variable} ${inter.variable} h-full`}
-    >
+    <html lang="en" suppressHydrationWarning className={`${unbounded.variable} ${instrument.variable} h-full`}>
       <head>
         {/* No-flash theme: light is default; apply stored dark choice before paint. */}
         <script
@@ -81,16 +95,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           }}
         />
       </head>
-      {/* suppressHydrationWarning: browser extensions (e.g. WOT injects
-          `wotdisconnected`) mutate <body> before React hydrates — harmless. */}
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+      {/* suppressHydrationWarning: browser extensions mutate <body> before React
+          hydrates — harmless. */}
+      <body id="top" className="flex min-h-full flex-col" suppressHydrationWarning>
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:border focus:border-[var(--color-brand-orange)] focus:bg-[var(--color-surface)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-[var(--color-fg)]"
         >
           Skip to content
         </a>
-        <SmoothScroll />
         <OrganizationJsonLd />
         <WebsiteJsonLd />
         <RegisterSW />
@@ -98,7 +111,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="main" className="flex-1">{children}</main>
         <Footer />
         <WhatsAppFloat />
-        <BackToTop />
+        <script dangerouslySetInnerHTML={{ __html: enhance }} />
       </body>
     </html>
   );

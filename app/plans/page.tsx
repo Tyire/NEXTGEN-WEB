@@ -1,72 +1,82 @@
 import type { Metadata } from "next";
-import { Container, Eyebrow } from "@/components/ui";
-import { PageHero } from "@/components/PageHero";
-import { PlansSection } from "@/components/sections/PlansSection";
-import { CoverageChecker } from "@/components/CoverageChecker";
+import { Container, Button, Arrow, SectionHead } from "@/components/ui";
+import { PageHero } from "@/components/sections/PageHero";
+import { PlansGrid } from "@/components/sections/PlansGrid";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { CoverageChecker } from "@/components/CoverageChecker";
 import { BreadcrumbJsonLd, PlansJsonLd } from "@/components/JsonLd";
-import { coverageZones } from "@/lib/site";
-
-const crumbs = [
-  { name: "Home", href: "/" },
-  { name: "Plans", href: "/plans" },
-];
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Fiber Plans & Pricing in Lagos — Check Your Estate",
+  title: "Plans & Pricing — Unlimited Fiber from ₦1,500/day",
   description:
-    "NextGen fiber broadband plans for homes and business in Lagos. See speeds and Naira pricing, check coverage in your estate, and subscribe. 1Gbps internet Nigeria price, GPON fiber Lagos.",
+    "Unlimited GPON fiber plans in Lagos: 25/35/50 Mbps prepaid monthly, ₦1,500/day unlimited, and dedicated business tiers. Real prices from the onboarding portal.",
   alternates: { canonical: "/plans" },
 };
 
 export default function PlansPage() {
   return (
     <>
-      <BreadcrumbJsonLd items={crumbs} />
+      <BreadcrumbJsonLd items={[{ name: "Home", href: "/" }, { name: "Plans", href: "/plans" }]} />
       <PlansJsonLd />
+
       <PageHero
-        eyebrow="Plans & coverage · Lagos"
-        title="Pick your speed."
-        highlight="We'll get you live."
-        sub="Transparent fiber plans for homes and business. Check your estate below — where NextGen already has network presence, install can land in as little as 3 days after a site survey."
-        crumbs={crumbs}
+        eyebrow="Plans & pricing"
+        title={
+          <>
+            Pick your
+            <br />
+            <span className="text-flow">speed.</span>
+          </>
+        }
+        lede="Every plan is unlimited data on true fiber — prepaid, no contracts, no fair-usage fine print. Prices mirror the onboarding portal exactly."
         image="banner-plans"
-      />
+        ghost="PLANS"
+      >
+        <Button href={site.selfcare.onboard} external>
+          Start onboarding <Arrow />
+        </Button>
+      </PageHero>
 
-      <PlansSection heading="All plans" showAll />
-
-      <section className="py-20">
+      <section className="relative overflow-hidden py-20 md:py-28">
         <Container>
-          <Eyebrow>Coverage check</Eyebrow>
-          <h2 className="display mt-4 mb-7 max-w-xl text-3xl font-semibold text-[var(--color-fg)] md:text-4xl">
-            Already live in your estate? We connect you faster.
-          </h2>
-          <CoverageChecker />
+          <PlansGrid />
+          <p className="sr mt-8 text-sm text-[var(--color-fg-muted)]">
+            All residential plans are prepaid and unlimited. Installation is free in several estates
+            (some include your first month free) — select your estate below for the exact figure.
+          </p>
+        </Container>
+      </section>
 
-          <div className="mt-12">
-            <p className="eyebrow mb-4">Currently lit areas</p>
-            <div className="flex flex-wrap gap-2.5">
-              {coverageZones.map((z) => (
-                <span
-                  key={z}
-                  className="rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface)] px-4 py-2 font-mono text-xs tracking-wide text-[var(--color-fg-muted)]"
-                >
-                  {z}
-                </span>
-              ))}
-            </div>
-            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-[var(--color-fg-faint)]">
-              Don&apos;t see your area? We&apos;re expanding continuously and often have fiber
-              closer than you&apos;d expect. Send your address — install is scheduled after a site
-              inspection.
-            </p>
+      <section className="relative overflow-hidden bg-[var(--color-void)] py-20 md:py-28" id="coverage">
+        <span aria-hidden="true" className="ghost absolute -top-3 right-0 text-[18vw] opacity-50 md:text-[10rem]">
+          ESTATE
+        </span>
+        <Container className="relative">
+          <SectionHead
+            eyebrow="Your estate"
+            title={
+              <>
+                What&rsquo;s live <span className="grad-text">where you live.</span>
+              </>
+            }
+            lede="Exact plans, prices and installation cost for your estate — the same data the onboarding portal uses."
+          />
+          <div className="sr-pop mt-12 md:mt-16">
+            <CoverageChecker />
           </div>
         </Container>
       </section>
 
       <CtaBanner
-        title="Let's get your address surveyed."
-        sub="Drop your estate and we'll check the nearest fiber and the fastest path to getting you connected."
+        title={
+          <>
+            Three days from
+            <br />
+            &ldquo;yes&rdquo; to streaming.
+          </>
+        }
+        lede="Onboard online, we survey, we splice, you stream."
       />
     </>
   );
