@@ -17,9 +17,6 @@ export type Plan = {
   checkoutUrl: string;
 };
 
-export const plansUpdatedNote =
-  "Live prices from the NextGen onboarding portal, confirmed 2 Jul 2026";
-
 // Selecting a plan sends the customer to onboarding to choose their estate & pay.
 const ONBOARD = "https://selfcare.nextgen.ng/onboard";
 

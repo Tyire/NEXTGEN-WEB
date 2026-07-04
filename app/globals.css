@@ -169,16 +169,23 @@ a, button, [role="button"], select, summary, label {
 .text-flow {
   background: linear-gradient(
     100deg,
-    var(--color-brand-red),
-    var(--color-brand-orange) 42%,
-    var(--color-brand-amber) 66%,
-    var(--color-brand-orange) 90%
+    #ffb14a,
+    #ffc766 38%,
+    #ffe49a 66%,
+    #ffbe58 90%
   );
   background-size: 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+  /* Kill the inherited .hero-pop text-shadow — on a background-clip:text word it
+     paints a dark cloud that greys the gradient fill. The filter below replaces it. */
+  text-shadow: none;
+  /* Soft DOWNWARD shadow only — an all-around (0 0) halo bleeds onto the strokes
+     and greys the fill. Offsetting it down keeps the orange bright while still
+     lifting the word off the video (the hero's left scrim does the heavy lifting). */
+  filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.6));
   animation: text-flow 5.5s linear infinite;
 }
 @keyframes text-flow { to { background-position: 220% center; } }

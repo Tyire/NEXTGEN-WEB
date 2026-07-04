@@ -1,6 +1,6 @@
 import { Container, Eyebrow, Arrow } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
-import { plans, formatNaira, plansUpdatedNote, type Plan } from "@/data/plans";
+import { plans, formatNaira, type Plan } from "@/data/plans";
 
 export function PlansSection({
   heading = "Our Plans",
@@ -16,16 +16,11 @@ export function PlansSection({
   return (
     <section id="plans" className="border-y border-[var(--color-hairline)] bg-[var(--color-void)] py-24">
       <Container>
-        <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-xl">
-            <Eyebrow>{heading}</Eyebrow>
-            <h2 className="display mt-4 text-4xl font-semibold text-[var(--color-fg)] md:text-5xl">
-              Choose your speed.
-            </h2>
-          </div>
-          <p className="max-w-xs text-sm leading-relaxed text-[var(--color-fg-muted)]">
-            Unlimited data, no hidden caps. {plansUpdatedNote}.
-          </p>
+        <div className="mb-12 max-w-xl">
+          <Eyebrow>{heading}</Eyebrow>
+          <h2 className="display mt-4 text-4xl font-semibold text-[var(--color-fg)] md:text-5xl">
+            Choose your speed.
+          </h2>
         </div>
 
         <Reveal className="grid gap-5 md:grid-cols-3">

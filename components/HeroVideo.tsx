@@ -30,7 +30,7 @@ export function HeroVideo({ className = "" }: { className?: string }) {
       aria-hidden="true"
       // GPU-composited filter — lifts the clip so it reads clear/vibrant (esp. on
       // mobile) without touching the file, so playback stays smooth.
-      style={{ backgroundColor: "#0a0d0c", filter: "brightness(1.08) contrast(1.07) saturate(1.18)" }}
+      style={{ backgroundColor: "#0a0d0c", filter: "brightness(0.9) contrast(1.05) saturate(1.12)" }}
     >
       <source src="/videos/hero-video.mp4" type="video/mp4" />
     </video>

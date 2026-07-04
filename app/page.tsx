@@ -45,8 +45,10 @@ export default function Home() {
         }
       >
         <HeroVideo className="absolute inset-0 -z-20 h-full w-full object-cover" />
-        {/* No dark overlay — the video stays bright. Text legibility comes from
-            .hero-pop text-shadow + a faint bottom fade for the stat row only. */}
+        {/* Left-anchored dark scrim: darkens the copy side so the white heading and
+            the bright-orange accent word both pop, while the vivid teal right side
+            fades to transparent and stays fully visible. */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#050706]/92 via-[#050706]/62 via-55% to-transparent" />
         <div className="absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-t from-[#060807]/45 to-transparent" />
         <span className="aurora pointer-events-none absolute -top-32 left-[-10%] -z-10 h-[520px] w-[520px] rounded-full bg-[var(--color-brand-red)] opacity-[0.22] blur-[150px]" />
         <span className="aurora pointer-events-none absolute -bottom-24 right-[-8%] -z-10 h-[440px] w-[440px] rounded-full bg-[var(--color-brand-amber)] opacity-[0.16] blur-[150px] [animation-delay:-6s]" />
