@@ -13,7 +13,7 @@ export function Preloader() {
     <div className="preloader" aria-hidden="true">
       <img src="/brand/logo-icon.png" alt="" width={76} height={76} className="pl-logo" draggable={false} />
       <span className="pl-beam" />
-      <span className="pl-tag">Fiber &middot; Lagos</span>
+      <span className="pl-tag">NextGen &middot; Telecom</span>
     </div>
   );
 }
