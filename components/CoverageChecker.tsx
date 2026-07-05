@@ -1,17 +1,57 @@
 "use client";
 
 import { useState } from "react";
-import { estates, estatePlans } from "@/data/estates";
-import { formatNaira } from "@/data/plans";
+import { estates, estatePlans, type Estate } from "@/data/estates";
+import { formatNaira, type Plan } from "@/data/plans";
 import { site } from "@/lib/site";
 import { Arrow } from "./ui";
 
 /**
- * Pick your estate → see exactly what onboarding would show: available plans
- * with prices, plus the installation cost. This is a JS *enhancement* — the
- * page around it never depends on it, and the WhatsApp fallback line below is
- * plain HTML that always renders.
+ * Pick your estate → exactly what the onboarding portal shows: the plans
+ * available there as full price cards, plus the installation cost — with
+ * install/promo hints right in the dropdown. JS *enhancement* only; the
+ * page around it never depends on it and the WhatsApp fallback always renders.
  */
+
+function estateHint(e: Estate) {
+  const install = e.installFee === 0 ? "Free installation" : `${formatNaira(e.installFee)} install`;
+  return `${e.label}  ·  ${install}${e.firstMonthFree ? " + 1st month free" : ""}`;
+}
+
+function amount(p: Plan) {
+  return p.priceNgn == null ? null : new Intl.NumberFormat("en-NG", { maximumFractionDigits: 0 }).format(p.priceNgn);
+}
+
+function EstatePlanCard({ p }: { p: Plan }) {
+  const amt = amount(p);
+  return (
+    <li className="flex flex-col rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-ink)] p-5">
+      <p className="eyebrow">{p.speed}</p>
+      <h4 className="display mt-1 text-base font-bold">{p.name}</h4>
+      <p className="mt-3">
+        {amt ? (
+          <>
+            <span className="display grad-text align-top text-sm font-bold">₦</span>
+            <span className="display grad-text text-3xl font-extrabold tracking-tight">{amt}</span>
+            <span className="ml-1 text-xs text-[var(--color-fg-faint)]">/{p.cycle}</span>
+          </>
+        ) : (
+          <span className="display text-lg font-bold">{formatNaira(p.priceNgn)}</span>
+        )}
+      </p>
+      <p className="mt-2 flex-1 text-xs leading-relaxed text-[var(--color-fg-muted)]">{p.highlights[0]}</p>
+      <a
+        href={site.selfcare.onboard}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group grad-sunset mt-4 inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-xs font-bold text-white transition-transform duration-200 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97]"
+      >
+        Subscribe <Arrow />
+      </a>
+    </li>
+  );
+}
+
 export function CoverageChecker() {
   const [id, setId] = useState("");
   const estate = estates.find((e) => String(e.id) === id) ?? null;
@@ -29,13 +69,13 @@ export function CoverageChecker() {
         name="estate"
         value={id}
         onChange={(e) => setId(e.target.value)}
-        className="w-full rounded-2xl border-2 border-[var(--color-hairline)] bg-[var(--color-ink)] px-5 py-4 text-sm font-semibold text-[var(--color-fg)] focus-visible:border-[var(--color-brand-orange)] sm:max-w-md"
+        className="w-full rounded-2xl border-2 border-[var(--color-hairline)] bg-[var(--color-ink)] px-5 py-4 text-sm font-semibold text-[var(--color-fg)] focus-visible:border-[var(--color-brand-orange)]"
         style={{ colorScheme: "inherit" }}
       >
         <option value="">Select your estate or area…</option>
         {estates.map((e) => (
           <option key={e.id} value={e.id}>
-            {e.label}
+            {estateHint(e)}
           </option>
         ))}
       </select>
@@ -45,7 +85,9 @@ export function CoverageChecker() {
         {estate && (
           <div className="mt-6">
             <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-ink)] px-5 py-4">
-              <span className="font-bold text-[var(--color-success)]">We&rsquo;re live in {estate.name}.</span>
+              <span className="font-bold text-[var(--color-success)]">
+                Good news — we&rsquo;re live in {estate.name}!
+              </span>
               <span className="text-sm text-[var(--color-fg-muted)]">
                 Installation:{" "}
                 <strong className="text-[var(--color-fg)]">
@@ -59,34 +101,10 @@ export function CoverageChecker() {
               )}
             </div>
 
-            <p className="eyebrow mt-6 mb-3">Plans available here</p>
-            <ul className="grid gap-3">
+            <p className="eyebrow mt-6 mb-3">Plans available at {estate.name}</p>
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {plans.map((p) => (
-                <li
-                  key={p.id}
-                  className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[var(--color-hairline)] bg-[var(--color-ink)] px-5 py-4"
-                >
-                  <div className="min-w-0">
-                    <span className="font-bold text-[var(--color-fg)]">{p.name}</span>
-                    <span className="display ml-2 text-[0.65rem] font-semibold uppercase tracking-wider text-[var(--color-fg-faint)]">
-                      {p.speed}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <span className="display tabular-nums font-bold text-[var(--color-fg)]">
-                      {formatNaira(p.priceNgn)}
-                      <span className="text-xs font-normal text-[var(--color-fg-faint)]">/{p.cycle}</span>
-                    </span>
-                    <a
-                      href={site.selfcare.onboard}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group grad-sunset inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold text-white transition-transform duration-200 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97]"
-                    >
-                      Choose <Arrow />
-                    </a>
-                  </div>
-                </li>
+                <EstatePlanCard key={p.id} p={p} />
               ))}
             </ul>
           </div>
@@ -101,9 +119,9 @@ export function CoverageChecker() {
           rel="noopener noreferrer"
           className="font-semibold text-[var(--color-brand-orange)] underline underline-offset-2 hover:text-[var(--color-brand-red)]"
         >
-          Message us on WhatsApp
+          message us on WhatsApp
         </a>{" "}
-        and we&rsquo;ll check the nearest fibre for you.
+        — chances are the fibre is already on your street, and we&rsquo;ll check for you in minutes.
       </p>
     </div>
   );

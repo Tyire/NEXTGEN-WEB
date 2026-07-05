@@ -6,7 +6,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/JsonLd";
 import { RegisterSW } from "@/components/RegisterSW";
-import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { Preloader } from "@/components/Preloader";
+import { Cinema } from "@/components/Cinema";
 
 const unbounded = Unbounded({
   variable: "--font-unbounded",
@@ -88,16 +89,21 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning className={`${unbounded.variable} ${instrument.variable} h-full`}>
       <head>
-        {/* No-flash theme: light is default; apply stored dark choice before paint. */}
+        {/* Pre-paint: apply stored dark choice (light default) + arm the
+            entrance curtain on the FIRST view of the session only. The
+            curtain's whole lifecycle is CSS (globals.css) — this just gates it. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}`,
+            __html: `try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}
+try{if(!sessionStorage.getItem('ng-boot')){document.documentElement.setAttribute('data-boot','1');sessionStorage.setItem('ng-boot','1');}}catch(e){}`,
           }}
         />
       </head>
       {/* suppressHydrationWarning: browser extensions mutate <body> before React
           hydrates — harmless. */}
       <body id="top" className="flex min-h-full flex-col" suppressHydrationWarning>
+        <Preloader />
+        <div className="progress-beam" aria-hidden="true" />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:border focus:border-[var(--color-brand-orange)] focus:bg-[var(--color-surface)] focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-[var(--color-fg)]"
@@ -110,7 +116,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header />
         <main id="main" className="flex-1">{children}</main>
         <Footer />
-        <WhatsAppFloat />
+        <Cinema />
         <script dangerouslySetInnerHTML={{ __html: enhance }} />
       </body>
     </html>

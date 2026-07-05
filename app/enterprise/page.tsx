@@ -45,6 +45,7 @@ export default function EnterprisePage() {
         }
         lede={svc.short + " Backed by a 99.9% uptime SLA and engineers who answer at 2am."}
         image="banner-enterprise"
+        video="/videos/banner-enterprise.vid"
         ghost="METRO"
       >
         <Button href="/contact">

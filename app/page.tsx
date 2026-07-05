@@ -1,5 +1,5 @@
 import { Container, Button, Arrow, SectionHead } from "@/components/ui";
-import { HeroVideo } from "@/components/HeroVideo";
+import { BlobVideo } from "@/components/BlobVideo";
 import { Ticker } from "@/components/sections/Ticker";
 import { PlansGrid } from "@/components/sections/PlansGrid";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
@@ -24,7 +24,13 @@ export default function Home() {
           <div className="blob -bottom-32 right-[-10%] h-[520px] w-[520px]" style={{ "--blob-c": "rgba(255,167,15,0.28)", animationDelay: "-7s" } as React.CSSProperties} />
           <div className="blob left-1/3 top-1/3 h-[420px] w-[640px]" style={{ "--blob-c": "rgba(255,107,44,0.22)" } as React.CSSProperties} />
         </div>
-        <HeroVideo className="absolute inset-0 -z-20 h-full w-full object-cover" />
+        <BlobVideo
+          src="/videos/hero-video.vid"
+          mobileSrc="/videos/hero-mobile.vid"
+          startAt={4}
+          data-parallax=""
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+        />
         {/* left scrim for copy legibility over the bright clip */}
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(12,4,9,0.85)_10%,rgba(12,4,9,0.45)_55%,transparent_85%)]" />
         <div aria-hidden="true" className="grain absolute inset-0 -z-10" />
@@ -41,8 +47,8 @@ export default function Home() {
             <span className="text-flow">No stories.</span>
           </h1>
           <p className="rise hero-pop mt-7 max-w-xl text-base leading-relaxed text-white/90 md:text-lg" style={{ animationDelay: "0.18s" }}>
-            Unlimited fiber internet for Lagos homes and businesses — stream, work and game at full
-            speed, installed within 3 days of survey.
+            Unlimited fiber for Lagos homes and businesses — stream, work and game at full speed.
+            Installed in 3 days, backed by real engineers who actually pick up.
           </p>
           <div className="rise mt-10 flex flex-wrap items-center gap-4" style={{ animationDelay: "0.28s" }}>
             <Button href={site.selfcare.onboard} external>
@@ -99,7 +105,7 @@ export default function Home() {
       </section>
 
       {/* ── COVERAGE ───────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[var(--color-void)] py-20 md:py-28" id="coverage">
+      <section className="wash relative overflow-hidden py-20 md:py-28" id="coverage">
         <span aria-hidden="true" className="ghost absolute -top-3 left-0 text-[20vw] opacity-50 md:text-[11rem]">
           LIVE IN
         </span>

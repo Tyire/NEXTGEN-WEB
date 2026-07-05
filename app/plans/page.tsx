@@ -31,6 +31,7 @@ export default function PlansPage() {
         }
         lede="Every plan is unlimited data on true fiber — prepaid, no contracts, no fair-usage fine print. Prices mirror the onboarding portal exactly."
         image="banner-plans"
+        video="/videos/banner-plans.vid"
         ghost="PLANS"
       >
         <Button href={site.selfcare.onboard} external>
@@ -48,7 +49,7 @@ export default function PlansPage() {
         </Container>
       </section>
 
-      <section className="relative overflow-hidden bg-[var(--color-void)] py-20 md:py-28" id="coverage">
+      <section className="wash relative overflow-hidden py-20 md:py-28" id="coverage">
         <span aria-hidden="true" className="ghost absolute -top-3 right-0 text-[18vw] opacity-50 md:text-[10rem]">
           ESTATE
         </span>

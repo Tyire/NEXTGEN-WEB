@@ -251,6 +251,114 @@ a, button, [role="button"], select, summary, label {
 .icon-sun { display: none; }
 [data-theme="dark"] .icon-sun { display: block; }
 
+/* ── Sunset wash bands (light mode pops; dark stays deep) ───────────── */
+.wash {
+  background-image:
+    radial-gradient(60% 90% at 85% 0%, var(--wash-hot) 0%, transparent 60%),
+    radial-gradient(50% 80% at 0% 100%, var(--wash-warm) 0%, transparent 55%),
+    linear-gradient(var(--wash-base), var(--wash-base));
+}
+:root {
+  --wash-base: #ffedd9;
+  --wash-hot: rgba(255, 107, 44, 0.22);
+  --wash-warm: rgba(255, 31, 77, 0.14);
+}
+[data-theme="dark"] {
+  --wash-base: #0f050b;
+  --wash-hot: rgba(255, 107, 44, 0.1);
+  --wash-warm: rgba(255, 31, 77, 0.08);
+}
+/* Card top-edge sunset accent. */
+.edge-top { position: relative; }
+.edge-top::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background-image: var(--grad-sunset);
+}
+
+/* ── Scroll progress beam (GSAP scrubs scaleX; harmless static sliver without JS) ── */
+.progress-beam {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  height: 3px;
+  background-image: var(--grad-sunset);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+/* ── Preloader — "speed burst" curtain, 100% CSS lifecycle ────────────
+   Rendered by the server on EVERY page, but display:none unless the inline
+   <head> script sets html[data-boot] (first visit this session only).
+   The hide animation is pure CSS with a fixed delay, so even if every byte
+   of JS after <head> fails, the curtain ALWAYS lifts. */
+.preloader { display: none; }
+html[data-boot] .preloader {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.4rem;
+  background: #14060e;
+  animation: preload-lift 0.75s var(--ease-in-out) 1.7s forwards;
+}
+html[data-boot] .preloader::after {
+  /* curved trailing edge that follows the curtain up */
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 12vh;
+  background: #14060e;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+}
+@keyframes preload-lift {
+  to { transform: translateY(-114%); visibility: hidden; }
+}
+.preloader .pl-logo {
+  width: 76px;
+  height: auto;
+  animation: pl-pop 0.7s var(--ease-out) both;
+}
+@keyframes pl-pop {
+  from { opacity: 0; transform: scale(0.82) translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+/* The "fiber beam": a gradient line that charges across, then bursts. */
+.preloader .pl-beam {
+  width: min(46vw, 240px);
+  height: 3px;
+  border-radius: 3px;
+  background-image: var(--grad-sunset);
+  transform-origin: 0 50%;
+  animation: pl-charge 1.3s var(--ease-in-out) 0.15s both;
+}
+@keyframes pl-charge {
+  0%   { transform: scaleX(0); }
+  70%  { transform: scaleX(1); }
+  100% { transform: scaleX(1); box-shadow: 0 0 24px 2px rgba(255, 107, 44, 0.8); }
+}
+.preloader .pl-tag {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  animation: pl-pop 0.7s var(--ease-out) 0.35s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-boot] .preloader { display: none; }
+}
+
 /* ── Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

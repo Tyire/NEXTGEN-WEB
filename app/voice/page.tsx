@@ -45,6 +45,7 @@ export default function VoicePage() {
         }
         lede={svc.benefit + " Crystal-clear calling for homes, SMEs and corporate PBX on the 01-640 Lagos number range."}
         image="banner-voice"
+        video="/videos/banner-voice.vid"
         ghost="VOICE"
       >
         <Button href="/contact">

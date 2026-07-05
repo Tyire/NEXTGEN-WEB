@@ -1,14 +1,18 @@
 import { Container, Eyebrow } from "@/components/ui";
+import { BlobVideo } from "@/components/BlobVideo";
 
 /**
- * Subpage hero: real fiber imagery + ghost word + sunset accents.
+ * Subpage hero: banner imagery + ghost word + sunset accents.
  * `image` is a public/images/people basename, e.g. "banner-voice".
+ * `video` (a /videos/*.vid path) fades in OVER the image when it plays —
+ * the image stays as the instant/no-JS experience.
  */
 export function PageHero({
   eyebrow,
   title,
   lede,
   image,
+  video,
   ghost,
   children,
 }: {
@@ -16,6 +20,7 @@ export function PageHero({
   title: React.ReactNode;
   lede: string;
   image: string;
+  video?: string;
   ghost: string;
   children?: React.ReactNode;
 }) {
@@ -41,6 +46,7 @@ export function PageHero({
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
       </picture>
+      {video && <BlobVideo src={video} className="absolute inset-0 -z-20 h-full w-full object-cover" />}
       {/* Scrim so type always reads. */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(105deg,rgba(10,4,8,0.88)_20%,rgba(10,4,8,0.55)_60%,rgba(255,60,44,0.25))]" />
 

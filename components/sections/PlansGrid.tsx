@@ -14,7 +14,7 @@ function PlanCard({ p, i }: { p: Plan; i: number }) {
       className={`sr-pop lift relative flex flex-col rounded-[var(--radius)] p-7 md:p-8 ${
         p.featured
           ? "grad-border glow-pulse bg-[var(--color-surface)]"
-          : "border border-[var(--color-hairline)] bg-[var(--color-surface)]"
+          : "edge-top border border-[var(--color-hairline)] bg-[var(--color-surface)]"
       }`}
       style={{ animationDelay: `${i * 0.05}s` }}
     >

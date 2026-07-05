@@ -1,10 +1,11 @@
 import { trustStats } from "@/lib/site";
 import { Container, Eyebrow } from "@/components/ui";
+import { BlobVideo } from "@/components/BlobVideo";
 
 /** Why-NextGen band: image + huge gradient stats on the void surface. */
 export function StatsBand() {
   return (
-    <section className="relative overflow-hidden bg-[var(--color-void)] py-20 md:py-28">
+    <section className="wash relative overflow-hidden py-20 md:py-28">
       <span aria-hidden="true" className="ghost absolute -top-2 right-0 text-[18vw] opacity-50 md:text-[10rem]">
         UPTIME
       </span>
@@ -31,7 +32,7 @@ export function StatsBand() {
                 <dt className="order-2 text-[0.7rem] uppercase tracking-wider text-[var(--color-fg-faint)] sm:mt-1.5">
                   {s.label}
                 </dt>
-                <dd className="display grad-text text-3xl font-extrabold sm:text-4xl">{s.value}</dd>
+                <dd data-count="" className="display grad-text text-3xl font-extrabold sm:text-4xl">{s.value}</dd>
               </div>
             ))}
           </dl>
@@ -39,16 +40,20 @@ export function StatsBand() {
 
         <div className="sr-pop relative">
           <div aria-hidden="true" className="blob drift -right-16 -top-16 h-72 w-72" style={{ "--blob-c": "rgba(255,31,77,0.3)" } as React.CSSProperties} />
-          <picture>
-            <source type="image/avif" srcSet="/images/people/why-640.avif 640w, /images/people/why-1024.avif 1024w" sizes="(min-width:1024px) 45vw, 92vw" />
-            <source type="image/webp" srcSet="/images/people/why-640.webp 640w, /images/people/why-1024.webp 1024w" sizes="(min-width:1024px) 45vw, 92vw" />
-            <img
-              src="/images/people/why-1024.webp"
-              alt="NextGen engineer splicing fiber in a Lagos estate"
-              loading="lazy"
-              className="relative aspect-[4/3] w-full rounded-[var(--radius)] border border-[var(--color-hairline)] object-cover shadow-[var(--shadow-pop)]"
-            />
-          </picture>
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--radius)] border border-[var(--color-hairline)] shadow-[var(--shadow-pop)]">
+            <picture>
+              <source type="image/avif" srcSet="/images/people/why-640.avif 640w, /images/people/why-1024.avif 1024w" sizes="(min-width:1024px) 45vw, 92vw" />
+              <source type="image/webp" srcSet="/images/people/why-640.webp 640w, /images/people/why-1024.webp 1024w" sizes="(min-width:1024px) 45vw, 92vw" />
+              <img
+                src="/images/people/why-1024.webp"
+                alt="A Lagos family streaming together on NextGen fiber"
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </picture>
+            {/* mum & daughter browsing — the image above stays as the instant fallback */}
+            <BlobVideo src="/videos/why-people.vid" className="absolute inset-0 h-full w-full object-cover" grade={false} />
+          </div>
           {/* sticker stat */}
           <p className="display absolute -bottom-5 -left-2 -rotate-2 rounded-2xl grad-sunset px-5 py-3.5 text-white shadow-[0_16px_40px_-16px_rgba(255,31,77,0.8)] md:-left-6">
             <span className="block text-2xl font-extrabold leading-none">3 days</span>
