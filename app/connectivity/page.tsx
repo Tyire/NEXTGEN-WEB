@@ -55,30 +55,75 @@ export default function ConnectivityPage() {
           />
           <ul className="mt-12 grid gap-4 md:mt-16">
             {speedTiers.map((t, i) => (
-              <li
-                key={t.name}
-                className={`sr lift flex flex-wrap items-center justify-between gap-4 rounded-[var(--radius)] border p-6 md:p-7 ${
-                  "featured" in t && t.featured
-                    ? "grad-border bg-[var(--color-surface)]"
-                    : "border-[var(--color-hairline)] bg-[var(--color-surface)]"
-                }`}
-                style={{ animationDelay: `${i * 0.04}s` }}
-              >
-                <div className="flex items-center gap-5">
-                  <span aria-hidden="true" className="display grad-text w-12 text-3xl font-extrabold">
-                    0{i + 1}
-                  </span>
-                  <div>
-                    <h3 className="display text-lg font-bold">{t.name}</h3>
-                    <p className="mt-1 text-sm text-[var(--color-fg-muted)]">{t.use}</p>
+              <li key={t.name} className="sr" style={{ animationDelay: `${i * 0.04}s` }}>
+                {/* Native <details>: expands with zero JS, keyboard-accessible out of the box. */}
+                <details
+                  className={`group lift rounded-[var(--radius)] border ${
+                    "featured" in t && t.featured
+                      ? "grad-border bg-[var(--color-surface)]"
+                      : "border-[var(--color-hairline)] bg-[var(--color-surface)]"
+                  }`}
+                >
+                  <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-4 p-6 md:p-7 [&::-webkit-details-marker]:hidden">
+                    <div className="flex items-center gap-5">
+                      <span aria-hidden="true" className="display grad-text w-14 shrink-0 text-3xl font-extrabold leading-none">
+                        0{i + 1}
+                      </span>
+                      <div>
+                        <h3 className="display text-lg font-bold">{t.name}</h3>
+                        <p className="mt-1 text-sm text-[var(--color-fg-muted)]">{t.use}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <span className="display text-xl font-extrabold md:text-2xl">{t.speed}</span>
+                      <span className="display rounded-full border border-[var(--color-hairline)] px-3 py-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-fg-faint)]">
+                        {t.tier}
+                      </span>
+                      <svg
+                        viewBox="0 0 16 16"
+                        aria-hidden="true"
+                        className="h-4 w-4 shrink-0 text-[var(--color-fg-faint)] transition-transform duration-300 ease-[var(--ease-out)] group-open:rotate-180"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="m3 6 5 5 5-5" />
+                      </svg>
+                    </div>
+                  </summary>
+                  <div className="rise border-t border-[var(--color-hairline)] px-6 pb-6 pt-5 md:px-7 md:pb-7" style={{ animationDuration: "0.45s" }}>
+                    <p className="max-w-2xl text-sm leading-relaxed text-[var(--color-fg-muted)]">{t.detail}</p>
+                    <ul className="mt-4 grid gap-2 text-sm text-[var(--color-fg-muted)] sm:grid-cols-3 sm:gap-4">
+                      {t.points.map((pt) => (
+                        <li key={pt} className="flex gap-2">
+                          <svg viewBox="0 0 16 16" className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-success)]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                            <path d="M2.5 8.5 6 12l7.5-8" />
+                          </svg>
+                          {pt}
+                        </li>
+                      ))}
+                    </ul>
+                    {t.tier === "business" ? (
+                      <a
+                        href="/contact"
+                        className="group/cta mt-6 inline-flex items-center gap-2 rounded-full border-2 border-[var(--color-hairline)] px-6 py-3 text-sm font-bold text-[var(--color-fg)] transition-colors hover:border-[var(--color-brand-orange)]"
+                      >
+                        Talk to sales <Arrow />
+                      </a>
+                    ) : (
+                      <a
+                        href={site.selfcare.onboard}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/cta grad-sunset mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white transition-transform duration-300 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97]"
+                      >
+                        Subscribe to {t.name} <Arrow />
+                      </a>
+                    )}
                   </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <span className="display text-xl font-extrabold md:text-2xl">{t.speed}</span>
-                  <span className="display rounded-full border border-[var(--color-hairline)] px-3 py-1.5 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-fg-faint)]">
-                    {t.tier}
-                  </span>
-                </div>
+                </details>
               </li>
             ))}
           </ul>

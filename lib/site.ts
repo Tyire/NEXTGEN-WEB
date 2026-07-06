@@ -98,13 +98,55 @@ export const trustStats = [
   { value: "3-day", label: "Install after survey" },
 ] as const;
 
-// Fiber speed tiers — 2 Mbps up to STM-16 (2.5 Gbps)
+// Fiber speed tiers — 2 Mbps up to STM-16 (2.5 Gbps).
+// `detail` + `points` power the expandable cards on /connectivity.
 export const speedTiers = [
-  { name: "Starter", speed: "2 – 10 Mbps", use: "Light browsing, email, single home", tier: "home" },
-  { name: "Home Pro", speed: "25 – 100 Mbps", use: "Streaming, WFH, smart homes", tier: "home", featured: true },
-  { name: "Gigabit", speed: "200 Mbps – 1 Gbps", use: "Creators, heavy households, small offices", tier: "home" },
-  { name: "Business", speed: "100 Mbps – 1 Gbps", use: "Dedicated, symmetrical, SLA-backed", tier: "business" },
-  { name: "Carrier STM", speed: "Up to 2.5 Gbps (STM-16)", use: "Carriers, data centers, large campuses", tier: "business" },
+  {
+    name: "Starter",
+    speed: "2 – 10 Mbps",
+    use: "Light browsing, email, single home",
+    tier: "home",
+    detail:
+      "An affordable true-fiber line for a single household that mostly browses, emails and streams music. Same GPON glass as every other tier — you upgrade with a plan change, not a re-install.",
+    points: ["Unlimited data, no fair-usage fine print", "Symmetrical upload and download", "Installed in about 3 days in lit estates"],
+  },
+  {
+    name: "Home Pro",
+    speed: "25 – 100 Mbps",
+    use: "Streaming, WFH, smart homes",
+    tier: "home",
+    featured: true,
+    detail:
+      "The sweet spot for most Lagos homes: 4K streaming on several screens, video calls that hold, smart-home gear and cloud backups — all at the same time, without the 9pm slowdown.",
+    points: ["Handles multiple 4K streams + video calls at once", "Low latency held steady at evening peak", "Prepaid, no contract — pause or change any month"],
+  },
+  {
+    name: "Gigabit",
+    speed: "200 Mbps – 1 Gbps",
+    use: "Creators, heavy households, small offices",
+    tier: "home",
+    detail:
+      "For creators pushing large uploads, busy compounds and small offices. Gigabit-class GPON with symmetrical speeds, so a 20 GB video export leaves your desk as fast as it would arrive.",
+    points: ["Symmetrical gigabit-class up/down", "Great for NAS, cloud work and game downloads", "Same-day support from real engineers"],
+  },
+  {
+    name: "Business",
+    speed: "100 Mbps – 1 Gbps",
+    use: "Dedicated, symmetrical, SLA-backed",
+    tier: "business",
+    detail:
+      "Dedicated capacity for offices that can't afford a bad day: SLA-backed uptime, symmetrical dedicated bandwidth, and priority support with an engineer on the line — not a queue.",
+    points: ["SLA-backed uptime commitments", "Dedicated (not shared) symmetrical bandwidth", "Priority business support line"],
+  },
+  {
+    name: "Carrier STM",
+    speed: "Up to 2.5 Gbps (STM-16)",
+    use: "Carriers, data centers, large campuses",
+    tier: "business",
+    detail:
+      "Carrier-grade transport for ISPs, data centers and large campuses — STM-16 capacity delivered over our own metro core, engineered with headroom and monitored around the clock.",
+    points: ["Up to 2.5 Gbps over our own metro core", "24/7 NOC monitoring", "Custom engineering and redundant paths on request"],
+  },
 ] as const;
 
 // Real lit coverage — the estates/areas live on the selfcare onboarding portal

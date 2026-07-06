@@ -64,10 +64,16 @@ function PlanCard({ p, i }: { p: Plan; i: number }) {
   );
 }
 
-export function PlansGrid({ include = "all" }: { include?: "all" | "residential" }) {
+export function PlansGrid({
+  include = "all",
+  carousel = false,
+}: {
+  include?: "all" | "residential";
+  carousel?: boolean;
+}) {
   const list = include === "residential" ? plans.filter((p) => p.priceNgn != null) : plans;
   return (
-    <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className={carousel ? "plans-carousel" : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3"}>
       {list.map((p, i) => (
         <PlanCard key={p.id} p={p} i={i} />
       ))}

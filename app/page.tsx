@@ -88,7 +88,7 @@ export default function Home() {
             lede="Real prices from our onboarding portal — what you see is what you pay. Every plan is unlimited data on true GPON fiber."
           />
           <div className="mt-12 md:mt-16">
-            <PlansGrid />
+            <PlansGrid carousel />
           </div>
           <p className="sr mt-8 text-sm text-[var(--color-fg-muted)]">
             Installation fees and first-month-free offers vary by estate —{" "}
@@ -117,6 +117,27 @@ export default function Home() {
           />
           <div className="sr-pop mt-12 md:mt-16">
             <CoverageChecker />
+          </div>
+
+          {/* Estate / business acquisition CTA */}
+          <div className="sr edge-top relative mt-10 rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 md:p-10">
+            <div className="flex flex-wrap items-center justify-between gap-6">
+              <div className="max-w-xl">
+                <h3 className="display text-2xl font-extrabold md:text-3xl">
+                  Want NextGen in <span className="grad-text">your estate?</span>
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg-muted)] md:text-base">
+                  Estate manager, resident committee, or a business that needs serious fiber — tell
+                  us where you are and we&apos;ll survey your location for the next build.
+                </p>
+              </div>
+              <a
+                href="/contact"
+                className="group grad-sunset inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-white shadow-[0_12px_32px_-12px_rgba(255,60,44,0.6)] transition-transform duration-300 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97]"
+              >
+                Reach out to us <Arrow />
+              </a>
+            </div>
           </div>
         </Container>
       </section>

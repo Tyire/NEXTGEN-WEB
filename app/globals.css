@@ -200,6 +200,35 @@ a, button, [role="button"], select, summary, label {
 }
 @keyframes text-flow { to { background-position: 240% center; } }
 
+/* ── Plans carousel (home) — CSS scroll-snap, swipe on touch. On hover-
+   capable devices the hovered card stays in focus while siblings soften.
+   Touch devices never get the blur (hover:hover guard). ─────────────── */
+.plans-carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* top padding clears the floating "Most popular" badge (overflow-x clips y) */
+  padding: 1.25rem 0.25rem 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-hairline) transparent;
+}
+.plans-carousel > li {
+  scroll-snap-align: center;
+  flex: 0 0 min(85vw, 330px);
+}
+@media (hover: hover) {
+  .plans-carousel > li {
+    transition: filter 0.35s var(--ease-out), opacity 0.35s var(--ease-out),
+      transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+  }
+  .plans-carousel:hover > li:not(:hover) {
+    filter: blur(3px);
+    opacity: 0.55;
+    transform: scale(0.97);
+  }
+}
+
 /* Card hover lift. */
 .lift {
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out),
