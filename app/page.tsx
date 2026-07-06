@@ -16,7 +16,7 @@ export default function Home() {
           The gradient/blob backdrop below is the DESIGNED hero — the video
           fades in over it when ready. Slow phone, dead JS, reduced motion:
           the hero still looks intentional, never broken. */}
-      <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#140710] md:min-h-[92vh]">
+      <section data-expand="" className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#140710] md:min-h-[92vh]">
         {/* designed fallback backdrop */}
         <div aria-hidden="true" className="absolute inset-0 -z-30">
           <div className="blob drift -left-24 -top-24 h-[480px] w-[480px]" style={{ "--blob-c": "rgba(255,31,77,0.35)" } as React.CSSProperties} />

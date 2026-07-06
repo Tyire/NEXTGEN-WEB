@@ -23,9 +23,10 @@ export function Cinema() {
     // Lenis smooth scroll — DESKTOP ONLY. Iron rule from the July rebuild:
     // Lenis never initializes on touch devices (it was part of the original
     // mobile breakage). Native scroll stays untouched there.
+    const desktop = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     let lenis: Lenis | null = null;
     let lenisTick: ((time: number) => void) | null = null;
-    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    if (desktop) {
       lenis = new Lenis({
         duration: 1.3,
         easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -50,6 +51,7 @@ export function Cinema() {
 
       // 2. Hero parallax — the video drifts slower than the page
       document.querySelectorAll<HTMLElement>("[data-parallax]").forEach((el) => {
+        if (desktop && el.closest("[data-expand]")) return; // expand tween owns it
         const holder = el.parentElement;
         if (!holder) return;
         gsap.to(el, {
@@ -90,6 +92,53 @@ export function Cinema() {
           scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: 1 },
         });
       });
+
+      // 5. Scroll-to-expand hero (desktop) — the hero video starts framed like
+      // a card over the designed backdrop and expands to full-bleed as you
+      // scroll. Mobile/no-JS: video is simply full-bleed from the start.
+      if (desktop) {
+        const heroSection = document.querySelector<HTMLElement>("[data-expand]");
+        const heroMedia = heroSection?.querySelector<HTMLElement>("[data-parallax]");
+        if (heroSection && heroMedia) {
+          gsap.fromTo(
+            heroMedia,
+            { clipPath: "inset(14% 8% 18% 8% round 28px)" },
+            {
+              clipPath: "inset(0% 0% 0% 0% round 0px)",
+              ease: "none",
+              scrollTrigger: { trigger: heroSection, start: "top top", end: "+=70%", pin: true, scrub: 0.4 },
+            }
+          );
+        }
+      }
+
+      // 6. Pinned pricing sweep (desktop) — vertical scroll pauses while the
+      // plan cards travel horizontally through view, so every plan is seen.
+      // Mobile/no-JS: .plans-carousel stays a native swipe carousel.
+      if (desktop) {
+        const track = document.querySelector<HTMLElement>(".plans-carousel");
+        const section = track?.closest("section");
+        if (track && section) {
+          track.classList.add("is-pinned");
+          const dist = () => track.scrollWidth - track.clientWidth;
+          if (dist() > 40) {
+            gsap.to(track, {
+              x: () => -dist(),
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: () => (section.offsetHeight > window.innerHeight ? "bottom bottom" : "top top"),
+                end: () => "+=" + dist(),
+                pin: true,
+                scrub: 0.5,
+                invalidateOnRefresh: true,
+              },
+            });
+          } else {
+            track.classList.remove("is-pinned");
+          }
+        }
+      }
     });
 
     return () => {

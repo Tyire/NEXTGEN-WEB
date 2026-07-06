@@ -211,16 +211,12 @@ a, button, [role="button"], select, summary, label {
   scroll-snap-align: center;
   flex: 0 0 min(85vw, 330px);
 }
-@media (hover: hover) {
-  .plans-carousel > li {
-    transition: filter 0.35s var(--ease-out), opacity 0.35s var(--ease-out),
-      transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
-  }
-  .plans-carousel:hover > li:not(:hover) {
-    filter: blur(3px);
-    opacity: 0.55;
-    transform: scale(0.97);
-  }
+/* Desktop pinned sweep (Cinema adds .is-pinned): the GSAP transform drives
+   the track, so native overflow/snap turn off. JS dead → class never added →
+   desktop falls back to the same native swipe carousel as touch. */
+.plans-carousel.is-pinned {
+  overflow: visible;
+  scroll-snap-type: none;
 }
 
 /* Card hover lift. */
