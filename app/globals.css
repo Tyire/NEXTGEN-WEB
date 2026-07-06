@@ -67,6 +67,9 @@ html {
   scroll-behavior: smooth;
   background: var(--color-ink);
 }
+/* When Lenis drives scrolling (desktop), native smooth would double-ease. */
+html.lenis { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
 
 body {
   background: var(--color-ink);

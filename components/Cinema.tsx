@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 
 /**
  * GSAP ScrollTrigger "cinema" layer — attention-catching set pieces that are
@@ -18,6 +19,23 @@ export function Cinema() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.registerPlugin(ScrollTrigger);
+
+    // Lenis smooth scroll — DESKTOP ONLY. Iron rule from the July rebuild:
+    // Lenis never initializes on touch devices (it was part of the original
+    // mobile breakage). Native scroll stays untouched there.
+    let lenis: Lenis | null = null;
+    let lenisTick: ((time: number) => void) | null = null;
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      lenis = new Lenis({
+        duration: 1.3,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        anchors: true,
+      });
+      lenis.on("scroll", ScrollTrigger.update);
+      lenisTick = (time) => lenis!.raf(time * 1000);
+      gsap.ticker.add(lenisTick);
+      gsap.ticker.lagSmoothing(0);
+    }
 
     const ctx = gsap.context(() => {
       // 1. Scroll progress beam
@@ -74,7 +92,11 @@ export function Cinema() {
       });
     });
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      if (lenisTick) gsap.ticker.remove(lenisTick);
+      lenis?.destroy();
+    };
   }, []);
 
   return null;
