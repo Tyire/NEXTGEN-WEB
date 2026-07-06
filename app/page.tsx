@@ -4,6 +4,7 @@ import { PlansGrid } from "@/components/sections/PlansGrid";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { StatsBand } from "@/components/sections/StatsBand";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { CoverageChecker } from "@/components/CoverageChecker";
 import { site } from "@/lib/site";
 
@@ -163,6 +164,7 @@ export default function Home() {
       </section>
 
       <StatsBand />
+      <Testimonials />
       <CtaBanner />
     </>
   );
