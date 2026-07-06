@@ -8,7 +8,8 @@
 //   3. Only immutable hashed assets (/_next/static/) are cache-first.
 // v3: Ink & Signal rebrand — bump flushes stale fonts/images/videos cached
 // under v2 (HTML rules unchanged: still network-first, never precached).
-const VERSION = "nextgen-v3";
+// v4: plum dark restored + maturity pass (solid accents, new pages).
+const VERSION = "nextgen-v4";
 
 self.addEventListener("install", () => {
   self.skipWaiting();
