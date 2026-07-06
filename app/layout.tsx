@@ -74,6 +74,12 @@ const enhance = `(function(){
     for(var k=0;k<m.length;k++){m[k].setAttribute('content',d?'#180b12':'#f6f8fb');}
   }
   syncMeta();
+  function atTop(){
+    if(window.scrollY<24){document.documentElement.setAttribute('data-at-top','');}
+    else{document.documentElement.removeAttribute('data-at-top');}
+  }
+  atTop();
+  window.addEventListener('scroll',atTop,{passive:true});
   var btns=document.querySelectorAll('.theme-toggle');
   for(var i=0;i<btns.length;i++){btns[i].addEventListener('click',function(){
     var d=document.documentElement.getAttribute('data-theme')==='dark';

@@ -32,13 +32,13 @@ function ThemeButton({ className = "" }: { className?: string }) {
 
 export function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-[var(--color-hairline)] bg-[var(--color-ink-glass)] backdrop-blur-md">
+    <header className="site-header fixed inset-x-0 top-0 z-50 border-b border-[var(--color-hairline)] bg-[var(--color-ink-glass)] backdrop-blur-md">
       {/* Checkbox FIRST so `#nav-open:checked ~ …` reaches the bar and panel. */}
       {/* Focusable: Space toggles it natively, checked state IS the AT state —
           keyboard menu access with zero JS. Focus ring drawn on the burger. */}
       <input type="checkbox" id="nav-open" className="peer sr-only" aria-label="Menu" />
 
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-5 md:h-20 md:px-10">
+      <div className="nav-bar mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-5 md:h-20 md:px-10">
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- plain <a> by design: nav must work without hydration */}
         <a href="/" aria-label="NextGen Telcoms home" className="shrink-0">
           <Logo className="h-7 w-auto md:h-8" />

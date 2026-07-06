@@ -269,6 +269,31 @@ a, button, [role="button"], select, summary, label {
 }
 .burger .bl + .bl { margin-top: 5px; }
 
+/* ── Transparent header at page top ───────────────────────────────────
+   JS (enhance script) sets html[data-at-top] while scrollY < 24. Every
+   page opens on a dark hero, so the bar goes transparent with white
+   foreground, then eases back to glass once scrolling starts.
+   No JS → attribute never set → header is always glass. */
+.site-header {
+  transition: background-color 0.35s ease, border-color 0.35s ease;
+}
+html[data-at-top] .site-header {
+  background-color: transparent;
+  border-color: transparent;
+  backdrop-filter: none;
+}
+/* Scope the white foreground to the bar only — the dropdown panel keeps
+   normal theme colors so an opened menu stays readable. */
+html[data-at-top] .nav-bar {
+  --color-fg: #ffffff;
+  --color-fg-muted: rgba(255, 255, 255, 0.82);
+  --color-hairline: rgba(255, 255, 255, 0.3);
+  --color-surface: rgba(255, 255, 255, 0.12);
+}
+/* Swap to the white wordmark while transparent in light theme. */
+html[data-at-top]:not([data-theme="dark"]) .nav-bar img[src="/brand/logo-full.png"] { display: none; }
+html[data-at-top]:not([data-theme="dark"]) .nav-bar img[src="/brand/logo-full-dark.png"] { display: block; }
+
 /* Theme toggle: CSS shows the right icon; a tiny inline script flips the attr. */
 [data-theme="dark"] .icon-moon { display: none; }
 .icon-sun { display: none; }
