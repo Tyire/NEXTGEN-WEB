@@ -51,7 +51,6 @@ export function Cinema() {
 
       // 2. Hero parallax — the video drifts slower than the page
       document.querySelectorAll<HTMLElement>("[data-parallax]").forEach((el) => {
-        if (desktop && el.closest("[data-expand]")) return; // expand tween owns it
         const holder = el.parentElement;
         if (!holder) return;
         gsap.to(el, {
@@ -93,26 +92,7 @@ export function Cinema() {
         });
       });
 
-      // 5. Scroll-to-expand hero (desktop) — the hero video starts framed like
-      // a card over the designed backdrop and expands to full-bleed as you
-      // scroll. Mobile/no-JS: video is simply full-bleed from the start.
-      if (desktop) {
-        const heroSection = document.querySelector<HTMLElement>("[data-expand]");
-        const heroMedia = heroSection?.querySelector<HTMLElement>("[data-parallax]");
-        if (heroSection && heroMedia) {
-          gsap.fromTo(
-            heroMedia,
-            { clipPath: "inset(14% 8% 18% 8% round 28px)" },
-            {
-              clipPath: "inset(0% 0% 0% 0% round 0px)",
-              ease: "none",
-              scrollTrigger: { trigger: heroSection, start: "top top", end: "+=70%", pin: true, scrub: 0.4 },
-            }
-          );
-        }
-      }
-
-      // 6. Pinned pricing sweep (desktop) — vertical scroll pauses while the
+      // 5. Pinned pricing sweep (desktop) — vertical scroll pauses while the
       // plan cards travel horizontally through view, so every plan is seen.
       // Mobile/no-JS: .plans-carousel stays a native swipe carousel.
       if (desktop) {

@@ -40,7 +40,9 @@ const quotes = [
  */
 export function Testimonials() {
   return (
-    <section data-theme="dark" className="relative overflow-hidden bg-[var(--color-void)] text-[var(--color-fg)]">
+    // NOTE: no overflow-hidden here — an overflow-hidden ancestor disables
+    // position:sticky, which is what drives the card stacking.
+    <section data-theme="dark" className="relative bg-[var(--color-void)] text-[var(--color-fg)]">
       {/* faint blueprint grid, masked toward the top */}
       <div
         aria-hidden="true"
