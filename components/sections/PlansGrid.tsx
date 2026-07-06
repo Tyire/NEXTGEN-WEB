@@ -29,8 +29,8 @@ function PlanCard({ p, i }: { p: Plan; i: number }) {
       <p className="mt-5">
         {amt ? (
           <>
-            <span className="display grad-text align-top text-lg font-bold">₦</span>
-            <span className="display grad-text text-5xl font-extrabold tracking-tight">{amt}</span>
+            <span className="display text-[var(--color-brand-orange)] align-top text-lg font-bold">₦</span>
+            <span className="display text-[var(--color-brand-orange)] text-5xl font-extrabold tracking-tight">{amt}</span>
             <span className="ml-1 text-sm text-[var(--color-fg-faint)]">/{p.cycle}</span>
           </>
         ) : (

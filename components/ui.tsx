@@ -50,10 +50,7 @@ export function Container({ children, className = "" }: { children: React.ReactN
 
 export function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <p className={`eyebrow mb-4 flex items-center gap-2.5 ${className}`}>
-      <span aria-hidden="true" className="inline-block h-2 w-2 rounded-full grad-sunset" />
-      {children}
-    </p>
+    <p className={`eyebrow mb-4 ${className}`}>{children}</p>
   );
 }
 

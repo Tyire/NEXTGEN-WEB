@@ -62,7 +62,7 @@ export default function VoicePage() {
             eyebrow="Why fiber voice"
             title={
               <>
-                Your number, on <span className="grad-text">01-640.</span>
+                Your number, on <span className="text-[var(--color-brand-orange)]">01-640.</span>
               </>
             }
             lede="Voice built into the network itself — not an app fighting your bandwidth."
@@ -74,7 +74,7 @@ export default function VoicePage() {
                 className="sr-pop lift rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 md:p-8"
                 style={{ animationDelay: `${i * 0.06}s` }}
               >
-                <span aria-hidden="true" className="display grad-text text-3xl font-extrabold">0{i + 1}</span>
+                <span aria-hidden="true" className="display text-[var(--color-brand-orange)] text-3xl font-extrabold">0{i + 1}</span>
                 <h3 className="display mt-4 text-xl font-bold">{f.t}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg-muted)]">{f.d}</p>
               </li>

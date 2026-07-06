@@ -16,7 +16,7 @@ export default function Home() {
           The gradient/blob backdrop below is the DESIGNED hero — the video
           fades in over it when ready. Slow phone, dead JS, reduced motion:
           the hero still looks intentional, never broken. */}
-      <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#081020] md:min-h-[92vh]">
+      <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#140710] md:min-h-[92vh]">
         {/* designed fallback backdrop */}
         <div aria-hidden="true" className="absolute inset-0 -z-30">
           <div className="blob drift -left-24 -top-24 h-[480px] w-[480px]" style={{ "--blob-c": "rgba(255,31,77,0.35)" } as React.CSSProperties} />
@@ -31,7 +31,7 @@ export default function Home() {
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
         {/* left scrim for copy legibility over the bright clip */}
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(6,12,24,0.85)_10%,rgba(6,12,24,0.45)_55%,transparent_85%)]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(12,4,9,0.85)_10%,rgba(12,4,9,0.45)_55%,transparent_85%)]" />
         <div aria-hidden="true" className="grain absolute inset-0 -z-10" />
 
         <Container className="relative pb-24 pt-32 md:pb-28 md:pt-36">
@@ -80,7 +80,7 @@ export default function Home() {
             eyebrow="Fiber plans"
             title={
               <>
-                Unlimited. <span className="grad-text">Prepaid.</span>
+                Unlimited. <span className="text-[var(--color-brand-orange)]">Prepaid.</span>
                 <br />
                 No contracts.
               </>
@@ -110,7 +110,7 @@ export default function Home() {
             eyebrow="Coverage"
             title={
               <>
-                Already lit in <span className="grad-text">your estate?</span>
+                Already lit in <span className="text-[var(--color-brand-orange)]">your estate?</span>
               </>
             }
             lede="We build estate by estate across Lekki, Ikate, Ilasan, Orchid and Ajah. Pick yours to see live plans and the exact installation cost."
@@ -124,7 +124,7 @@ export default function Home() {
             <div className="flex flex-wrap items-center justify-between gap-6">
               <div className="max-w-xl">
                 <h3 className="display text-2xl font-extrabold md:text-3xl">
-                  Want NextGen in <span className="grad-text">your estate?</span>
+                  Want NextGen in <span className="text-[var(--color-brand-orange)]">your estate?</span>
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg-muted)] md:text-base">
                   Estate manager, resident committee, or a business that needs serious fiber — tell
@@ -151,7 +151,7 @@ export default function Home() {
               <>
                 One network.
                 <br />
-                <span className="grad-text">Three superpowers.</span>
+                <span className="text-[var(--color-brand-orange)]">Three superpowers.</span>
               </>
             }
             lede="Home fiber, business voice, and carrier-grade transport — all running on infrastructure we own and operate ourselves."

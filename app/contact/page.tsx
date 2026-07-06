@@ -45,7 +45,7 @@ export default function ContactPage() {
       <section className="relative overflow-hidden py-20 md:py-28">
         <Container className="grid gap-14 lg:grid-cols-[1fr_1.2fr]">
           <div>
-            <SectionHead eyebrow="Channels" title={<>Reach us <span className="grad-text">anywhere.</span></>} />
+            <SectionHead eyebrow="Channels" title={<>Reach us <span className="text-[var(--color-brand-orange)]">anywhere.</span></>} />
             <ul className="mt-10 grid gap-4">
               {channels.map((c, i) => (
                 <li key={c.t} className="sr" style={{ animationDelay: `${i * 0.05}s` }}>

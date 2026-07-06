@@ -48,7 +48,7 @@ export default function ConnectivityPage() {
             eyebrow="Speed tiers"
             title={
               <>
-                From starter to <span className="grad-text">STM-16.</span>
+                From starter to <span className="text-[var(--color-brand-orange)]">STM-16.</span>
               </>
             }
             lede="One network, every scale — the same fiber that feeds a studio apartment can feed a data center."
@@ -66,7 +66,7 @@ export default function ConnectivityPage() {
                 >
                   <summary className="flex cursor-pointer list-none flex-wrap items-center justify-between gap-4 p-6 md:p-7 [&::-webkit-details-marker]:hidden">
                     <div className="flex items-center gap-5">
-                      <span aria-hidden="true" className="display grad-text w-14 shrink-0 text-3xl font-extrabold leading-none">
+                      <span aria-hidden="true" className="display text-[var(--color-brand-orange)] w-14 shrink-0 text-3xl font-extrabold leading-none">
                         0{i + 1}
                       </span>
                       <div>
@@ -153,7 +153,7 @@ export default function ConnectivityPage() {
               eyebrow="Why it’s different"
               title={
                 <>
-                  Glass to your door, <span className="grad-text">not copper.</span>
+                  Glass to your door, <span className="text-[var(--color-brand-orange)]">not copper.</span>
                 </>
               }
             />

@@ -20,7 +20,7 @@ export function CtaBanner({
   lede?: string;
 }) {
   return (
-    <section className="relative isolate overflow-hidden bg-brand-navy">
+    <section data-theme="dark" className="relative isolate overflow-hidden bg-[var(--color-void)]">
       <div aria-hidden="true" className="grad-sunset absolute inset-x-0 top-0 h-1" />
       <div aria-hidden="true" className="grain absolute inset-0" />
       <span aria-hidden="true" className="ghost absolute -bottom-8 left-0 text-[24vw] md:text-[14rem]" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.14)" }}>

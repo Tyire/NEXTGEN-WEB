@@ -19,7 +19,7 @@ export function ServicesGrid() {
             <h3 className="display relative mt-3 text-2xl font-bold">{s.name}</h3>
             <p className="relative mt-4 flex-1 text-sm leading-relaxed text-[var(--color-fg-muted)]">{s.short}</p>
             <p className="relative mt-6 border-t border-[var(--color-hairline)] pt-5">
-              <span className="display grad-text text-3xl font-extrabold">{s.stat.value}</span>
+              <span className="display text-[var(--color-brand-orange)] text-3xl font-extrabold">{s.stat.value}</span>
               <span className="ml-2 text-xs uppercase tracking-wider text-[var(--color-fg-faint)]">{s.stat.label}</span>
             </p>
             <span className="relative mt-6 inline-flex items-center gap-2 text-sm font-bold text-[var(--color-brand-orange)]">

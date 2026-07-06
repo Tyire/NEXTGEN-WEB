@@ -4,7 +4,7 @@
 import sharp from "sharp";
 import { mkdir } from "node:fs/promises";
 
-const INK = "#0b1c33"; // brand ink navy — matches the Ink & Signal palette
+const INK = "#180b12"; // plum-black — matches the dark theme ink
 const ICON = "public/brand/logo-icon.png";
 
 async function appIcon(size, pad) {
@@ -37,11 +37,11 @@ console.log("wrote public/favicon.png");
 // OG image (1200x630) — grid + glow + real mark + text
 const ogBg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0b1c33"/><stop offset="100%" stop-color="#081020"/></linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#180b12"/><stop offset="100%" stop-color="#0f050b"/></linearGradient>
     <linearGradient id="txt" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FF1F4D"/><stop offset="55%" stop-color="#FF6B2C"/><stop offset="100%" stop-color="#FFA70F"/></linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <g opacity="0.07" stroke="#22344e">
+  <g opacity="0.07" stroke="#40263a">
     ${Array.from({ length: 19 }, (_, i) => `<line x1="${i * 64}" y1="0" x2="${i * 64}" y2="630"/>`).join("")}
     ${Array.from({ length: 10 }, (_, i) => `<line x1="0" y1="${i * 64}" x2="1200" y2="${i * 64}"/>`).join("")}
   </g>

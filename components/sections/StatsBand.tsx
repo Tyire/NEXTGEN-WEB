@@ -13,7 +13,7 @@ export function StatsBand() {
         <div className="sr">
           <Eyebrow>Why NextGen</Eyebrow>
           <h2 className="display text-4xl font-extrabold sm:text-5xl md:text-6xl">
-            Built like a <span className="grad-text">carrier.</span>
+            Built like a <span className="text-[var(--color-brand-orange)]">carrier.</span>
             <br />
             Priced like a neighbour.
           </h2>
@@ -32,7 +32,7 @@ export function StatsBand() {
                 <dt className="order-2 text-[0.7rem] uppercase tracking-wider text-[var(--color-fg-faint)] sm:mt-1.5">
                   {s.label}
                 </dt>
-                <dd data-count="" className="display grad-text text-3xl font-extrabold sm:text-4xl">{s.value}</dd>
+                <dd data-count="" className="display text-[var(--color-brand-orange)] text-3xl font-extrabold sm:text-4xl">{s.value}</dd>
               </div>
             ))}
           </dl>

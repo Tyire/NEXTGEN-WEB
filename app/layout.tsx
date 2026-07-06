@@ -60,7 +60,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f6f8fb" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a1220" },
+    { media: "(prefers-color-scheme: dark)", color: "#180b12" },
   ],
   colorScheme: "light dark",
 };
@@ -71,7 +71,7 @@ const enhance = `(function(){
   function syncMeta(){
     var d=document.documentElement.getAttribute('data-theme')==='dark';
     var m=document.querySelectorAll('meta[name="theme-color"]');
-    for(var k=0;k<m.length;k++){m[k].setAttribute('content',d?'#0a1220':'#f6f8fb');}
+    for(var k=0;k<m.length;k++){m[k].setAttribute('content',d?'#180b12':'#f6f8fb');}
   }
   syncMeta();
   var btns=document.querySelectorAll('.theme-toggle');

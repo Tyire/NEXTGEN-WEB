@@ -31,8 +31,8 @@ function EstatePlanCard({ p }: { p: Plan }) {
       <p className="mt-3">
         {amt ? (
           <>
-            <span className="display grad-text align-top text-sm font-bold">₦</span>
-            <span className="display grad-text text-3xl font-extrabold tracking-tight">{amt}</span>
+            <span className="display text-[var(--color-brand-orange)] align-top text-sm font-bold">₦</span>
+            <span className="display text-[var(--color-brand-orange)] text-3xl font-extrabold tracking-tight">{amt}</span>
             <span className="ml-1 text-xs text-[var(--color-fg-faint)]">/{p.cycle}</span>
           </>
         ) : (

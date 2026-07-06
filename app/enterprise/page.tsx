@@ -62,7 +62,7 @@ export default function EnterprisePage() {
             eyebrow="What we build"
             title={
               <>
-                Networks with a <span className="grad-text">pulse.</span>
+                Networks with a <span className="text-[var(--color-brand-orange)]">pulse.</span>
               </>
             }
             lede="For multi-site enterprise, banks and fintech, government, ISPs and carriers."
@@ -74,7 +74,7 @@ export default function EnterprisePage() {
                 className="sr-pop lift rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 md:p-8"
                 style={{ animationDelay: `${i * 0.06}s` }}
               >
-                <span aria-hidden="true" className="display grad-text text-3xl font-extrabold">0{i + 1}</span>
+                <span aria-hidden="true" className="display text-[var(--color-brand-orange)] text-3xl font-extrabold">0{i + 1}</span>
                 <h3 className="display mt-4 text-xl font-bold">{o.t}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg-muted)]">{o.d}</p>
               </li>

@@ -58,7 +58,7 @@ export default function PlansPage() {
             eyebrow="Your estate"
             title={
               <>
-                What&rsquo;s live <span className="grad-text">where you live.</span>
+                What&rsquo;s live <span className="text-[var(--color-brand-orange)]">where you live.</span>
               </>
             }
             lede="Exact plans, prices and installation cost for your estate — the same data the onboarding portal uses."
