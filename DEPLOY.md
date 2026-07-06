@@ -18,7 +18,58 @@ npx serve out -l 3210
 
 ## Option A — Nginx on a VPS
 
-### 1. Get the files up
+This assumes a fresh Ubuntu/Debian VPS with SSH access and root/sudo. Building
+happens on **your own machine** — the server only ever receives the finished
+static files, so it never needs Node.js installed.
+
+### 0. One-time server setup
+
+SSH into the box, then:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+
+# Nginx + Let's Encrypt client + firewall
+sudo apt install -y nginx certbot python3-certbot-nginx ufw rsync
+
+# Firewall: allow SSH + web, then turn it on
+sudo ufw allow OpenSSH
+sudo ufw allow 'Nginx Full'   # opens 80 + 443
+sudo ufw enable
+sudo ufw status
+```
+
+That's the entire server-side install list: `nginx`, `certbot` +
+`python3-certbot-nginx`, `ufw`, `rsync`. No Node, no database, no PHP.
+
+On your **local machine** (where you already have this project), make sure
+you have Node.js 20+ and npm — that's all that's needed to build:
+
+```powershell
+node --version   # 20.x or newer
+npm --version
+```
+
+If missing on Windows: `winget install OpenJS.NodeJS.LTS`.
+
+### 1. Point DNS at the server
+
+At your domain registrar, add these records (replace `SERVER_IP` with the
+VPS's public IP):
+
+| Type | Host | Value |
+|---|---|---|
+| A | `@` | `SERVER_IP` |
+| A | `www` | `SERVER_IP` |
+
+DNS can take a few minutes to a few hours to propagate. Confirm with
+`nslookup nextgen.ng` before moving to the HTTPS step.
+
+### 2. Build locally, get the files up
+
+```powershell
+npm run build          # writes the whole static site to out/
+```
 
 ```bash
 # from your machine (replace user/host)
@@ -29,7 +80,7 @@ sudo rsync -a --delete /tmp/nextgen/ /var/www/nextgen.ng/
 sudo chown -R www-data:www-data /var/www/nextgen.ng
 ```
 
-### 2. Server block
+### 3. Server block
 
 `/etc/nginx/sites-available/nextgen.ng`:
 
@@ -89,20 +140,40 @@ sudo ln -s /etc/nginx/sites-available/nextgen.ng /etc/nginx/sites-enabled/
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
-### 3. HTTPS (Let's Encrypt)
+### 4. HTTPS (Let's Encrypt)
+
+Already installed in step 0 — just run it (DNS from step 1 must have
+propagated first, or this fails):
 
 ```bash
-sudo apt install certbot python3-certbot-nginx
 sudo certbot --nginx -d nextgen.ng -d www.nextgen.ng
 ```
 
-Certbot rewrites the server block for 443 + auto-renewal. After the site
-loads over HTTPS, uncomment the HSTS header and `sudo systemctl reload nginx`.
-
-### 4. Redeploys
+Certbot rewrites the server block for 443, adds the HTTP→HTTPS redirect, and
+sets up auto-renewal (a systemd timer — nothing more to do). After the site
+loads over HTTPS, edit the server block to uncomment the HSTS header, then:
 
 ```bash
-npm run build
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+### 5. Verify it's live
+
+```bash
+curl -I https://nextgen.ng                # expect: HTTP/2 200
+curl -I https://nextgen.ng/sitemap.xml    # expect: HTTP/2 200
+```
+
+Then open the site in a real browser from your phone (not on the same
+network as the server) and click through Home → Plans → Contact.
+
+### 6. Redeploys (every time you push a change)
+
+```powershell
+npm run build          # on your machine
+```
+
+```bash
 rsync -a --delete out/ user@server:/var/www/nextgen.ng/
 ```
 
@@ -135,8 +206,41 @@ The export already contains everything the shared host needs, including
 
 ### Checklist after either deploy
 
-- [ ] Home, all 5 subpages, `/404` render over HTTPS
+- [ ] Home, all pages, `/404` render over HTTPS
 - [ ] `sitemap.xml` + `robots.txt` reachable
 - [ ] Videos play (hero + banners), theme toggle works
-- [ ] Old phones: hard-refresh once — sw v3 purges every older cache
+- [ ] Old phones: hard-refresh once — the service worker purges every older cache
 - [ ] `securityheaders.com` scan comes back green
+- [ ] Submit the contact form yourself once and confirm it reaches your inbox
+
+---
+
+## Contact form delivery
+
+No secrets are involved either way — nothing below touches an `.env` file or
+a server process.
+
+**Current setup (already live, zero config):** the form posts as
+`mailto:info@nextgen.ng` (`components/ContactForm.tsx`) — clicking Send opens
+the visitor's own email app with the message pre-filled, and they hit send
+from their own address. Works everywhere a mail client is configured; on a
+phone/browser with none set up, nothing happens when they click Send.
+
+**Optional upgrade — guaranteed delivery, still no backend:** a free
+form-relay service (e.g. [Web3Forms](https://web3forms.com)) lets the static
+form POST directly to their endpoint, which emails you. Their "access key"
+is meant to sit in public HTML — it can only forward to the address you
+registered, it can't read or send anything else. To switch:
+
+1. Sign up at web3forms.com with `info@nextgen.ng` and copy the access key
+   they give you.
+2. In `components/ContactForm.tsx`, change the `<form>` tag:
+   ```tsx
+   <form action="https://api.web3forms.com/submit" method="post" className="grid gap-5">
+     <input type="hidden" name="access_key" value="PASTE_YOUR_KEY_HERE" />
+     {/* ...existing fields unchanged... */}
+   ```
+3. `npm run build` and redeploy.
+
+Send me the key once you have it (or paste it directly into that file
+yourself) and I'll wire it in.
