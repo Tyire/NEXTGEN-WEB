@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Unbounded, Instrument_Sans } from "next/font/google";
+import { Archivo, Inter } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { Header } from "@/components/Header";
@@ -9,14 +9,14 @@ import { RegisterSW } from "@/components/RegisterSW";
 import { Preloader } from "@/components/Preloader";
 import { Cinema } from "@/components/Cinema";
 
-const unbounded = Unbounded({
-  variable: "--font-unbounded",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
   display: "swap",
 });
 
-const instrument = Instrument_Sans({
-  variable: "--font-instrument",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
@@ -59,8 +59,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fff7ee" },
-    { media: "(prefers-color-scheme: dark)", color: "#180b12" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f8fb" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a1220" },
   ],
   colorScheme: "light dark",
 };
@@ -87,7 +87,7 @@ const enhance = `(function(){
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${unbounded.variable} ${instrument.variable} h-full`}>
+    <html lang="en" suppressHydrationWarning className={`${archivo.variable} ${inter.variable} h-full`}>
       <head>
         {/* Pre-paint: apply stored dark choice (light default) + arm the
             entrance curtain on the FIRST view of the session only. The

@@ -11,7 +11,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
  *  - scroll progress beam under the header
  *  - hero video parallax
  *  - stat counters that count up ([data-count])
- *  - the marquee ticker skews with scroll velocity
  *  - ghost background words drift sideways as you scroll
  * If this bundle never loads, the site is merely calmer — never broken.
  */
@@ -36,7 +35,7 @@ export function Cinema() {
         const holder = el.parentElement;
         if (!holder) return;
         gsap.to(el, {
-          yPercent: 16,
+          yPercent: 10,
           ease: "none",
           scrollTrigger: { trigger: holder, start: "top top", end: "bottom top", scrub: true },
         });
@@ -65,22 +64,10 @@ export function Cinema() {
         });
       });
 
-      // 4. Ticker skews with scroll velocity — the strip feels alive
-      const tracks = gsap.utils.toArray<HTMLElement>(".ticker-track");
-      if (tracks.length) {
-        const setters = tracks.map((t) => gsap.quickTo(t, "skewX", { duration: 0.4, ease: "power2.out" }));
-        ScrollTrigger.create({
-          onUpdate: (self) => {
-            const skew = gsap.utils.clamp(-10, 10, self.getVelocity() / -250);
-            setters.forEach((set) => set(skew));
-          },
-        });
-      }
-
-      // 5. Ghost words drift sideways for depth
+      // 4. Ghost words drift sideways for depth
       document.querySelectorAll<HTMLElement>(".ghost").forEach((el) => {
         gsap.to(el, {
-          xPercent: gsap.utils.random(-7, 7, 1),
+          xPercent: gsap.utils.random(-4, 4, 1),
           ease: "none",
           scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: 1 },
         });

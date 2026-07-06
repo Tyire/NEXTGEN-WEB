@@ -3,9 +3,10 @@
 /* Manual dark mode driven by [data-theme="dark"] on <html> (not prefers-color-scheme). */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* ══ NEXTGEN — "LAGOS ENERGY" design system ═══════════════════════════
-   Vivid sunset gradient (red → orange → amber) as the brand voice,
-   oversized Unbounded display type, sticker-bold shapes.
+/* ══ NEXTGEN — "INK & SIGNAL" design system ═══════════════════════════
+   Professional telecom: cool neutral surfaces grounded in deep ink navy,
+   the brand orange demoted to a single disciplined accent (buttons, edge
+   lines, links). Archivo display + Inter body.
 
    IRON RULE: no content is EVER hidden waiting for JavaScript. Scroll
    reveals are CSS scroll-driven animations behind @supports — browsers
@@ -17,25 +18,26 @@
   --color-brand-orange: #ff6b2c;
   --color-brand-amber: #ffa70f;
   --color-brand: #ff5a2c;
-  --font-display: var(--font-unbounded), "Arial Black", system-ui, sans-serif;
-  --font-sans: var(--font-instrument), "Segoe UI", system-ui, sans-serif;
+  --color-brand-navy: #0b1c33;
+  --font-display: var(--font-archivo), "Arial", system-ui, sans-serif;
+  --font-sans: var(--font-inter), "Segoe UI", system-ui, sans-serif;
   --radius: 20px;
 }
 
 /* Theme-flipping semantic tokens — read via var(--color-*) in arbitrary utilities. */
 :root {
-  /* LIGHT — warm cream gallery with hot color pops */
-  --color-ink: #fff7ee;        /* page background */
-  --color-ink-glass: rgba(255, 247, 238, 0.92); /* header glass (explicit rgba — no color-mix dependency) */
-  --color-void: #ffedd9;       /* deep warm bands */
+  /* LIGHT — cool paper, navy ink text, orange reserved for accents */
+  --color-ink: #f6f8fb;        /* page background */
+  --color-ink-glass: rgba(246, 248, 251, 0.92); /* header glass (explicit rgba — no color-mix dependency) */
+  --color-void: #e9eef6;       /* quiet cool bands */
   --color-surface: #ffffff;    /* cards */
-  --color-surface-2: #fff1e1;
-  --color-hairline: #f0dbc6;
-  --color-fg: #221016;
-  --color-fg-muted: #6d5a55;
-  --color-fg-faint: #a08b81;
-  --color-success: #1fa564;
-  --shadow-pop: 0 24px 48px -24px rgba(255, 60, 40, 0.35);
+  --color-surface-2: #eef2f8;
+  --color-hairline: #dde5ee;
+  --color-fg: #101d30;
+  --color-fg-muted: #51617a;
+  --color-fg-faint: #8b99ad;
+  --color-success: #14915c;
+  --shadow-pop: 0 24px 48px -24px rgba(11, 28, 51, 0.25);
   color-scheme: light;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -44,18 +46,18 @@
 }
 
 [data-theme="dark"] {
-  /* DARK — plum-black night market, colors run hotter */
-  --color-ink: #180b12;
-  --color-ink-glass: rgba(24, 11, 18, 0.9);
-  --color-void: #0f050b;
-  --color-surface: #251320;
-  --color-surface-2: #2f1a29;
-  --color-hairline: #40263a;
-  --color-fg: #fff3ea;
-  --color-fg-muted: #c9b0ac;
-  --color-fg-faint: #91797a;
+  /* DARK — deep ink navy, quiet and infrastructural */
+  --color-ink: #0a1220;
+  --color-ink-glass: rgba(10, 18, 32, 0.9);
+  --color-void: #050b16;
+  --color-surface: #101c2f;
+  --color-surface-2: #16253c;
+  --color-hairline: #22344e;
+  --color-fg: #edf2f9;
+  --color-fg-muted: #a6b4c8;
+  --color-fg-faint: #6d7d94;
   --color-success: #3ecf8e;
-  --shadow-pop: 0 24px 56px -20px rgba(255, 60, 60, 0.45);
+  --shadow-pop: 0 24px 56px -20px rgba(0, 0, 0, 0.5);
   color-scheme: dark;
 }
 
@@ -177,16 +179,6 @@ a, button, [role="button"], select, summary, label {
   }
 }
 
-/* Marquee ticker — the signature Lagos Energy strip. Track holds TWO copies
-   of the content; sliding -50% loops seamlessly. */
-@keyframes ticker-slide { to { transform: translate3d(-50%, 0, 0); } }
-.ticker-track {
-  display: flex;
-  width: max-content;
-  animation: ticker-slide var(--ticker-speed, 28s) linear infinite;
-  will-change: transform;
-}
-
 /* Slow-drifting glow (transform-only). */
 @keyframes drift {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
@@ -217,10 +209,10 @@ a, button, [role="button"], select, summary, label {
   .lift:hover { transform: translateY(-6px); box-shadow: var(--shadow-pop); }
 }
 
-/* Featured-plan breathing glow. */
+/* Featured-plan breathing glow — kept quiet. */
 @keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 14px 44px -16px rgba(255, 90, 44, 0.5); }
-  50%      { box-shadow: 0 22px 64px -18px rgba(255, 31, 77, 0.75); }
+  0%, 100% { box-shadow: 0 14px 44px -16px rgba(255, 90, 44, 0.28); }
+  50%      { box-shadow: 0 22px 64px -18px rgba(255, 90, 44, 0.42); }
 }
 .glow-pulse { animation: glow-pulse 3.6s ease-in-out infinite; }
 
@@ -259,14 +251,14 @@ a, button, [role="button"], select, summary, label {
     linear-gradient(var(--wash-base), var(--wash-base));
 }
 :root {
-  --wash-base: #ffedd9;
-  --wash-hot: rgba(255, 107, 44, 0.22);
-  --wash-warm: rgba(255, 31, 77, 0.14);
+  --wash-base: #e9eef6;
+  --wash-hot: rgba(255, 107, 44, 0.1);
+  --wash-warm: rgba(11, 28, 51, 0.08);
 }
 [data-theme="dark"] {
-  --wash-base: #0f050b;
-  --wash-hot: rgba(255, 107, 44, 0.1);
-  --wash-warm: rgba(255, 31, 77, 0.08);
+  --wash-base: #050b16;
+  --wash-hot: rgba(255, 107, 44, 0.07);
+  --wash-warm: rgba(255, 31, 77, 0.04);
 }
 /* Card top-edge sunset accent. */
 .edge-top { position: relative; }
@@ -306,7 +298,7 @@ html[data-boot] .preloader {
   justify-content: center;
   flex-direction: column;
   gap: 1.4rem;
-  background: #14060e;
+  background: #081020;
   animation: preload-lift 0.75s var(--ease-in-out) 1.7s forwards;
 }
 html[data-boot] .preloader::after {
@@ -317,7 +309,7 @@ html[data-boot] .preloader::after {
   left: 0;
   right: 0;
   height: 12vh;
-  background: #14060e;
+  background: #081020;
   border-radius: 0 0 50% 50% / 0 0 100% 100%;
 }
 @keyframes preload-lift {
@@ -362,7 +354,7 @@ html[data-boot] .preloader::after {
 /* ── Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rise, .sr, .sr-pop, .drift, .glow-pulse, .ticker-track, .text-flow { animation: none !important; }
+  .rise, .sr, .sr-pop, .drift, .glow-pulse, .text-flow { animation: none !important; }
   .sr, .sr-pop { opacity: 1 !important; transform: none !important; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;

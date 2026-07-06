@@ -5,7 +5,7 @@ const wa = `https://wa.me/${site.whatsapp.replace(/\D/g, "")}?text=${encodeURICo
   "Hi NextGen, I'd like to get connected."
 )}`;
 
-/** Closing CTA — full sunset band, giant type, white CTA. */
+/** Closing CTA — deep ink-navy band, giant type, orange accent line. */
 export function CtaBanner({
   title = (
     <>
@@ -20,9 +20,10 @@ export function CtaBanner({
   lede?: string;
 }) {
   return (
-    <section className="relative isolate overflow-hidden grad-sunset">
+    <section className="relative isolate overflow-hidden bg-brand-navy">
+      <div aria-hidden="true" className="grad-sunset absolute inset-x-0 top-0 h-1" />
       <div aria-hidden="true" className="grain absolute inset-0" />
-      <span aria-hidden="true" className="ghost absolute -bottom-8 left-0 text-[24vw] md:text-[14rem]" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.3)" }}>
+      <span aria-hidden="true" className="ghost absolute -bottom-8 left-0 text-[24vw] md:text-[14rem]" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.14)" }}>
         CONNECT
       </span>
       <Container className="relative py-20 text-center md:py-28">

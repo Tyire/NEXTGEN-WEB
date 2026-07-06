@@ -1,6 +1,5 @@
 import { Container, Button, Arrow, SectionHead } from "@/components/ui";
 import { BlobVideo } from "@/components/BlobVideo";
-import { Ticker } from "@/components/sections/Ticker";
 import { PlansGrid } from "@/components/sections/PlansGrid";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { StatsBand } from "@/components/sections/StatsBand";
@@ -17,7 +16,7 @@ export default function Home() {
           The gradient/blob backdrop below is the DESIGNED hero — the video
           fades in over it when ready. Slow phone, dead JS, reduced motion:
           the hero still looks intentional, never broken. */}
-      <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#140710] md:min-h-[92vh]">
+      <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#081020] md:min-h-[92vh]">
         {/* designed fallback backdrop */}
         <div aria-hidden="true" className="absolute inset-0 -z-30">
           <div className="blob drift -left-24 -top-24 h-[480px] w-[480px]" style={{ "--blob-c": "rgba(255,31,77,0.35)" } as React.CSSProperties} />
@@ -32,7 +31,7 @@ export default function Home() {
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
         {/* left scrim for copy legibility over the bright clip */}
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(12,4,9,0.85)_10%,rgba(12,4,9,0.45)_55%,transparent_85%)]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(6,12,24,0.85)_10%,rgba(6,12,24,0.45)_55%,transparent_85%)]" />
         <div aria-hidden="true" className="grain absolute inset-0 -z-10" />
 
         <Container className="relative pb-24 pt-32 md:pb-28 md:pt-36">
@@ -70,9 +69,6 @@ export default function Home() {
           </ul>
         </Container>
       </section>
-
-      {/* signature marquee, overlapping the hero seam */}
-      <Ticker className="-mt-7 md:-mt-8" />
 
       {/* ── PLANS ──────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden py-20 md:py-28" id="plans">

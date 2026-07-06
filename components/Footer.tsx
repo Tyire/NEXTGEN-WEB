@@ -8,7 +8,8 @@ const year = new Date().getFullYear();
 /** Server component, plain anchors — renders complete without any JS. */
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-[var(--color-hairline)] bg-[var(--color-void)]">
+    // data-theme="dark" scopes the dark tokens: the footer is always ink navy
+    <footer data-theme="dark" className="relative overflow-hidden bg-[var(--color-void)] text-[var(--color-fg)]">
       {/* sunset edge */}
       <div aria-hidden="true" className="grad-sunset h-1 w-full" />
       <Container className="relative py-14 md:py-20">
@@ -20,7 +21,7 @@ export function Footer() {
           <div>
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- plain <a> by design: nav must work without hydration */}
             <a href="/" aria-label="NextGen Telcoms home">
-              <Logo className="h-8 w-auto" />
+              <Logo className="h-11 w-auto" />
             </a>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-[var(--color-fg-muted)]">
               {site.tagline} And people who pick up when you call — GPON fiber, business voice and
