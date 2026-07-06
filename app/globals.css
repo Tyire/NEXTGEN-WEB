@@ -260,14 +260,15 @@ a, button, [role="button"], select, summary, label {
   --wash-hot: rgba(255, 107, 44, 0.07);
   --wash-warm: rgba(255, 31, 77, 0.04);
 }
-/* Card top-edge sunset accent. */
-.edge-top { position: relative; }
+/* Card top-edge sunset accent. The card's own rounded corners clip the
+   strip (overflow:hidden), so it always follows the card edge exactly —
+   a self-rounded strip can't match the 20px corner curve and juts out. */
+.edge-top { position: relative; overflow: hidden; }
 .edge-top::before {
   content: "";
   position: absolute;
-  inset: 0 0 auto 0;
+  inset: -1px -1px auto -1px;
   height: 4px;
-  border-radius: var(--radius) var(--radius) 0 0;
   background-image: var(--grad-sunset);
 }
 

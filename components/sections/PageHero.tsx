@@ -25,7 +25,7 @@ export function PageHero({
   children?: React.ReactNode;
 }) {
   return (
-    <section className="relative isolate overflow-hidden pt-16 md:pt-20">
+    <section className="relative isolate flex min-h-[45svh] items-end overflow-hidden pt-24 md:pt-28">
       {/* Banner image — <picture> with avif/webp at 3 widths, eager (it IS the LCP). */}
       <picture>
         <source
@@ -48,22 +48,22 @@ export function PageHero({
       </picture>
       {video && <BlobVideo src={video} className="absolute inset-0 -z-20 h-full w-full object-cover" />}
       {/* Scrim so type always reads. */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(105deg,rgba(10,4,8,0.88)_20%,rgba(10,4,8,0.55)_60%,rgba(255,60,44,0.25))]" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(105deg,rgba(6,12,24,0.88)_20%,rgba(6,12,24,0.55)_60%,rgba(255,60,44,0.15))]" />
 
-      <Container className="relative py-20 md:py-28">
+      <Container className="relative w-full pb-12 pt-10 md:pb-14">
         <span aria-hidden="true" className="ghost absolute -bottom-6 right-0 text-[20vw] opacity-25 md:text-[11rem]" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.35)" }}>
           {ghost}
         </span>
         <div className="max-w-3xl" style={{ "--color-fg-faint": "rgba(255,255,255,0.75)" } as React.CSSProperties}>
           <Eyebrow className="rise">{eyebrow}</Eyebrow>
-          <h1 className="display rise hero-pop text-4xl font-extrabold text-white sm:text-6xl md:text-7xl" style={{ animationDelay: "0.08s" }}>
+          <h1 className="display rise hero-pop text-4xl font-extrabold text-white sm:text-5xl md:text-6xl" style={{ animationDelay: "0.08s" }}>
             {title}
           </h1>
-          <p className="rise hero-pop mt-6 max-w-xl text-base leading-relaxed text-white/90 md:text-lg" style={{ animationDelay: "0.16s" }}>
+          <p className="rise hero-pop mt-5 max-w-xl text-base leading-relaxed text-white/90 md:text-lg" style={{ animationDelay: "0.16s" }}>
             {lede}
           </p>
           {children && (
-            <div className="rise mt-9 flex flex-wrap items-center gap-4" style={{ animationDelay: "0.24s" }}>
+            <div className="rise mt-7 flex flex-wrap items-center gap-4" style={{ animationDelay: "0.24s" }}>
               {children}
             </div>
           )}
