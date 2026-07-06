@@ -54,9 +54,9 @@ export default function ContactPage() {
                     {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className="lift flex items-baseline justify-between gap-4 rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] px-6 py-5"
                   >
-                    <div>
+                    <div className="min-w-0">
                       <p className="eyebrow">{c.t}</p>
-                      <p className="display mt-1.5 text-lg font-bold text-[var(--color-fg)]">{c.v}</p>
+                      <p className="display mt-1.5 truncate text-lg font-bold text-[var(--color-fg)]">{c.v}</p>
                     </div>
                     <span className="shrink-0 text-xs text-[var(--color-fg-faint)]">{c.s}</span>
                   </a>

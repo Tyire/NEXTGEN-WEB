@@ -128,7 +128,7 @@ export default function Home() {
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg-muted)] md:text-base">
                   Estate manager, resident committee, or a business that needs serious fiber — tell
-                  us where you are and we&apos;ll survey your location for the next build.
+                  us where you are and we&rsquo;ll survey your location for the next build.
                 </p>
               </div>
               <a

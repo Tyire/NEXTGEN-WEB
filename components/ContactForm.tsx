@@ -11,8 +11,8 @@ export function ContactForm() {
   return (
     <form action={`mailto:${site.email}`} method="post" encType="text/plain" className="grid gap-5">
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Full name" name="name" required autoComplete="name" placeholder="e.g. Ada Obi" />
-        <Field label="Phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" required placeholder="e.g. 0801 234 5678" />
+        <Field label="Full name" name="name" required autoComplete="name" placeholder="e.g. Ada Obi…" />
+        <Field label="Phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" required placeholder="e.g. 0801 234 5678…" />
       </div>
       <div className="grid gap-5 sm:grid-cols-2">
         <Field
@@ -23,7 +23,7 @@ export function ContactForm() {
           autoComplete="email"
           spellCheck={false}
           required
-          placeholder="e.g. you@company.com"
+          placeholder="e.g. you@company.com…"
         />
         <div>
           <label htmlFor="cf-interest" className={labelCls}>
@@ -37,7 +37,7 @@ export function ContactForm() {
           </select>
         </div>
       </div>
-      <Field label="Estate / address" name="address" autoComplete="street-address" placeholder="e.g. Lekki Phase 1, Lagos" />
+      <Field label="Estate / address" name="address" autoComplete="street-address" placeholder="e.g. Lekki Phase 1, Lagos…" />
       <div>
         <label htmlFor="cf-message" className={labelCls}>
           Message

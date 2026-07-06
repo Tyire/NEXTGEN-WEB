@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const features = [
   {
     t: "HD voice, zero copper",
-    d: "Calls ride your fiber line end-to-end — no crackle, no dropouts, no NITEL-era wiring between you and the person you're talking to.",
+    d: "Calls ride your fiber line end-to-end — no crackle, no dropouts, no NITEL-era wiring between you and the person you’re talking to.",
   },
   {
     t: "A real Lagos number",
@@ -98,7 +98,7 @@ export default function VoicePage() {
             in HD.
           </>
         }
-        lede="Tell us how many lines you need — we'll have you talking on fiber this week."
+        lede="Tell us how many lines you need — we’ll have you talking on fiber this week."
       />
     </>
   );

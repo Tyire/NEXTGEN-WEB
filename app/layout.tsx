@@ -68,12 +68,19 @@ export const viewport: Viewport = {
 /* Tiny vanilla enhancements (ES5, no React dependency — they run even if
    hydration never happens): theme toggle + active nav marking. */
 const enhance = `(function(){
+  function syncMeta(){
+    var d=document.documentElement.getAttribute('data-theme')==='dark';
+    var m=document.querySelectorAll('meta[name="theme-color"]');
+    for(var k=0;k<m.length;k++){m[k].setAttribute('content',d?'#0a1220':'#f6f8fb');}
+  }
+  syncMeta();
   var btns=document.querySelectorAll('.theme-toggle');
   for(var i=0;i<btns.length;i++){btns[i].addEventListener('click',function(){
     var d=document.documentElement.getAttribute('data-theme')==='dark';
     if(d){document.documentElement.removeAttribute('data-theme');}
     else{document.documentElement.setAttribute('data-theme','dark');}
     try{localStorage.setItem('theme',d?'light':'dark');}catch(e){}
+    syncMeta();
   });}
   try{
     var p=location.pathname.replace(/\\/+$/,'')||'/';

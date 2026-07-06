@@ -6,7 +6,9 @@
 //   2. The cache name is versioned — bumping it nukes every old cache
 //      (including v1) on activate, which heals previously-broken phones.
 //   3. Only immutable hashed assets (/_next/static/) are cache-first.
-const VERSION = "nextgen-v2";
+// v3: Ink & Signal rebrand — bump flushes stale fonts/images/videos cached
+// under v2 (HTML rules unchanged: still network-first, never precached).
+const VERSION = "nextgen-v3";
 
 self.addEventListener("install", () => {
   self.skipWaiting();

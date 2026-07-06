@@ -255,7 +255,15 @@ a, button, [role="button"], select, summary, label {
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.35s var(--ease-out);
 }
-.nav-panel > div { overflow: hidden; }
+/* visibility keeps collapsed links out of the tab order; it transitions
+   (delayed) so the close animation still plays. */
+.nav-panel > div { overflow: hidden; visibility: hidden; transition: visibility 0.35s; }
+#nav-open:checked ~ .nav-panel > div { visibility: visible; }
+/* Keyboard focus ring on the burger when the sr-only checkbox has focus. */
+#nav-open:focus-visible ~ div .burger {
+  outline: 2px solid var(--color-brand-orange);
+  outline-offset: 2px;
+}
 /* Burger morphs to X when checked. */
 #nav-open:checked ~ div .burger .l1 { transform: translateY(7px) rotate(45deg); }
 #nav-open:checked ~ div .burger .l2 { opacity: 0; }
@@ -395,6 +403,9 @@ html[data-boot] .preloader::after {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Anchor targets (#plans, #coverage, …) clear the fixed header on jump. */
+main [id] { scroll-margin-top: 6rem; }
 
 ::selection { background: var(--color-brand-orange); color: #1a0d05; }
 

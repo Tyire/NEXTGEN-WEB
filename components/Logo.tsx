@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 
 /** Isolated icon mark (transparent, works on any surface). */
 export function LogoIcon({ className = "h-9 w-9" }: { className?: string }) {
-  return <img src="/brand/logo-icon.png" alt={site.name} className={className} />;
+  return <img src="/brand/logo-icon.png" alt={site.name} width={286} height={280} className={className} />;
 }
 
 /**
@@ -31,12 +31,16 @@ export function Logo({
       <img
         src="/brand/logo-full.png"
         alt={`${site.name} logo`}
+        width={1119}
+        height={280}
         className={`${className} ${forceWhite ? "hidden" : "block dark:hidden"}`}
       />
       {/* white wordmark — dark theme, or when forcing white over the hero */}
       <img
         src="/brand/logo-full-dark.png"
         alt={`${site.name} logo`}
+        width={1119}
+        height={280}
         className={`${className} ${forceWhite ? "block" : "hidden dark:block"}`}
       />
     </>

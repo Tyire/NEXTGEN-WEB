@@ -58,6 +58,8 @@ export function InstallPrompt({ className = "" }: { className?: string }) {
       <button
         type="button"
         onClick={install}
+        aria-expanded={ios ? showIosHelp : undefined}
+        aria-controls={ios ? "ios-install-help" : undefined}
         className="group inline-flex items-center gap-2 rounded-full border-2 border-[var(--color-hairline)] px-5 py-2.5 text-xs font-bold text-[var(--color-fg)] transition-colors hover:border-[var(--color-brand-orange)]"
       >
         <svg viewBox="0 0 24 24" className="h-4 w-4 text-[var(--color-brand-orange)]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -66,7 +68,7 @@ export function InstallPrompt({ className = "" }: { className?: string }) {
         Install the NextGen app
       </button>
       {showIosHelp && (
-        <p className="mt-3 max-w-xs text-xs leading-relaxed text-[var(--color-fg-muted)]">
+        <p id="ios-install-help" className="mt-3 max-w-xs text-xs leading-relaxed text-[var(--color-fg-muted)]">
           On iPhone: tap the <strong>Share</strong> button in Safari, then{" "}
           <strong>&ldquo;Add to Home Screen&rdquo;</strong> — NextGen installs like a regular app.
         </p>

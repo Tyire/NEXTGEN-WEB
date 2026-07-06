@@ -28,7 +28,7 @@ export default function ConnectivityPage() {
             <span className="text-flow">different.</span>
           </>
         }
-        lede="True GPON fiber to your door — symmetrical speeds, low latency, and bandwidth that doesn't fold at 9pm. From 2 Mbps starter lines to 2.5 Gbps carrier tiers."
+        lede="True GPON fiber to your door — symmetrical speeds, low latency, and bandwidth that doesn’t fold at 9pm. From 2 Mbps starter lines to 2.5 Gbps carrier tiers."
         image="banner-connectivity"
         video="/videos/banner-connectivity.vid"
         ghost="FIBER"
@@ -150,7 +150,7 @@ export default function ConnectivityPage() {
           </div>
           <div className="sr order-1 lg:order-2">
             <SectionHead
-              eyebrow="Why it's different"
+              eyebrow="Why it’s different"
               title={
                 <>
                   Glass to your door, <span className="grad-text">not copper.</span>
@@ -174,7 +174,7 @@ export default function ConnectivityPage() {
             could be next.
           </>
         }
-        lede="Check coverage now — if we're lit in your estate, you're 3 days from full-speed fiber."
+        lede="Check coverage now — if we’re lit in your estate, you’re 3 days from full-speed fiber."
       />
     </>
   );
