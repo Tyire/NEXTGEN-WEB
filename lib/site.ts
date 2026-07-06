@@ -41,7 +41,16 @@ export const nav = [
   { label: "Voice", href: "/voice" },
   { label: "Enterprise", href: "/enterprise" },
   { label: "Plans", href: "/plans" },
+  { label: "Support", href: "/support" },
   { label: "Contact", href: "/contact" },
+] as const;
+
+// Secondary links — footer only.
+export const footerLinks = [
+  { label: "About Us", href: "/about" },
+  { label: "Privacy Policy", href: "/legal/privacy" },
+  { label: "Terms of Service", href: "/legal/terms" },
+  { label: "Fair Usage Policy", href: "/legal/fair-usage" },
 ] as const;
 
 export type Service = {

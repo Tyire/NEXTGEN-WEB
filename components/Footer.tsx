@@ -1,7 +1,7 @@
 import { Logo } from "./Logo";
 import { Container } from "./ui";
 import { InstallPrompt } from "./InstallPrompt";
-import { site, nav, services, coverageZones } from "@/lib/site";
+import { site, nav, footerLinks, services, coverageZones } from "@/lib/site";
 
 const year = new Date().getFullYear();
 
@@ -128,6 +128,11 @@ export function Footer() {
             {services.map((s) => (
               <a key={s.slug} href={s.href} className="hover:text-[var(--color-fg)]">
                 {s.eyebrow}
+              </a>
+            ))}
+            {footerLinks.map((l) => (
+              <a key={l.href} href={l.href} className="hover:text-[var(--color-fg)]">
+                {l.label}
               </a>
             ))}
           </p>

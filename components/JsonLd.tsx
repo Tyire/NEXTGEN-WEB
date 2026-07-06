@@ -109,6 +109,22 @@ export function PlansJsonLd() {
   );
 }
 
+export function FaqJsonLd({ faqs }: { faqs: { q: string; a: string }[] }) {
+  return (
+    <Json
+      data={{
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      }}
+    />
+  );
+}
+
 export function BreadcrumbJsonLd({ items }: { items: { name: string; href: string }[] }) {
   return (
     <Json
