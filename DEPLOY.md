@@ -16,6 +16,66 @@ npx serve out -l 3210
 
 ---
 
+## Option 0 — Vercel (fastest client demo, recommended)
+
+Vercel serves the same static export in seconds. `vercel.json` in the repo
+already sets the security headers + caching, matching what `.htaccess` does
+elsewhere. No Node runtime is billed — it's served as static assets.
+
+### First deploy (one-time, ~5 minutes)
+
+From this project folder, on your machine:
+
+```powershell
+# 1. install the CLI globally (one-time)
+npm i -g vercel
+
+# 2. log in — opens a browser; sign in with GitHub/Google/email
+vercel login
+
+# 3. deploy to a preview URL
+vercel
+```
+
+`vercel` prompts you a few times on the first run:
+- **Set up and deploy?** → yes
+- **Which scope?** → your personal account (or a team, if you have one)
+- **Link to existing project?** → no
+- **Project name?** → `nextgen-web` (or anything)
+- **In which directory is your code?** → `./`
+- **Override settings?** → no (Vercel auto-detects Next.js)
+
+After ~90 seconds you get a preview URL like
+`https://nextgen-web-xxxx.vercel.app`. Send that to the client for review.
+
+### Ship it to production
+
+```powershell
+vercel --prod
+```
+
+That deploys the same build to your production URL
+(`https://nextgen-web.vercel.app`). Repeat this command every time you want a
+new build live — takes about 60 seconds.
+
+### Point nextgen.ng at the Vercel deployment
+
+Open the project in [vercel.com/dashboard](https://vercel.com/dashboard) →
+**Settings → Domains** → add `nextgen.ng` and `www.nextgen.ng`. Vercel shows
+the DNS records to add at your registrar (usually one `A` record for the apex
+and one `CNAME` for `www`). Once DNS propagates Vercel provisions HTTPS
+automatically.
+
+### Alternative: connect via GitHub (auto-deploy on push)
+
+If you'd rather deploy by pushing to GitHub than running `vercel --prod`:
+
+1. Push this repo to GitHub (any name, private is fine).
+2. In vercel.com → **Add New → Project → Import** → pick the repo.
+3. Every `git push` triggers a fresh production build.
+
+---
+
 ## Option A — Nginx on a VPS
 
 This assumes a fresh Ubuntu/Debian VPS with SSH access and root/sudo. Building
