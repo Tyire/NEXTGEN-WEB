@@ -92,10 +92,12 @@ export function Cinema() {
         });
       });
 
-      // 5. Pinned pricing sweep (desktop) — vertical scroll pauses while the
-      // plan cards travel horizontally through view, so every plan is seen.
-      // Mobile/no-JS: .plans-carousel stays a native swipe carousel.
-      if (desktop) {
+      // 5. Pinned pricing sweep — vertical scroll pauses while the plan cards
+      // travel horizontally through view, so every plan is seen. Only runs on
+      // wide desktop viewports (>=768px). Narrow viewport OR touch device
+      // keeps .plans-carousel as native swipe + dot pagination.
+      const wideDesktop = desktop && window.matchMedia("(min-width: 768px)").matches;
+      if (wideDesktop) {
         const track = document.querySelector<HTMLElement>(".plans-carousel");
         const section = track?.closest("section");
         if (track && section) {

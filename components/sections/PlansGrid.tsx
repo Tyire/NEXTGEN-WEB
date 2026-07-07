@@ -1,5 +1,6 @@
 import { plans, formatNaira, type Plan } from "@/data/plans";
 import { Arrow } from "@/components/ui";
+import { PlansCarouselNav } from "./PlansCarouselNav";
 
 /** Naira value without the sign, so the sign can be styled smaller. */
 function amount(p: Plan) {
@@ -73,10 +74,17 @@ export function PlansGrid({
 }) {
   const list = include === "residential" ? plans.filter((p) => p.priceNgn != null) : plans;
   return (
-    <ul className={carousel ? "plans-carousel" : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3"}>
-      {list.map((p, i) => (
-        <PlanCard key={p.id} p={p} i={i} />
-      ))}
-    </ul>
+    <>
+      <ul className={carousel ? "plans-carousel" : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3"}>
+        {list.map((p, i) => (
+          <PlanCard key={p.id} p={p} i={i} />
+        ))}
+      </ul>
+      {carousel && (
+        <div className="md:hidden">
+          <PlansCarouselNav total={list.length} />
+        </div>
+      )}
+    </>
   );
 }
