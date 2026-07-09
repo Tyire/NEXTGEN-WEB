@@ -26,7 +26,6 @@ export default function Home() {
         </div>
         <BlobVideo
           src="/videos/hero-video.vid"
-          mobileSrc="/videos/hero-mobile.vid"
           startAt={4}
           data-parallax=""
           className="absolute inset-0 -z-20 h-full w-full object-cover"

@@ -59,10 +59,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f8fb" },
-    { media: "(prefers-color-scheme: dark)", color: "#180b12" },
-  ],
+  // NOTE: theme-color is intentionally NOT declared here. The site theme is a
+  // manual toggle (light default), so a media-query <meta> would be wrong, and
+  // — more importantly — a React-owned meta whose `content` the pre-paint
+  // script rewrites for stored-dark users triggers a hydration mismatch. We
+  // create the theme-color meta imperatively in the <head> script below, so
+  // React never reconciles it. syncMeta() (layout enhance script) keeps it in
+  // step with the toggle.
   colorScheme: "light dark",
 };
 
@@ -109,6 +112,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script
           dangerouslySetInnerHTML={{
             __html: `try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}
+try{var d=document.documentElement.getAttribute('data-theme')==='dark';var mc=document.createElement('meta');mc.setAttribute('name','theme-color');mc.setAttribute('content',d?'#180b12':'#f6f8fb');document.head.appendChild(mc);}catch(e){}
 try{if(!sessionStorage.getItem('ng-boot')){document.documentElement.setAttribute('data-boot','1');sessionStorage.setItem('ng-boot','1');}}catch(e){}`,
           }}
         />

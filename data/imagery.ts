@@ -94,13 +94,13 @@ export const imagery: Record<string, ImageSlot> = {
   },
   "banner-contact": {
     "id": "banner-contact",
-    "query": "fiber optic starburst",
+    "query": "contact nextgen office lagos",
     "orientation": "landscape",
     "src": "/images/people/banner-contact",
-    "alt": "Fiber-optic strands radiating outward in a dark starburst of blue and red light.",
+    "alt": "NextGen Telcoms contact — reach our team in Lagos.",
     "avgColor": "#181828",
-    "photographer": "Photograph",
-    "photographerUrl": "https://www.pexels.com/@photograph"
+    "photographer": null,
+    "photographerUrl": null
   }
 };
 

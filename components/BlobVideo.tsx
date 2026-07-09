@@ -33,32 +33,39 @@ export function BlobVideo({
   const [url, setUrl] = useState<string | null>(null);
   const [playing, setPlaying] = useState(false);
   const usedMobile = useRef(false);
+  const objectUrl = useRef<string | null>(null);
+  const onScreen = useRef(true);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     usedMobile.current = !!mobileSrc && window.matchMedia("(max-width: 767px)").matches;
     const chosen = usedMobile.current ? mobileSrc! : src;
 
-    let objectUrl: string | null = null;
     let cancelled = false;
     fetch(chosen)
       .then((r) => r.blob())
       .then((b) => {
         if (cancelled) return;
-        objectUrl = URL.createObjectURL(new Blob([b], { type: "video/mp4" }));
-        setUrl(objectUrl);
+        // b is already a Blob; retype it in place instead of copying the bytes
+        // into a second Blob (that copy briefly doubled hero memory).
+        const typed = b.type === "video/mp4" ? b : b.slice(0, b.size, "video/mp4");
+        objectUrl.current = URL.createObjectURL(typed);
+        setUrl(objectUrl.current);
       })
       .catch(() => {});
 
     return () => {
       cancelled = true;
-      if (objectUrl) URL.revokeObjectURL(objectUrl);
+      if (objectUrl.current) {
+        URL.revokeObjectURL(objectUrl.current);
+        objectUrl.current = null;
+      }
     };
   }, [src, mobileSrc]);
 
   function begin() {
     const v = ref.current;
-    if (!v) return;
+    if (!v || !onScreen.current) return;
     try {
       if (startAt && !usedMobile.current && v.duration && v.currentTime < 0.1)
         v.currentTime = Math.min(startAt, v.duration - 0.1);
@@ -71,6 +78,34 @@ export function BlobVideo({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
+  // Once the clip is fully buffered the media element owns its own copy, so we
+  // can revoke the blob URL and let the ~MB JS Blob be garbage-collected —
+  // looping keeps working off the buffered resource. Halves steady-state hero
+  // memory (was: JS Blob + decoded video kept alive together).
+  function releaseBlob() {
+    if (objectUrl.current) {
+      URL.revokeObjectURL(objectUrl.current);
+      objectUrl.current = null;
+    }
+  }
+
+  // Pause decoding when the hero scrolls out of view; resume on return. A
+  // full-screen video that keeps decoding off-screen is pure wasted CPU/GPU/mem.
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        onScreen.current = e.isIntersecting;
+        if (e.isIntersecting) v.play().catch(() => {});
+        else v.pause();
+      },
+      { threshold: 0.01 },
+    );
+    io.observe(v);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <video
       {...rest}
@@ -79,6 +114,7 @@ export function BlobVideo({
       src={url ?? undefined}
       onLoadedMetadata={begin}
       onPlaying={() => setPlaying(true)}
+      onCanPlayThrough={releaseBlob}
       autoPlay
       muted
       loop

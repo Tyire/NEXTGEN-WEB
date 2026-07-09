@@ -38,6 +38,7 @@ export default function ContactPage() {
         }
         lede="Sales, support, surveys, partnerships — real people in Lagos, on channels you actually use."
         image="banner-contact"
+        video="/videos/banner-contact.vid"
         ghost="HELLO"
       />
 
