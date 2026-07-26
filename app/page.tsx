@@ -6,6 +6,8 @@ import { StatsBand } from "@/components/sections/StatsBand";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { CoverageChecker } from "@/components/CoverageChecker";
+import { DataInMotion } from "@/components/sections/DataInMotion";
+import { SpeedMeter } from "@/components/sections/SpeedMeter";
 import { site } from "@/lib/site";
 
 const chips = ["↑↓ Symmetrical", "STM-16 capable", "Low-latency core"];
@@ -163,6 +165,13 @@ export default function Home() {
       </section>
 
       <StatsBand />
+
+      {/* ── DATA IN MOTION ─────────────────────────────────────── */}
+      <DataInMotion />
+
+      {/* ── SPEED METER ────────────────────────────────────────── */}
+      <SpeedMeter />
+
       <Testimonials />
       <CtaBanner />
     </>

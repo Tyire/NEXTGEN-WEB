@@ -41,12 +41,13 @@ export const nav = [
   { label: "Voice", href: "/voice" },
   { label: "Enterprise", href: "/enterprise" },
   { label: "Plans", href: "/plans" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
 // Secondary links — footer only.
 export const footerLinks = [
-  { label: "About Us", href: "/about" },
+  { label: "Careers", href: "/careers" },
   { label: "FAQ", href: "/faq" },
   { label: "Privacy Policy", href: "/legal/privacy" },
   { label: "Terms of Service", href: "/legal/terms" },
