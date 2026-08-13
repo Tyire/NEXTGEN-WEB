@@ -158,6 +158,8 @@ export function SpeedMeter() {
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden py-20 md:py-28 bg-[var(--color-void)]" aria-label="NextGen fiber speed demonstration">
+      {/* ng-orbit keyframe for the orbital speed dots — scoped inline */}
+      <style dangerouslySetInnerHTML={{ __html: "@keyframes ng-orbit{to{transform:rotate(360deg) translateX(108px);}}" }} />
       <span aria-hidden="true" className="ghost absolute right-0 top-0 text-[18vw] opacity-40 md:text-[10rem]">SPEED</span>
 
       <div className="mx-auto w-full max-w-6xl px-5 md:px-10">

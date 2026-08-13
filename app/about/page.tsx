@@ -105,10 +105,10 @@ export default function AboutPage() {
                 key={s.label}
                 className="lift rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7"
               >
-                <dd data-count="" className="display text-5xl font-extrabold text-[var(--color-brand-orange)]">
+                <p data-count="" className="display text-5xl font-extrabold text-[var(--color-brand-orange)]">
                   {s.value}
-                </dd>
-                <dt className="mt-2 text-sm text-[var(--color-fg-muted)]">{s.label}</dt>
+                </p>
+                <p className="mt-2 text-sm text-[var(--color-fg-muted)]">{s.label}</p>
               </div>
             ))}
           </div>

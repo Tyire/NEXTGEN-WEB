@@ -183,6 +183,12 @@ a, button, [role="button"], select, summary, label {
 }
 .drift { animation: drift 14s ease-in-out infinite; }
 
+/* Hero scroll-indicator dot */
+@keyframes scroll-dot {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.9; }
+  50%      { transform: translateX(-50%) translateY(20px); opacity: 0.2; }
+}
+
 /* Animated flowing gradient on text (hero accent word). */
 .text-flow {
   background-image: linear-gradient(100deg, #ff1f4d, #ff6b2c 30%, #ffc14a 55%, #ff6b2c 80%, #ff1f4d);
@@ -298,22 +304,18 @@ html[data-at-top]:not([data-theme="dark"]) .nav-bar img[src="/brand/logo-full-da
 .icon-sun { display: none; }
 [data-theme="dark"] .icon-sun { display: block; }
 
-/* ── Sunset wash bands (light mode pops; dark stays deep) ───────────── */
+/* ── Wash bands — light mode: pure clean white; dark mode: keeps deep tint ── */
 .wash {
+  background: var(--color-ink);
+}
+[data-theme="dark"] .wash {
+  --wash-base: #0f050b;
+  --wash-hot: rgba(255, 107, 44, 0.07);
+  --wash-warm: rgba(255, 31, 77, 0.04);
   background-image:
     radial-gradient(60% 90% at 85% 0%, var(--wash-hot) 0%, transparent 60%),
     radial-gradient(50% 80% at 0% 100%, var(--wash-warm) 0%, transparent 55%),
     linear-gradient(var(--wash-base), var(--wash-base));
-}
-:root {
-  --wash-base: #e9eef6;
-  --wash-hot: rgba(255, 107, 44, 0.1);
-  --wash-warm: rgba(11, 28, 51, 0.08);
-}
-[data-theme="dark"] {
-  --wash-base: #0f050b;
-  --wash-hot: rgba(255, 107, 44, 0.07);
-  --wash-warm: rgba(255, 31, 77, 0.04);
 }
 /* Card top-edge sunset accent. The card's own rounded corners clip the
    strip (overflow:hidden), so it always follows the card edge exactly —

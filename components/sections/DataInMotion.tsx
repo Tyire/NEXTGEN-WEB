@@ -153,7 +153,7 @@ export function DataInMotion() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#0f050b] dark:bg-[#0f050b]"
+      className="relative bg-[#0f050b]"
       style={{ height: reducedMotion ? "60vh" : "200vh" }}
       aria-label="Data in motion visualisation"
     >
