@@ -6,7 +6,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Careers — Join NextGen Telcoms",
+  title: "Careers — Join NextGen Telecoms",
   description:
     "Help us build the best telecoms company in Nigeria. We're looking for engineers, support specialists, and ambitious people who want to change how Nigeria connects.",
   alternates: { canonical: "/careers" },

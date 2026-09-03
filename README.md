@@ -1,6 +1,6 @@
-# NextGen Telcoms — nextgen.ng
+# NextGen Telecoms — nextgen.ng
 
-Production redesign for **NextGen Telcoms**, a Lagos-based fiber ISP. Bright,
+Production redesign for **NextGen Telecoms**, a Lagos-based fiber ISP. Bright,
 professional marketing + plans site with a dark editorial theme on toggle.
 Multipage, static-exportable, PWA, SEO-first.
 

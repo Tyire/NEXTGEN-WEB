@@ -6,7 +6,7 @@ import { BreadcrumbJsonLd } from "@/components/JsonLd";
 import { site, trustStats, coverageZones } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About NextGen Telcoms — The NextGen Telecom Company",
+  title: "About NextGen Telecoms — The NextGen Telecom Company",
   description:
     "We're changing the way leading brands and consumers communicate. GPON fiber, Metro Ethernet, VoIP — built and owned by NextGen across Lagos and Nigeria.",
   alternates: { canonical: "/about" },

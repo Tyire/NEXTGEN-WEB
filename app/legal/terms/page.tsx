@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "The terms that govern NextGen Telcoms fiber, voice and enterprise services.",
+  description: "The terms that govern NextGen Telecoms fiber, voice and enterprise services.",
   alternates: { canonical: "/legal/terms" },
 };
 
@@ -13,7 +13,7 @@ export default function TermsPage() {
   return (
     <LegalShell eyebrow="Legal" title="Terms of Service" updated="July 2026 (draft)">
       <p>
-        These terms govern your use of NextGen Telcoms services. Subscribing to a plan, or using
+        These terms govern your use of NextGen Telecoms services. Subscribing to a plan, or using
         this website, means you accept them.
       </p>
 

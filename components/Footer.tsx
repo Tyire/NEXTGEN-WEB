@@ -20,7 +20,7 @@ export function Footer() {
         <div className="relative grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- plain <a> by design: nav must work without hydration */}
-            <a href="/" aria-label="NextGen Telcoms home">
+            <a href="/" aria-label="NextGen Telecoms home">
               <Logo className="h-11 w-auto" />
             </a>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-[var(--color-fg-muted)]">

@@ -97,7 +97,7 @@ export const imagery: Record<string, ImageSlot> = {
     "query": "contact nextgen office lagos",
     "orientation": "landscape",
     "src": "/images/people/banner-contact",
-    "alt": "NextGen Telcoms contact — reach our team in Lagos.",
+    "alt": "NextGen Telecoms contact — reach our team in Lagos.",
     "avgColor": "#181828",
     "photographer": null,
     "photographerUrl": null

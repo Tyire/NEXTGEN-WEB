@@ -3,8 +3,8 @@
 // STILL PENDING: precise street address (current address is region-level only).
 
 export const site = {
-  name: "NextGen Telcoms",
-  legalName: "NextGen Telcoms Ltd",
+  name: "NextGen Telecoms",
+  legalName: "NextGen Telecoms Ltd",
   shortName: "NextGen",
   domain: "nextgen.ng",
   url: "https://nextgen.ng",

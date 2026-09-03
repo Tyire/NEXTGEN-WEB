@@ -7,7 +7,7 @@ export function LogoIcon({ className = "h-9 w-9" }: { className?: string }) {
 }
 
 /**
- * Real NextGen Telcoms logo, theme-aware. Black wordmark on light, white on dark —
+ * Real NextGen Telecoms logo, theme-aware. Black wordmark on light, white on dark —
  * both rendered, CSS swaps them via the `dark:` variant so there's no JS flash.
  * `showWordmark={false}` renders the icon mark alone.
  */

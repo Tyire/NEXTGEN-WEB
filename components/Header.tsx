@@ -40,7 +40,7 @@ export function Header() {
 
       <div className="nav-bar mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-5 md:h-20 md:px-10">
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- plain <a> by design: nav must work without hydration */}
-        <a href="/" aria-label="NextGen Telcoms home" className="shrink-0">
+        <a href="/" aria-label="NextGen Telecoms home" className="shrink-0">
           <Logo className="h-7 w-auto md:h-8" />
         </a>
 

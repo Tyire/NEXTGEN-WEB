@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How NextGen Telcoms collects, uses and protects subscriber data under the NDPR.",
+  description: "How NextGen Telecoms collects, uses and protects subscriber data under the NDPR.",
   alternates: { canonical: "/legal/privacy" },
 };
 
@@ -14,7 +14,7 @@ export default function PrivacyPage() {
   return (
     <LegalShell eyebrow="Legal" title="Privacy Policy" updated="July 2026 (draft)">
       <p>
-        NextGen Telcoms Ltd (&ldquo;NextGen&rdquo;, &ldquo;we&rdquo;) respects your privacy. This
+        NextGen Telecoms Ltd (&ldquo;NextGen&rdquo;, &ldquo;we&rdquo;) respects your privacy. This
         policy explains what we collect, why, and the choices you have. It applies to this website
         and to our subscriber services, and is written to comply with the Nigeria Data Protection
         Regulation (NDPR).
@@ -50,7 +50,7 @@ export default function PrivacyPage() {
       <h2>Contact</h2>
       <p>
         Data questions: <a href={`mailto:${site.email}`}>{site.email}</a> or {site.phoneDisplay},
-        NextGen Telcoms Ltd, {site.address.region}, Nigeria.
+        NextGen Telecoms Ltd, {site.address.region}, Nigeria.
       </p>
     </LegalShell>
   );

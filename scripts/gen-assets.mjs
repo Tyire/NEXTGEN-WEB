@@ -47,7 +47,7 @@ const ogBg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" 
   </g>
   <ellipse cx="1050" cy="90" rx="340" ry="240" fill="#FF6B2C" opacity="0.14"/>
   <text x="232" y="150" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="54" fill="#f4f1ec">NextGen</text>
-  <text x="234" y="190" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="22" letter-spacing="8" fill="url(#txt)">TELCOM</text>
+  <text x="234" y="190" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="22" letter-spacing="8" fill="url(#txt)">TELECOM</text>
   <text x="90" y="350" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="80" fill="#f4f1ec">Fiber that keeps</text>
   <text x="90" y="440" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="80" fill="url(#txt)">up with you.</text>
   <text x="92" y="520" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#a7b0ac">GPON Fiber · VoIP · Metro Ethernet — Lagos, Nigeria</text>

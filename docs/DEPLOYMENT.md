@@ -1,6 +1,6 @@
 # Deployment
 
-NextGen Telcoms is a **Next.js static export** (`output: "export"` + `trailingSlash: true`).
+NextGen Telecoms is a **Next.js static export** (`output: "export"` + `trailingSlash: true`).
 `npm run build` writes a fully static site to `out/` — plain HTML/CSS/JS, no Node runtime
 at serve time. It deploys anywhere that serves static files.
 

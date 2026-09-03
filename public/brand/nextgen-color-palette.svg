@@ -6,10 +6,10 @@
       <stop offset="100%" stop-color="#FFA70F"/>
     </linearGradient>
   </defs>
-  <text x="0" y="24" font-family="Poppins, Arial, sans-serif" font-weight="700" font-size="18" fill="#111">NextGen Telcom — Color Palette</text>
+  <text x="0" y="24" font-family="Poppins, Arial, sans-serif" font-weight="700" font-size="18" fill="#111">NextGen Telecom — Color Palette</text>
 
   <rect x="0" y="40" width="600" height="36" rx="6" fill="url(#brandGrad)"/>
-  <text x="0" y="92" font-family="monospace" font-size="13" fill="#444">Primary brand gradient (icon &amp; "TELCOM" text)</text>
+  <text x="0" y="92" font-family="monospace" font-size="13" fill="#444">Primary brand gradient (icon &amp; "TELECOM" text)</text>
 
   <rect x="0" y="105" width="130" height="60" rx="6" fill="#FF1F4D"/>
   <text x="0" y="180" font-family="monospace" font-size="13" fill="#444">#FF1F4D</text>

@@ -1,9 +1,9 @@
-# NextGen Telcoms — Build Context & Decisions (v3)
+# NextGen Telecoms — Build Context & Decisions (v3)
 
 Source-of-truth for *what we decided and why*. Kept current as the build evolves.
 
 ## Product
-Marketing + plans site for NextGen Telcoms, a Lagos fiber ISP. Goal: convert homes and
+Marketing + plans site for NextGen Telecoms, a Lagos fiber ISP. Goal: convert homes and
 businesses into subscribers. Tone: confident, premium, human, conversion-focused.
 
 ## Service scope (STRICT — exactly three)
