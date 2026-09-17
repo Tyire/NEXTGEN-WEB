@@ -159,6 +159,25 @@ export const speedTiers = [
   },
 ] as const;
 
+// Company purpose — the driving-force copy shown on / and /about. Kept here
+// so a wording change lands in every surface at once.
+export const purpose = {
+  mission: {
+    headline: "To connect every Nigerian",
+    lines: [
+      "To establish a revolutionary realm of limitless high-speed data connectivity and associated services for the people of Nigeria.",
+      "To become the foremost and most dependable provider of top-tier broadband services throughout Nigeria, setting the standard for excellence.",
+    ],
+  },
+  vision: {
+    headline: "Our core beliefs",
+    beliefs: [
+      "Unrestricted internet accessibility at all times and in any location, without limitations or constraints.",
+      "Step into a fresh era of high-speed data connectivity and exceptional voice communication quality.",
+    ],
+  },
+} as const;
+
 // Real lit coverage — the estates/areas live on the selfcare onboarding portal
 // (confirmed 2026-07-02). Broad areas first, then the specific estates.
 export const coverageZones = [

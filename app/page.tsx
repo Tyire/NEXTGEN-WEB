@@ -9,7 +9,7 @@ import { CoverageChecker } from "@/components/CoverageChecker";
 import { GeometricFlythrough } from "@/components/sections/GeometricFlythrough";
 import { SpeedGauge } from "@/components/sections/SpeedGauge";
 import { NetworkMap } from "@/components/sections/NetworkMap";
-import { site } from "@/lib/site";
+import { site, purpose } from "@/lib/site";
 
 // Hero proof points (from Kimi's design)
 const proofPoints = [
@@ -251,6 +251,59 @@ export default function Home() {
               </div>
             ))}
           </dl>
+        </Container>
+      </section>
+
+      {/* ── PURPOSE — mission & vision anchor the six reasons above ── */}
+      <section className="wash relative overflow-hidden py-20 md:py-28" aria-labelledby="purpose-title">
+        <span aria-hidden="true" className="ghost absolute -top-4 right-0 text-[18vw] opacity-30 md:text-[10rem]">
+          PURPOSE
+        </span>
+        <Container className="relative">
+          <div className="max-w-2xl">
+            <p className="eyebrow">Our driving force</p>
+            <h2 id="purpose-title" className="display mt-4 text-4xl font-extrabold sm:text-5xl md:text-6xl">
+              Why we&rsquo;re building <span className="text-[var(--color-brand-orange)]">NextGen.</span>
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-[var(--color-fg-muted)] md:text-lg">
+              Every plan, every install, every night-shift ticket ladders back to a single purpose.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:mt-16 md:grid-cols-2 md:gap-8">
+            {/* Mission */}
+            <article className="sr-pop edge-top rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 md:p-10">
+              <span className="display block text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-brand-orange)]">
+                Mission Statement
+              </span>
+              <h3 className="display mt-4 text-2xl font-extrabold md:text-3xl">
+                {purpose.mission.headline}
+              </h3>
+              {purpose.mission.lines.map((line, i) => (
+                <p key={i} className={`${i === 0 ? "mt-4" : "mt-3"} text-sm leading-relaxed text-[var(--color-fg-muted)]`}>
+                  {line}
+                </p>
+              ))}
+            </article>
+
+            {/* Vision */}
+            <article className="sr-pop edge-top rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 md:p-10" style={{ animationDelay: "0.07s" }}>
+              <span className="display block text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-brand-orange)]">
+                Vision Statement
+              </span>
+              <h3 className="display mt-4 text-2xl font-extrabold md:text-3xl">
+                {purpose.vision.headline}
+              </h3>
+              <ul className="mt-4 space-y-3">
+                {purpose.vision.beliefs.map((b) => (
+                  <li key={b} className="flex gap-3 text-sm leading-relaxed text-[var(--color-fg-muted)]">
+                    <span aria-hidden="true" className="mt-1 shrink-0 text-[var(--color-brand-orange)]">→</span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </div>
         </Container>
       </section>
 

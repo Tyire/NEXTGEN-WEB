@@ -3,7 +3,7 @@ import { Container, Button, Arrow, SectionHead } from "@/components/ui";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
-import { site, trustStats, coverageZones } from "@/lib/site";
+import { site, trustStats, coverageZones, purpose } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About NextGen Telecoms — The NextGen Telecom Company",
@@ -25,11 +25,6 @@ const pillars = [
     title: "Engineers who pick up",
     body: "Support here means a Lagos-based engineer on WhatsApp or the phone — someone who can actually read your line, not a script. It's the single thing customers mention most.",
   },
-];
-
-const coreBeliefs = [
-  "Unrestricted internet accessibility at all times and in any location, without limitations or constraints.",
-  "Step into a fresh era of high-speed data connectivity and exceptional voice communication quality.",
 ];
 
 export default function AboutPage() {
@@ -127,16 +122,13 @@ export default function AboutPage() {
               Mission Statement
             </span>
             <h2 className="display mt-4 text-2xl font-extrabold md:text-3xl">
-              To connect every Nigerian
+              {purpose.mission.headline}
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-[var(--color-fg-muted)]">
-              To establish a revolutionary realm of limitless high-speed data connectivity and
-              associated services for the people of Nigeria.
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--color-fg-muted)]">
-              To become the foremost and most dependable provider of top-tier broadband services
-              throughout Nigeria, setting the standard for excellence.
-            </p>
+            {purpose.mission.lines.map((line, i) => (
+              <p key={i} className={`${i === 0 ? "mt-4" : "mt-3"} text-sm leading-relaxed text-[var(--color-fg-muted)]`}>
+                {line}
+              </p>
+            ))}
           </div>
 
           {/* Vision */}
@@ -145,10 +137,10 @@ export default function AboutPage() {
               Vision Statement
             </span>
             <h2 className="display mt-4 text-2xl font-extrabold md:text-3xl">
-              Our core beliefs
+              {purpose.vision.headline}
             </h2>
             <ul className="mt-4 space-y-3">
-              {coreBeliefs.map((b) => (
+              {purpose.vision.beliefs.map((b) => (
                 <li key={b} className="flex gap-3 text-sm leading-relaxed text-[var(--color-fg-muted)]">
                   <span aria-hidden="true" className="mt-1 shrink-0 text-[var(--color-brand-orange)]">→</span>
                   {b}

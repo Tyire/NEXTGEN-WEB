@@ -9,7 +9,10 @@
 // v3: Ink & Signal rebrand — bump flushes stale fonts/images/videos cached
 // under v2 (HTML rules unchanged: still network-first, never precached).
 // v4: plum dark restored + maturity pass (solid accents, new pages).
-const VERSION = "nextgen-v4";
+// v5: warm-paper light theme, cursor trail removed, GSAP+Lenis code-split
+// out of the entry bundle, splash gate moved to localStorage. Bump flushes
+// the pre-refinement JS chunks that returning phones might still be caching.
+const VERSION = "nextgen-v5";
 
 self.addEventListener("install", () => {
   self.skipWaiting();
