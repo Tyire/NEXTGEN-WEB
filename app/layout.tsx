@@ -8,7 +8,6 @@ import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/JsonLd";
 import { RegisterSW } from "@/components/RegisterSW";
 import { Preloader } from "@/components/Preloader";
 import { Cinema } from "@/components/Cinema";
-import { CursorTrail } from "@/components/CursorTrail";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -135,7 +134,6 @@ try{if(!sessionStorage.getItem('ng-boot')){document.documentElement.setAttribute
         <main id="main" className="flex-1">{children}</main>
         <Footer />
         <Cinema />
-        <CursorTrail />
         <script dangerouslySetInnerHTML={{ __html: enhance }} />
       </body>
     </html>

@@ -50,7 +50,7 @@ export function Testimonials() {
       />
       <Container className="relative py-16 md:py-20">
         {/* Mobile/tablet heading — desktop uses the sticky right column instead */}
-        <SectionHead className="lg:hidden" eyebrow="Word on the street" title={<>Lagos is <span className="text-[var(--color-brand-orange)]">talking.</span></>} />
+        <SectionHead className="lg:hidden" eyebrow="Word on the street" title={<>Our customers are <span className="text-[var(--color-brand-orange)]">talking.</span></>} />
 
         <div className="mt-4 grid gap-8 lg:mt-0 lg:grid-cols-[1.1fr_1fr]">
           <div className="grid gap-2">
@@ -76,7 +76,7 @@ export function Testimonials() {
             <div className="max-w-sm">
               <p className="eyebrow mb-4">Word on the street</p>
               <h2 className="display text-4xl font-extrabold sm:text-5xl">
-                Lagos is <span className="text-[var(--color-brand-orange)]">talking.</span>
+                Our customers are <span className="text-[var(--color-brand-orange)]">talking.</span>
               </h2>
               <p className="mt-5 text-base leading-relaxed text-[var(--color-fg-muted)]">
                 Homes, estates and businesses on real fiber — and what changed for them. Keep

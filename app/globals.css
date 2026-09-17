@@ -25,19 +25,24 @@
 
 /* Theme-flipping semantic tokens — read via var(--color-*) in arbitrary utilities. */
 :root {
-  /* LIGHT — cool paper, navy ink text, orange reserved for accents */
-  --color-ink: #f6f8fb;        /* page background */
-  --color-ink-glass: rgba(246, 248, 251, 0.92); /* header glass (explicit rgba — no color-mix dependency) */
-  --color-void: #e9eef6;       /* quiet cool bands */
-  --color-surface: #ffffff;    /* cards */
-  --color-surface-2: #eef2f8;
-  --color-hairline: #dde5ee;
-  --color-fg: #101d30;
+  /* LIGHT — warm neutral paper, blue-navy ink, orange reserved for accents */
+  --color-ink: #f6f5f0;        /* warm paper background (no teal cast) */
+  --color-ink-glass: rgba(246, 245, 240, 0.92);
+  --color-void: #ecebe4;       /* quiet neutral bands */
+  --color-surface: #fdfcf7;    /* cards — warm off-white */
+  --color-surface-2: #efede5;
+  --color-hairline: #ddd9cd;
+  --color-fg: #101d30;         /* blue-navy ink (unchanged from prior) */
   --color-fg-muted: #51617a;
-  --color-fg-faint: #8b99ad;
+  --color-fg-faint: #8b8a83;
   --color-success: #14915c;
-  --shadow-pop: 0 24px 48px -24px rgba(11, 28, 51, 0.25);
+  --shadow-pop: 0 24px 48px -24px rgba(11, 28, 51, 0.22);
   color-scheme: light;
+
+  /* Paired solid-action tokens — blue-navy action on warm paper */
+  --action-bg: #101d30;
+  --action-fg: #fdfcf7;
+  --action-hover: #1a2c48;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -58,6 +63,10 @@
   --color-success: #3ecf8e;
   --shadow-pop: 0 24px 56px -20px rgba(0, 0, 0, 0.5);
   color-scheme: dark;
+  /* Inverted solid-action tokens so light buttons read on plum ground */
+  --action-bg: #fff3ea;
+  --action-fg: #180b12;
+  --action-hover: #ffe0c9;
 }
 
 * { border-color: var(--color-hairline); }
@@ -525,4 +534,31 @@ main [id] { scroll-margin-top: 6rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .gauge-particle { display: none; }
+}
+
+/* ── Light paper utilities — solid actions, quiet dividers, small motion ── */
+.button-solid, .button-light {
+  background: var(--action-bg);
+  color: var(--action-fg);
+  border: 1px solid transparent;
+  border-radius: 0.6rem;
+  box-shadow: none;
+}
+.button-solid:hover { background: var(--action-hover); box-shadow: none; }
+.button-light { background: var(--color-surface); color: var(--color-fg); }
+.button-ghost:hover { background: var(--color-void); border-color: var(--color-fg-muted); }
+.text-link { display: inline-flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; font-weight: 600; text-underline-offset: 5px; }
+.text-link:hover { text-decoration: underline; }
+.benefit-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-brand-orange); flex: none; display: inline-block; }
+.service-link { transition: border-color 220ms ease, transform 220ms var(--ease-out); }
+.service-link:hover { border-color: var(--color-fg-muted); transform: translateY(-2px); }
+.signal-mark { display: inline-flex; align-items: end; gap: 3px; height: 18px; }
+.signal-mark i { display: block; width: 3px; background: var(--color-fg); border-radius: 2px; transform-origin: bottom; animation: signal-rise 0.6s var(--ease-out) both; }
+.signal-mark i:nth-child(1) { height: 6px; animation-delay: 0.3s; }
+.signal-mark i:nth-child(2) { height: 11px; animation-delay: 0.4s; }
+.signal-mark i:nth-child(3) { height: 17px; animation-delay: 0.5s; }
+@keyframes signal-rise { from { transform: scaleY(0.2); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .signal-mark i, .hero-photo { animation: none; }
+  .service-link:hover { transform: none; }
 }
