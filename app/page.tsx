@@ -263,7 +263,7 @@ export default function Home() {
           <div className="max-w-2xl">
             <p className="eyebrow">Our driving force</p>
             <h2 id="purpose-title" className="display mt-4 text-4xl font-extrabold sm:text-5xl md:text-6xl">
-              Why we&rsquo;re building <span className="text-[var(--color-brand-orange)]">NextGen.</span>
+              Why Choose <span className="text-[var(--color-brand-orange)]">NextGen?</span>
             </h2>
             <p className="mt-5 text-base leading-relaxed text-[var(--color-fg-muted)] md:text-lg">
               Every plan, every install, every night-shift ticket ladders back to a single purpose.
