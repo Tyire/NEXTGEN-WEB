@@ -6,8 +6,9 @@ import { StatsBand } from "@/components/sections/StatsBand";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { CoverageChecker } from "@/components/CoverageChecker";
-import { DataInMotion } from "@/components/sections/DataInMotion";
-import { SpeedMeter } from "@/components/sections/SpeedMeter";
+import { GeometricFlythrough } from "@/components/sections/GeometricFlythrough";
+import { SpeedGauge } from "@/components/sections/SpeedGauge";
+import { NetworkMap } from "@/components/sections/NetworkMap";
 import { site } from "@/lib/site";
 
 // Hero proof points (from Kimi's design)
@@ -217,7 +218,7 @@ export default function Home() {
       </section>
 
       {/* ── DATA IN MOTION ─────────────────────────────────────────── */}
-      <DataInMotion />
+      <GeometricFlythrough />
 
       {/* ── WHY NEXTGEN — Kimi's numbered grid, nextgen-web styling ─── */}
       <section className="relative overflow-hidden bg-[var(--color-ink)] py-20 md:py-28">
@@ -231,7 +232,7 @@ export default function Home() {
               <>
                 Six reasons people
                 <br />
-                <span className="text-[var(--color-brand-orange)]">don't switch back.</span>
+                <span className="text-[var(--color-brand-orange)]">don&rsquo;t switch back.</span>
               </>
             }
           />
@@ -253,8 +254,8 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ── SPEED METER ────────────────────────────────────────────── */}
-      <SpeedMeter />
+      {/* ── SPEED GAUGE ────────────────────────────────────────────── */}
+      <SpeedGauge />
 
       {/* ── COVERAGE ──────────────────────────────────────────────── */}
       <section className="wash relative overflow-hidden py-20 md:py-28" id="coverage">
@@ -298,6 +299,8 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
+      <NetworkMap />
 
       <StatsBand />
       <Testimonials />

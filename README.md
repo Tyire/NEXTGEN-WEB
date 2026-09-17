@@ -1,5 +1,20 @@
 # NextGen Telecoms — nextgen.ng
 
+## Design consolidation (17 September 2026)
+
+nextgen-web is the canonical source and deployment target. It retains its current
+hero, mobile video, pricing and estate data, careers, navigation, WhatsApp and 404.
+The selected nextgen-ultimate improvements are the geometric flythrough, SVG speed
+gauge and gold-accented Lagos network illustration. Existing dependencies are reused.
+The gauge is explicitly illustrative; the map does not assert surveyed fiber routes.
+Both render useful content without JavaScript and with reduced motion.
+
+Verify: npm run build, then serve the export and run
+node scripts/check-design-merge.mjs http://127.0.0.1:3107 (or use the dev server).
+Browser QA also covers light/dark themes, mobile layout and return navigation.
+Older historical notes below may describe previous iterations.
+
+
 Production redesign for **NextGen Telecoms**, a Lagos-based fiber ISP. Bright,
 professional marketing + plans site with a dark editorial theme on toggle.
 Multipage, static-exportable, PWA, SEO-first.
