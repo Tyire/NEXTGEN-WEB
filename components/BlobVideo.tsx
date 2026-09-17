@@ -42,17 +42,28 @@ export function BlobVideo({
     const chosen = usedMobile.current ? mobileSrc! : src;
 
     let cancelled = false;
-    fetch(chosen)
-      .then((r) => r.blob())
-      .then((b) => {
-        if (cancelled) return;
-        // b is already a Blob; retype it in place instead of copying the bytes
-        // into a second Blob (that copy briefly doubled hero memory).
-        const typed = b.type === "video/mp4" ? b : b.slice(0, b.size, "video/mp4");
-        objectUrl.current = URL.createObjectURL(typed);
-        setUrl(objectUrl.current);
-      })
-      .catch(() => {});
+    // Defer the multi-MB blob fetch until the browser has finished first paint.
+    // Otherwise the hero video download races page render on slow phones and
+    // the whole site feels heavy. Falls back to setTimeout on Safari.
+    const idle = (cb: () => void) => {
+      const w = window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number };
+      if (w.requestIdleCallback) w.requestIdleCallback(cb, { timeout: 1200 });
+      else setTimeout(cb, 250);
+    };
+    idle(() => {
+      if (cancelled) return;
+      fetch(chosen)
+        .then((r) => r.blob())
+        .then((b) => {
+          if (cancelled) return;
+          // b is already a Blob; retype it in place instead of copying the bytes
+          // into a second Blob (that copy briefly doubled hero memory).
+          const typed = b.type === "video/mp4" ? b : b.slice(0, b.size, "video/mp4");
+          objectUrl.current = URL.createObjectURL(typed);
+          setUrl(objectUrl.current);
+        })
+        .catch(() => {});
+    });
 
     return () => {
       cancelled = true;

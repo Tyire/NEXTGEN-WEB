@@ -19,6 +19,26 @@ import Lenis from "lenis";
 export function Cinema() {
   const pathname = usePathname();
   useEffect(() => {
+    let cancelled = false;
+    // Wait for the browser to finish first paint before booting GSAP/Lenis so
+    // the ~200KB scroll layer never competes with initial render. Falls back
+    // to a small timeout on browsers without requestIdleCallback (Safari).
+    const idle = (cb: () => void) => {
+      const w = window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number };
+      if (w.requestIdleCallback) w.requestIdleCallback(cb, { timeout: 800 });
+      else setTimeout(cb, 200);
+    };
+    let cleanup: (() => void) | undefined;
+    idle(() => {
+      if (cancelled) return;
+      cleanup = boot();
+    });
+    return () => {
+      cancelled = true;
+      cleanup?.();
+    };
+
+    function boot() {
     gsap.registerPlugin(ScrollTrigger);
     const media = gsap.matchMedia();
     media.add({ motion: "(prefers-reduced-motion: no-preference)", desktop: "(min-width: 768px) and (hover: hover) and (pointer: fine)" }, (context) => {
@@ -190,6 +210,7 @@ export function Cinema() {
       };
     });
     return () => media.revert();
+    }
   }, [pathname]);
 
   return null;

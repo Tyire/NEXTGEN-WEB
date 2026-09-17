@@ -3,10 +3,11 @@
 /**
  * "Speed burst" entrance curtain — a SERVER component with a 100% CSS
  * lifecycle (see globals.css). The inline <head> script sets
- * html[data-boot] on the FIRST page view of the session only; CSS shows the
- * curtain, charges the fiber beam, and lifts it after ~1.7s with a fixed
- * animation delay. No JavaScript runs it, so it can never get stuck —
- * the exact failure mode the old preloader had on mobile.
+ * html[data-boot] on the visitor's FIRST-EVER load only (gated by the
+ * `ng-visited` flag in localStorage), so returning visitors never see it.
+ * CSS shows the curtain, charges the fiber beam, and lifts it after ~1.7s
+ * with a fixed animation delay. No JavaScript runs it, so it can never
+ * get stuck — the exact failure mode the old preloader had on mobile.
  */
 export function Preloader() {
   return (

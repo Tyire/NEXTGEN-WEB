@@ -352,7 +352,8 @@ html[data-at-top]:not([data-theme="dark"]) .nav-bar img[src="/brand/logo-full-da
 
 /* ── Preloader — "speed burst" curtain, 100% CSS lifecycle ────────────
    Rendered by the server on EVERY page, but display:none unless the inline
-   <head> script sets html[data-boot] (first visit this session only).
+   <head> script sets html[data-boot] (first-EVER visit only — the flag lives
+   in localStorage so returning visitors never see it again).
    The hide animation is pure CSS with a fixed delay, so even if every byte
    of JS after <head> fails, the curtain ALWAYS lifts. */
 .preloader { display: none; }

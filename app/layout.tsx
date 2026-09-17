@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/JsonLd";
 import { RegisterSW } from "@/components/RegisterSW";
 import { Preloader } from "@/components/Preloader";
-import { Cinema } from "@/components/Cinema";
+import CinemaMount from "@/components/CinemaMount";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -111,8 +111,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script
           dangerouslySetInnerHTML={{
             __html: `try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}
-try{var d=document.documentElement.getAttribute('data-theme')==='dark';var mc=document.createElement('meta');mc.setAttribute('name','theme-color');mc.setAttribute('content',d?'#180b12':'#f6f8fb');document.head.appendChild(mc);}catch(e){}
-try{if(!sessionStorage.getItem('ng-boot')){document.documentElement.setAttribute('data-boot','1');sessionStorage.setItem('ng-boot','1');}}catch(e){}`,
+try{var d=document.documentElement.getAttribute('data-theme')==='dark';var mc=document.createElement('meta');mc.setAttribute('name','theme-color');mc.setAttribute('content',d?'#180b12':'#f6f5f0');document.head.appendChild(mc);}catch(e){}
+try{if(!localStorage.getItem('ng-visited')){document.documentElement.setAttribute('data-boot','1');localStorage.setItem('ng-visited','1');}}catch(e){}`,
           }}
         />
       </head>
@@ -133,7 +133,7 @@ try{if(!sessionStorage.getItem('ng-boot')){document.documentElement.setAttribute
         <Header />
         <main id="main" className="flex-1">{children}</main>
         <Footer />
-        <Cinema />
+        <CinemaMount />
         <script dangerouslySetInnerHTML={{ __html: enhance }} />
       </body>
     </html>
