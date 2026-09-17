@@ -35,37 +35,16 @@ const audienceCards = [
 ];
 
 // "Why NextGen" numbered features (from Kimi's design)
-const whyFeatures = [
-  {
-    n: "01",
-    title: "Unlimited Data",
-    body: "No caps, no throttling, no hidden limits. Stream, download and work without watching your data allowance.",
-  },
-  {
-    n: "02",
-    title: "99.9% Uptime",
-    body: "Fully redundant network with automated failover. Your connection stays up when it matters most.",
-  },
-  {
-    n: "03",
-    title: "Symmetrical Speeds",
-    body: "Upload at the same speed you download. Critical for video calls, cloud backups and remote teams.",
-  },
-  {
-    n: "04",
-    title: "24/7 Support",
-    body: "Real engineers in Lagos on WhatsApp and the phone — not a ticket queue. Most issues resolve without a visit.",
-  },
-  {
-    n: "05",
-    title: "3-Day Installation",
-    body: "Survey to streaming in about three days in every lit estate. No wait lists, no guesswork.",
-  },
-  {
-    n: "06",
-    title: "Direct Backbone",
-    body: "Our own metro core connected to Equiano and MainOne submarine cables — not resold capacity.",
-  },
+// Six proofs that back up the mission. Rendered as a compact evidence rail
+// beneath the Mission/Vision cards in the PURPOSE section — not a section of
+// their own. Kept to one crisp line each so they read as receipts, not lede.
+const whyProofs = [
+  { title: "Unlimited Data", body: "No caps, no throttling, no hidden limits." },
+  { title: "99.9% Uptime", body: "Fully redundant network with automated failover." },
+  { title: "Symmetrical Speeds", body: "Upload as fast as you download — video calls, cloud backups, remote teams." },
+  { title: "24/7 Support", body: "Real Lagos engineers on WhatsApp and the phone — not a ticket queue." },
+  { title: "3-Day Installation", body: "Survey to streaming in about three days in every lit estate." },
+  { title: "Direct Backbone", body: "Our own metro core straight to Equiano and MainOne — not resold." },
 ];
 
 export default function Home() {
@@ -220,41 +199,7 @@ export default function Home() {
       {/* ── DATA IN MOTION ─────────────────────────────────────────── */}
       <GeometricFlythrough />
 
-      {/* ── WHY NEXTGEN — Kimi's numbered grid, nextgen-web styling ─── */}
-      <section className="relative overflow-hidden bg-[var(--color-ink)] py-20 md:py-28">
-        <span aria-hidden="true" className="ghost absolute -top-4 left-0 text-[18vw] opacity-30 md:text-[10rem]">
-          WHY
-        </span>
-        <Container className="relative">
-          <SectionHead
-            eyebrow="The NextGen difference"
-            title={
-              <>
-                Six reasons people
-                <br />
-                <span className="text-[var(--color-brand-orange)]">don&rsquo;t switch back.</span>
-              </>
-            }
-          />
-          <dl className="mt-12 grid gap-x-10 gap-y-8 md:mt-16 md:grid-cols-2 lg:grid-cols-3">
-            {whyFeatures.map((f, i) => (
-              <div
-                key={f.n}
-                className="sr-pop"
-                style={{ animationDelay: `${i * 0.06}s` }}
-              >
-                <span className="display block text-3xl font-extrabold text-[var(--color-brand-orange)] opacity-60">
-                  {f.n}
-                </span>
-                <dt className="display mt-3 text-lg font-bold">{f.title}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-[var(--color-fg-muted)]">{f.body}</dd>
-              </div>
-            ))}
-          </dl>
-        </Container>
-      </section>
-
-      {/* ── PURPOSE — mission & vision anchor the six reasons above ── */}
+      {/* ── PURPOSE — mission and vision lead; six proofs back them up ── */}
       <section className="wash relative overflow-hidden py-20 md:py-28" aria-labelledby="purpose-title">
         <span aria-hidden="true" className="ghost absolute -top-4 right-0 text-[18vw] opacity-30 md:text-[10rem]">
           PURPOSE
@@ -303,6 +248,32 @@ export default function Home() {
                 ))}
               </ul>
             </article>
+          </div>
+
+          {/* Evidence rail — how the mission and vision translate into service.
+              Deliberately understated: small tiles, hairline dividers, one
+              crisp line each. Meant to read as receipts under the cards
+              above, not as its own section. */}
+          <div className="mt-14 border-t border-[var(--color-hairline)] pt-10 md:mt-20 md:pt-14">
+            <div className="mb-8 flex flex-wrap items-baseline justify-between gap-3">
+              <p className="eyebrow">How we back it up</p>
+              <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-fg-faint)]">Six ways · one promise</p>
+            </div>
+            <ul className="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+              {whyProofs.map((p, i) => (
+                <li
+                  key={p.title}
+                  className="sr-pop group flex gap-4"
+                  style={{ animationDelay: `${i * 0.05}s` }}
+                >
+                  <span aria-hidden="true" className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[var(--color-brand-orange)]" />
+                  <div>
+                    <h4 className="display text-sm font-bold uppercase tracking-[0.08em]">{p.title}</h4>
+                    <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-fg-muted)]">{p.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </Container>
       </section>
