@@ -8,14 +8,14 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Careers — Join NextGen Telecoms",
   description:
-    "Help us build the best telecoms company in Nigeria. We're looking for engineers, support specialists, and ambitious people who want to change how Nigeria connects.",
+    "Join the team growing one of Nigeria's best telecoms companies. We're looking for engineers, support specialists, and ambitious people who want to change how Nigeria connects.",
   alternates: { canonical: "/careers" },
 };
 
 const perks = [
   { icon: "⚡", title: "Work on real infrastructure", body: "Not a reseller. Not a startup with a deck. We build and run the actual network — fiber in the ground, hardware in the field, engineers on the line." },
   { icon: "🇳🇬", title: "Built for Nigeria", body: "Every product decision, every hire, every expansion is about serving Nigerians better. You'll feel the impact of your work every single day." },
-  { icon: "🌱", title: "Grow with us", body: "We're at an early stage of a big mission. The people who join now shape the culture, the systems, and the direction of the company." },
+  { icon: "🌱", title: "Grow with us", body: "There's still plenty to shape. The people who join now help decide the culture, the systems, and where we take the company next." },
   { icon: "🛠️", title: "Solve real problems", body: "Power outages, terrain challenges, last-mile complexity — Nigerian telecoms is genuinely hard. We like it that way." },
 ];
 
@@ -40,12 +40,12 @@ export default function CareersPage() {
         eyebrow="Careers"
         title={
           <>
-            Build something
+            Shape something
             <br />
             <span className="text-flow">magnificent.</span>
           </>
         }
-        lede="Do you want to come join us build the best telecoms company in Nigeria? We're looking for people who are obsessed with reliability, honest with customers, and ready to get their hands dirty."
+        lede="Do you want to join the team running one of the best fiber networks in Nigeria? We're looking for people who are obsessed with reliability, honest with customers, and ready to get their hands dirty."
         image="banner-connectivity"
         ghost="TEAM"
       >
@@ -61,8 +61,8 @@ export default function CareersPage() {
             eyebrow="Why work here"
             title={
               <>
-                We're building something{" "}
-                <span className="text-[var(--color-brand-orange)]">that matters.</span>
+                The work here{" "}
+                <span className="text-[var(--color-brand-orange)]">actually matters.</span>
               </>
             }
             lede="Reliable internet changes everything — how people work, study, build businesses and stay connected to each other. That's what we come in for."

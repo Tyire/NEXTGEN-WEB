@@ -191,7 +191,7 @@ export default function AboutPage() {
               {
                 icon: "🇳🇬",
                 title: "Built for Nigeria",
-                body: "Naira pricing. Local support teams. Coverage in cities and estates that most ISPs ignore. We're building for the Nigerian market, not just about it.",
+                body: "Naira pricing. Local support teams. Coverage in cities and estates that most ISPs ignore. Built for the Nigerian market, not just aimed at it.",
               },
               {
                 icon: "⚡",
