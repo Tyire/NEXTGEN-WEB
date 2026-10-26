@@ -3,7 +3,10 @@ import { BlobVideo } from "@/components/BlobVideo";
 
 /**
  * Subpage hero: banner imagery + ghost word + sunset accents.
- * `image` is a public/images/people basename, e.g. "banner-voice".
+ * `image` is a public/images/people basename, e.g. "banner-voice". Omit it
+ * (no photography fetched for this page yet) to fall back to a dark
+ * grain/gradient panel instead of a broken <picture> — same layout, same
+ * copy treatment, no photo dependency.
  * `video` (a /videos/*.vid path) fades in OVER the image when it plays —
  * the image stays as the instant/no-JS experience.
  */
@@ -19,36 +22,54 @@ export function PageHero({
   eyebrow: string;
   title: React.ReactNode;
   lede: string;
-  image: string;
+  image?: string;
   video?: string;
   ghost: string;
   children?: React.ReactNode;
 }) {
   return (
     <section className="relative isolate flex min-h-[45svh] items-end overflow-hidden pt-24 md:pt-28">
-      {/* Banner image — <picture> with avif/webp at 3 widths, eager (it IS the LCP). */}
-      <picture>
-        <source
-          type="image/avif"
-          srcSet={`/images/people/${image}-640.avif 640w, /images/people/${image}-1024.avif 1024w, /images/people/${image}-1600.avif 1600w`}
-          sizes="100vw"
-        />
-        <source
-          type="image/webp"
-          srcSet={`/images/people/${image}-640.webp 640w, /images/people/${image}-1024.webp 1024w, /images/people/${image}-1600.webp 1600w`}
-          sizes="100vw"
-        />
-        <img
-          src={`/images/people/${image}-1024.webp`}
-          alt=""
-          aria-hidden="true"
-          fetchPriority="high"
-          className="absolute inset-0 -z-20 h-full w-full object-cover"
-        />
-      </picture>
-      {video && <BlobVideo src={video} className="absolute inset-0 -z-20 h-full w-full object-cover" />}
-      {/* Scrim so type always reads. */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(105deg,rgba(10,4,8,0.88)_20%,rgba(10,4,8,0.55)_60%,rgba(255,60,44,0.15))]" />
+      {image ? (
+        <>
+          {/* Banner image — <picture> with avif/webp at 3 widths, eager (it IS the LCP). */}
+          <picture>
+            <source
+              type="image/avif"
+              srcSet={`/images/people/${image}-640.avif 640w, /images/people/${image}-1024.avif 1024w, /images/people/${image}-1600.avif 1600w`}
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcSet={`/images/people/${image}-640.webp 640w, /images/people/${image}-1024.webp 1024w, /images/people/${image}-1600.webp 1600w`}
+              sizes="100vw"
+            />
+            <img
+              src={`/images/people/${image}-1024.webp`}
+              alt=""
+              aria-hidden="true"
+              fetchPriority="high"
+              className="absolute inset-0 -z-20 h-full w-full object-cover"
+            />
+          </picture>
+          {video && <BlobVideo src={video} className="absolute inset-0 -z-20 h-full w-full object-cover" />}
+          {/* Scrim so type always reads. */}
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(105deg,rgba(10,4,8,0.88)_20%,rgba(10,4,8,0.55)_60%,rgba(255,60,44,0.15))]" />
+        </>
+      ) : (
+        <>
+          {/* No photography yet for this page — dark grain/gradient panel instead.
+              Fixed dark literal (not the `--color-void` token): the heading/lede
+              below are hardcoded white for legibility, same as the photo-scrim
+              variant, so this background must stay dark regardless of the
+              page's light/dark theme. */}
+          <div aria-hidden="true" className="absolute inset-0 -z-20 bg-[#180b12]" />
+          <div aria-hidden="true" className="grain absolute inset-0 -z-10" />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,rgba(255,107,44,0.22),transparent_60%)]"
+          />
+        </>
+      )}
 
       <Container className="relative w-full pb-12 pt-10 md:pb-14">
         <span aria-hidden="true" className="ghost absolute -bottom-6 right-0 text-[20vw] opacity-25 md:text-[11rem]" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.35)" }}>

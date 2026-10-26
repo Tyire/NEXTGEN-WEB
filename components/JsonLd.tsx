@@ -1,5 +1,6 @@
 import { site, services } from "@/lib/site";
 import { plans } from "@/data/plans";
+import { cloudProducts, PRICING_STATUS, type CloudProduct } from "@/data/cloud-plans";
 
 function Json({ data }: { data: object }) {
   return (
@@ -106,6 +107,62 @@ export function PlansJsonLd() {
         />
       ))}
     </>
+  );
+}
+
+export function CloudServiceJsonLd({ slug }: { slug: string }) {
+  const p = cloudProducts.find((x) => x.slug === slug);
+  if (!p) return null;
+  return (
+    <Json
+      data={{
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: `${p.name} — NextGen Cloud`,
+        serviceType: p.eyebrow,
+        description: p.short,
+        provider: { "@id": `${site.url}/#organization` },
+        areaServed: { "@type": "Country", name: "Nigeria" },
+        url: `${site.url}${p.href}`,
+      }}
+    />
+  );
+}
+
+/**
+ * OfferCatalog for a Cloud product's tiers. While PRICING_STATUS is
+ * "proposal" (prices not yet confirmed by NextGen), this renders ONLY names —
+ * no `offers`/price — so no engine treats a proposal figure as a live price.
+ */
+export function CloudOfferCatalogJsonLd({ product }: { product: CloudProduct }) {
+  return (
+    <Json
+      data={{
+        "@context": "https://schema.org",
+        "@type": "OfferCatalog",
+        name: `${product.name} plans`,
+        itemListElement: product.tiers.map((t) => ({
+          "@type": "OfferCatalog",
+          name: t.name,
+          ...(PRICING_STATUS === "live" && t.priceNgn != null
+            ? {
+                itemListElement: [
+                  {
+                    "@type": "Offer",
+                    priceSpecification: {
+                      "@type": "PriceSpecification",
+                      price: t.priceNgn,
+                      priceCurrency: "NGN",
+                      valueAddedTaxIncluded: false,
+                    },
+                    seller: { "@id": `${site.url}/#organization` },
+                  },
+                ],
+              }
+            : {}),
+        })),
+      }}
+    />
   );
 }
 

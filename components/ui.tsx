@@ -18,6 +18,10 @@ export function Arrow({ className = "" }: { className?: string }) {
   );
 }
 
+/** Shared pill-button base — for anchors that need the Button look but custom `href` handling (e.g. a wa.me link) rather than the Button component itself. */
+export const waLinkButtonClass =
+  "group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold transition-transform duration-300 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97]";
+
 type BtnProps = {
   href: string;
   children: React.ReactNode;

@@ -1,7 +1,7 @@
 import { Logo } from "./Logo";
 import { Container } from "./ui";
 import { InstallPrompt } from "./InstallPrompt";
-import { site, nav, footerLinks, services, coverageZones } from "@/lib/site";
+import { site, nav, footerLinks, services, coverageZones, waLink } from "@/lib/site";
 
 const year = new Date().getFullYear();
 
@@ -29,7 +29,7 @@ export function Footer() {
             </p>
             <div className="mt-6 flex gap-3">
               <a
-                href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Hi NextGen, I'd like to ask about fiber availability and plans.")}`}
+                href={waLink("Hi NextGen, I'd like to ask about fiber availability and plans.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Chat with NextGen on WhatsApp"
