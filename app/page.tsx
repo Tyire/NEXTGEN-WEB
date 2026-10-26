@@ -166,6 +166,27 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* ── NEXTGEN CLOUD — compact band, links out to /cloud ─────────── */}
+      <section className="wash relative overflow-hidden py-16 md:py-20">
+        <Container className="relative flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
+          <div className="max-w-xl">
+            <p className="eyebrow mb-3">New · Pre-launch</p>
+            <h2 className="display text-3xl font-extrabold sm:text-4xl">
+              Introducing <span className="text-[var(--color-brand-orange)]">NextGen Cloud.</span>
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-[var(--color-fg-muted)]">
+              Hosting, business email, Naira-billed VPS and done-for-you websites — on our own Lagos network. A small pilot group is onboarding now.
+            </p>
+          </div>
+          <a
+            href="/cloud"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-full border-2 border-[var(--color-hairline)] px-6 py-3.5 text-sm font-bold text-[var(--color-fg)] transition-colors hover:border-[var(--color-brand-orange)]"
+          >
+            Explore NextGen Cloud <Arrow />
+          </a>
+        </Container>
+      </section>
+
       {/* ── PLANS ────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[var(--color-surface)] py-20 md:py-28" id="plans">
         <span aria-hidden="true" className="ghost absolute right-0 top-4 text-[20vw] opacity-30 md:text-[11rem]">
