@@ -1,5 +1,6 @@
 import { Container, Eyebrow } from "@/components/ui";
 import { BlobVideo } from "@/components/BlobVideo";
+import { KineticFabric } from "@/components/sections/KineticFabric";
 
 /**
  * Subpage hero: banner imagery + ghost word + sunset accents.
@@ -57,16 +58,16 @@ export function PageHero({
         </>
       ) : (
         <>
-          {/* No photography yet for this page — dark grain/gradient panel instead.
-              Fixed dark literal (not the `--color-void` token): the heading/lede
-              below are hardcoded white for legibility, same as the photo-scrim
-              variant, so this background must stay dark regardless of the
-              page's light/dark theme. */}
-          <div aria-hidden="true" className="absolute inset-0 -z-20 bg-[#180b12]" />
-          <div aria-hidden="true" className="grain absolute inset-0 -z-10" />
+          {/* No photography yet for this page — animated mesh-fabric panel
+              instead (paints its own fixed-dark background, matching the
+              photo-scrim variant's always-dark treatment regardless of the
+              page's light/dark theme). Pointer-interactive on desktop; a
+              static single frame under prefers-reduced-motion. */}
+          <KineticFabric className="absolute inset-0 -z-20 h-full w-full" />
+          <div aria-hidden="true" className="grain pointer-events-none absolute inset-0 -z-10" />
           <div
             aria-hidden="true"
-            className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,rgba(255,107,44,0.22),transparent_60%)]"
+            className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,rgba(255,107,44,0.18),transparent_60%)]"
           />
         </>
       )}
