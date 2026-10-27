@@ -23,12 +23,12 @@ export function SpeedGauge() {
       <div
         aria-hidden="true"
         className="blob drift absolute right-[-5%] top-[-10%] h-[500px] w-[500px]"
-        style={{ "--blob-c": "rgba(255,107,44,0.09)" } as React.CSSProperties}
+        style={{ "--blob-c": "rgba(255,255,255,0.03)" } as React.CSSProperties}
       />
       <div
         aria-hidden="true"
         className="blob absolute bottom-[-15%] left-[-8%] h-[440px] w-[440px]"
-        style={{ "--blob-c": "rgba(212,168,67,0.07)", animationDelay: "-9s" } as React.CSSProperties}
+        style={{ "--blob-c": "rgba(255,255,255,0.03)", animationDelay: "-9s" } as React.CSSProperties}
       />
 
       <Container className="relative">
@@ -65,14 +65,14 @@ export function SpeedGauge() {
               >
                 <defs>
                   <linearGradient id="gauge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%"   stopColor="#ff1f4d" />
-                    <stop offset="48%"  stopColor="#ff6b2c" />
-                    <stop offset="100%" stopColor="#ffa70f" />
+                    <stop offset="0%"   stopColor="rgba(255,255,255,0.55)" />
+                    <stop offset="60%"  stopColor="#ffffff" />
+                    <stop offset="100%" stopColor="#ff6b2c" />
                   </linearGradient>
                   {/* Gold tick-mark gradient for the track */}
                   <linearGradient id="track-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%"   stopColor="rgba(212,168,67,0.18)" />
-                    <stop offset="100%" stopColor="rgba(212,168,67,0.06)" />
+                    <stop offset="0%"   stopColor="rgba(255,255,255,0.14)" />
+                    <stop offset="100%" stopColor="rgba(255,255,255,0.05)" />
                   </linearGradient>
                 </defs>
 
@@ -144,7 +144,7 @@ export function SpeedGauge() {
                     <line
                       key={i}
                       x1={cx0} y1={cy0} x2={cx1} y2={cy1}
-                      stroke={i % 6 === 0 ? "rgba(212,168,67,0.6)" : "rgba(212,168,67,0.2)"}
+                      stroke={i % 6 === 0 ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.16)"}
                       strokeWidth={i % 6 === 0 ? 2 : 1}
                       strokeLinecap="round"
                     />
@@ -159,8 +159,8 @@ export function SpeedGauge() {
               aria-label="Speed illustration details"
             >
               {[
-                { label: "Illustration", value: "1 Gbps", color: "rgba(255,107,44,0.15)", border: "rgba(255,107,44,0.3)" },
-                { label: "Availability", value: "Check your plan", color: "rgba(212,168,67,0.12)", border: "rgba(212,168,67,0.3)" },
+                { label: "Illustration", value: "1 Gbps", color: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.14)" },
+                { label: "Availability", value: "Check your plan", color: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.14)" },
               ].map(({ label, value, color, border }) => (
                 <div
                   key={label}
@@ -180,14 +180,7 @@ export function SpeedGauge() {
             <h2 id="speed-gauge-title" className="display text-4xl font-extrabold text-white sm:text-5xl md:text-6xl">
               Room to do
               <br />
-              <span
-                style={{
-                  background: "linear-gradient(115deg,#ff1f4d,#ff6b2c 48%,#ffa70f)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
+              <span className="accent-word">
                 more.
               </span>
             </h2>
@@ -200,7 +193,7 @@ export function SpeedGauge() {
             <ul className="mt-8 grid gap-4">
               {[
                 { stat: "2.5 Gbps",    label: "Maximum fiber tier (STM-16)",         color: "#ff6b2c" },
-                { stat: "Symmetrical", label: "Same upload and download speeds",       color: "#d4a843" },
+                { stat: "Symmetrical", label: "Same upload and download speeds",       color: "#fafafa" },
               ].map(({ stat, label, color }) => (
                 <li key={stat} className="flex items-center gap-4">
                   <span

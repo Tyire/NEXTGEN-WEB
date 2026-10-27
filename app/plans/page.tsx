@@ -63,7 +63,7 @@ export default function PlansPage() {
         video="/videos/banner-plans.vid"
         ghost="PLANS"
       >
-        <Button href={site.selfcare.onboard} external>
+        <Button variant="accent" href={site.selfcare.onboard} external>
           Start onboarding <Arrow />
         </Button>
       </PageHero>

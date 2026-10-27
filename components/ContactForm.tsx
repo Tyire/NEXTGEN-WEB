@@ -48,7 +48,7 @@ export function ContactForm() {
       </div>
       <button
         type="submit"
-        className="grad-sunset mt-1 inline-flex w-fit items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-white shadow-[0_12px_32px_-12px_rgba(255,60,44,0.6)] transition-transform duration-200 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97]"
+        className="btn btn-accent mt-1 w-full sm:w-fit"
       >
         Send Enquiry
       </button>

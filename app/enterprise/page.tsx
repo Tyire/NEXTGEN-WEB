@@ -48,7 +48,7 @@ export default function EnterprisePage() {
         video="/videos/banner-enterprise.vid"
         ghost="METRO"
       >
-        <Button href="/contact">
+        <Button variant="accent" href="/contact">
           Talk to sales <Arrow />
         </Button>
       </PageHero>

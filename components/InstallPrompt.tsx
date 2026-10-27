@@ -60,7 +60,7 @@ export function InstallPrompt({ className = "" }: { className?: string }) {
         onClick={install}
         aria-expanded={ios ? showIosHelp : undefined}
         aria-controls={ios ? "ios-install-help" : undefined}
-        className="group inline-flex items-center gap-2 rounded-full border-2 border-[var(--color-hairline)] px-5 py-2.5 text-xs font-bold text-[var(--color-fg)] transition-colors hover:border-[var(--color-brand-orange)]"
+        className="group btn btn-ghost !min-h-10 !px-4 !text-xs"
       >
         <svg viewBox="0 0 24 24" className="h-4 w-4 text-[var(--color-brand-orange)]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />

@@ -44,7 +44,7 @@ function EstatePlanCard({ p }: { p: Plan }) {
         href={site.selfcare.onboard}
         target="_blank"
         rel="noopener noreferrer"
-        className="group grad-sunset mt-4 inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-xs font-bold text-white transition-transform duration-200 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97]"
+        className="group btn btn-accent mt-4 !min-h-10 !px-4 !text-xs"
       >
         Subscribe <Arrow />
       </a>
@@ -95,7 +95,7 @@ export function CoverageChecker() {
                 </strong>
               </span>
               {estate.firstMonthFree && (
-                <span className="display rounded-full grad-sunset px-3 py-1 text-[0.6rem] font-bold uppercase tracking-[0.14em] text-white">
+                <span className="rounded-full bg-[var(--accent)] px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-black">
                   1st month free
                 </span>
               )}

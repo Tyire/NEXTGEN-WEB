@@ -34,10 +34,10 @@ export default function ConnectivityPage() {
         video="/videos/banner-connectivity.vid"
         ghost="FIBER"
       >
-        <Button href={site.selfcare.onboard} external>
+        <Button variant="accent" href={site.selfcare.onboard} external>
           Check Coverage <Arrow />
         </Button>
-        <a href="/plans" className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10">
+        <a href="/plans" className="group btn btn-ghost-light">
           See plans <Arrow />
         </a>
       </PageHero>
@@ -109,7 +109,7 @@ export default function ConnectivityPage() {
                     {t.tier === "business" ? (
                       <a
                         href="/contact"
-                        className="group/cta mt-6 inline-flex items-center gap-2 rounded-full border-2 border-[var(--color-hairline)] px-6 py-3 text-sm font-bold text-[var(--color-fg)] transition-colors hover:border-[var(--color-brand-orange)]"
+                        className="group btn btn-ghost mt-6"
                       >
                         Talk to sales <Arrow />
                       </a>
@@ -118,7 +118,7 @@ export default function ConnectivityPage() {
                         href={site.selfcare.onboard}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group/cta grad-sunset mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white transition-transform duration-300 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97]"
+                        className="group btn btn-ink mt-6"
                       >
                         Subscribe to {t.name} <Arrow />
                       </a>

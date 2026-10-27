@@ -61,7 +61,7 @@ export function CloudWaitlistForm({ product }: { product?: string }) {
       <div className="mt-1 flex flex-wrap items-center gap-4">
         <button
           type="submit"
-          className="grad-sunset inline-flex w-fit items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-white shadow-[0_12px_32px_-12px_rgba(255,60,44,0.6)] transition-transform duration-200 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97]"
+          className="btn btn-accent"
         >
           Join the waitlist
         </button>
@@ -69,7 +69,7 @@ export function CloudWaitlistForm({ product }: { product?: string }) {
           href={waLink(`Hi NextGen, I'm interested in NextGen Cloud${product ? `: ${product}` : ""}.`)}
           target="_blank"
           rel="noopener noreferrer"
-          className="group inline-flex items-center gap-2 rounded-full border-2 border-[var(--color-hairline)] px-6 py-3.5 text-sm font-bold text-[var(--color-fg)] transition-colors hover:border-[var(--color-brand-orange)]"
+          className="group btn btn-ghost"
         >
           WhatsApp us instead <Arrow />
         </a>

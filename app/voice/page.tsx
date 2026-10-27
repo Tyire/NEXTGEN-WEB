@@ -48,10 +48,10 @@ export default function VoicePage() {
         video="/videos/banner-voice.vid"
         ghost="VOICE"
       >
-        <Button href="/contact">
+        <Button variant="accent" href="/contact">
           Get a number <Arrow />
         </Button>
-        <a href={`tel:${site.phoneHref}`} className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10">
+        <a href={`tel:${site.phoneHref}`} className="group btn btn-ghost-light">
           Call {site.phoneDisplay}
         </a>
       </PageHero>

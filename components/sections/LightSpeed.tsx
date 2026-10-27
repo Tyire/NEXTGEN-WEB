@@ -23,7 +23,8 @@ interface Streak {
   pz: number; // previous z, for the trail length
 }
 
-const COLORS = ["255, 31, 77", "255, 107, 44", "255, 167, 15"]; // brand red → orange → amber
+// Mostly white light; every fourth streak carries the accent.
+const COLORS = ["245, 245, 245", "245, 245, 245", "245, 245, 245", "255, 107, 44"];
 
 export function LightSpeed({
   speed = 2.4,
@@ -77,7 +78,7 @@ export function LightSpeed({
     };
 
     const drawFrame = () => {
-      ctx.fillStyle = "rgba(15, 5, 11, 0.32)"; // trail fade, not a hard clear — motion blur
+      ctx.fillStyle = "rgba(0, 0, 0, 0.32)"; // trail fade, not a hard clear — motion blur
       ctx.fillRect(0, 0, width, height);
 
       const cx = width / 2;
@@ -116,7 +117,7 @@ export function LightSpeed({
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
     resize();
-    ctx.fillStyle = "#0f050b";
+    ctx.fillStyle = "#000000";
     ctx.fillRect(0, 0, width, height);
 
     if (reduceMotion) {

@@ -1,5 +1,5 @@
 import { Logo } from "./Logo";
-import { Container } from "./ui";
+import { Container, Arrow } from "./ui";
 import { InstallPrompt } from "./InstallPrompt";
 import { site, nav, footerLinks, services, coverageZones, waLink } from "@/lib/site";
 
@@ -10,8 +10,21 @@ export function Footer() {
   return (
     // data-theme="dark" scopes the dark tokens: the footer is always ink navy
     <footer data-theme="dark" className="relative overflow-hidden bg-[var(--color-void)] text-[var(--color-fg)]">
-      {/* sunset edge */}
-      <div aria-hidden="true" className="grad-sunset h-1 w-full" />
+      {/* Editorial sign-off band */}
+      <Container className="relative border-b border-[var(--color-hairline)] pb-12 pt-16 md:pb-16 md:pt-24">
+        <p className="eyebrow eyebrow-rule mb-6">Live across Lagos</p>
+        <p className="display max-w-3xl text-[2.6rem] leading-[1.02] sm:text-6xl md:text-7xl">
+          Fibre that keeps up <span className="accent-word">with you.</span>
+        </p>
+        <div className="cta-pair mt-9">
+          <a href={site.selfcare.onboard} target="_blank" rel="noopener noreferrer" data-magnetic="" className="group btn btn-accent">
+            Check coverage <Arrow />
+          </a>
+          <a href={`tel:${site.phoneHref}`} className="btn btn-ghost">
+            Call {site.phoneDisplay}
+          </a>
+        </div>
+      </Container>
       <Container className="relative py-14 md:py-20">
         <span aria-hidden="true" className="ghost absolute -top-4 left-0 text-[22vw] opacity-40 md:text-[13rem]">
           NEXTGEN

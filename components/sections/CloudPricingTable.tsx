@@ -8,7 +8,8 @@ export function CloudPricingTable({ product }: { product: CloudProduct }) {
   return (
     <div>
       {PRICING_STATUS === "proposal" && (
-        <p className="sr mb-8 inline-flex items-center gap-2 rounded-full border border-[var(--color-hairline)] bg-[var(--color-surface-2)] px-4 py-2 text-xs font-semibold text-[var(--color-fg-muted)]">
+        <p className="sr mb-8 inline-flex items-center gap-2.5 rounded-full border border-[var(--color-hairline)] px-4 py-2 text-xs font-medium text-[var(--color-fg-muted)]">
+          <span className="live-dot" aria-hidden="true" />
           Indicative pricing — confirmed at launch
         </p>
       )}
@@ -18,24 +19,20 @@ export function CloudPricingTable({ product }: { product: CloudProduct }) {
             key={t.name}
             className={`sr-pop lift relative flex flex-col rounded-[var(--radius)] p-7 md:p-8 ${
               i === featuredIndex && product.tiers.length > 1
-                ? "grad-border glow-pulse bg-[var(--color-surface)]"
-                : "edge-top border border-[var(--color-hairline)] bg-[var(--color-surface)]"
+                ? "grad-border bg-[var(--color-surface)]"
+                : "border border-[var(--color-hairline)] bg-[var(--color-surface)]"
             }`}
             style={{ animationDelay: `${i * 0.05}s` }}
           >
-            <h3 className="display text-xl font-bold">{t.name}</h3>
-            <p className="mt-5">
-              <span className="display text-[var(--color-brand-orange)] text-4xl font-extrabold tracking-tight">
-                {formatCloudPrice(t)}
-              </span>
-              {t.unit && <span className="ml-1 text-sm text-[var(--color-fg-faint)]">{t.unit}</span>}
+            <h3 className="display text-[1.7rem] leading-tight">{t.name}</h3>
+            <p className="mt-6 border-t border-[var(--color-hairline)] pt-6">
+              <span className="display text-[2.6rem] leading-none tabular-nums">{formatCloudPrice(t)}</span>
+              {t.unit && <span className="ml-1.5 text-sm text-[var(--color-fg-faint)]">{t.unit}</span>}
             </p>
-            <ul className="mt-6 grid gap-2.5 text-sm text-[var(--color-fg-muted)]">
+            <ul className="mb-8 mt-6 grid flex-1 content-start gap-3 text-sm text-[var(--color-fg-muted)]">
               {t.includes.map((h) => (
-                <li key={h} className="flex gap-2.5">
-                  <svg viewBox="0 0 16 16" className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-success)]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M2.5 8.5 6 12l7.5-8" />
-                  </svg>
+                <li key={h} className="flex gap-3">
+                  <span className="mt-[7px] h-[5px] w-[5px] shrink-0 rounded-full bg-[var(--color-fg-faint)]" aria-hidden="true" />
                   {h}
                 </li>
               ))}
@@ -44,11 +41,7 @@ export function CloudPricingTable({ product }: { product: CloudProduct }) {
               href={waLink(`Hi NextGen, I'm interested in ${product.name}${t.name ? ` (${t.name})` : ""}.`)}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${waLinkButtonClass} mt-8 ${
-                i === featuredIndex && product.tiers.length > 1
-                  ? "grad-sunset text-white shadow-[0_12px_32px_-12px_rgba(255,60,44,0.6)]"
-                  : "border-2 border-[var(--color-hairline)] text-[var(--color-fg)] hover:border-[var(--color-brand-orange)]"
-              }`}
+              className={`${waLinkButtonClass} w-full ${i === featuredIndex && product.tiers.length > 1 ? "btn-accent" : "btn-ghost"}`}
             >
               {product.comingSoon ? "Join the waitlist" : "Talk to sales"} <Arrow />
             </a>
