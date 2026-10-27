@@ -1,5 +1,5 @@
 import { Container, Button, Arrow, SectionHead } from "@/components/ui";
-import { BlobVideo } from "@/components/BlobVideo";
+import { WovenParticles } from "@/components/sections/WovenParticles";
 import { PlansGrid } from "@/components/sections/PlansGrid";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { StatsBand } from "@/components/sections/StatsBand";
@@ -52,21 +52,12 @@ export default function Home() {
     <>
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#0d0508] md:min-h-[92vh]">
-        {/* Fallback blob backdrop — shows while video loads / JS off */}
-        <div aria-hidden="true" className="absolute inset-0 -z-30">
-          <div className="blob drift -left-24 -top-24 h-[480px] w-[480px]" style={{ "--blob-c": "rgba(255,31,77,0.35)" } as React.CSSProperties} />
-          <div className="blob -bottom-32 right-[-10%] h-[520px] w-[520px]" style={{ "--blob-c": "rgba(255,167,15,0.28)", animationDelay: "-7s" } as React.CSSProperties} />
-          <div className="blob left-1/3 top-1/3 h-[420px] w-[640px]" style={{ "--blob-c": "rgba(255,107,44,0.22)" } as React.CSSProperties} />
-        </div>
+        {/* Woven-light particle backdrop — renders instantly (no video to
+            buffer), and degrades gracefully: no JS / prefers-reduced-motion
+            still shows the dark base + one static frame of the knot. */}
+        <WovenParticles className="-z-20" />
 
-        <BlobVideo
-          src="/videos/hero-video.vid"
-          mobileSrc="/videos/hero-mobile.vid"
-          startAt={4}
-          className="absolute inset-0 -z-20 h-full w-full object-cover"
-        />
-
-        {/* Scrim — legibility over video */}
+        {/* Scrim — legibility over the particles */}
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(105deg,rgba(10,3,7,0.88)_0%,rgba(10,3,7,0.55)_55%,transparent_85%)]" />
         {/* Bottom fade to page bg */}
         <div aria-hidden="true" className="absolute bottom-0 left-0 right-0 -z-10 h-40 bg-[linear-gradient(to_bottom,transparent,#0d0508)]" />
