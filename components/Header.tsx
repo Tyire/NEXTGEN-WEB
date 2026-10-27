@@ -32,7 +32,7 @@ function ThemeButton({ className = "" }: { className?: string }) {
 
 export function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-5 md:pt-4">
+    <header className="site-header fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-5 md:pt-4">
       <div className="nav-bar site-pill mx-auto flex h-14 w-full max-w-6xl items-center justify-between gap-3 rounded-full pl-5 pr-1.5 md:h-[62px] md:pl-6 md:pr-2">
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- plain <a> by design: nav must work without hydration */}
         <a href="/" aria-label="NextGen Telecoms home" className="shrink-0">

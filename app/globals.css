@@ -27,8 +27,8 @@
   --color-brand-orange: var(--accent-text);
   --color-brand-amber: var(--accent-text);
   --color-brand: var(--accent);
-  --font-display: var(--font-serif), "Times New Roman", Georgia, serif;
-  --font-sans: var(--font-geist), "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-dm), "Segoe UI", system-ui, sans-serif;
+  --font-sans: var(--font-dm), "Segoe UI", system-ui, sans-serif;
   --radius: 22px;
 }
 
@@ -93,7 +93,7 @@ html {
   scroll-behavior: smooth;
   background: var(--color-ink);
 }
-html.lenis { height: auto; }
+html.lenis { height: auto; scroll-behavior: auto !important; } /* Mo'Afrique #1: native smooth fights Lenis */
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 
 body {
@@ -118,17 +118,21 @@ a, button, [role="button"], select, summary, label {
 }
 
 /* ── Typography ─────────────────────────────────────────────────────── */
-/* Display = editorial serif, ALWAYS regular weight (it ships one weight; no
-   faux bold). This rule is unlayered, so it beats Tailwind's font-bold /
-   font-extrabold utilities on the same element by design. */
+/* Display = DM Sans semibold, tight, Hostinger-style. Unlayered on purpose:
+   it beats Tailwind's font-bold / font-extrabold utilities, so every heading
+   on the site lands on one consistent weight. */
 .display {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-synthesis: none;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
   text-wrap: balance;
 }
+/* Calm, zoomed-out scale (Modish #6 — "the way Mo'Afrique looks zoomed out").
+   One place caps every heading, whatever size utility the markup carries. */
+h1.display { font-size: clamp(2.35rem, 1.55rem + 3.4vw, 4rem); line-height: 1.04; }
+h2.display { font-size: clamp(1.85rem, 1.45rem + 1.6vw, 2.5rem); line-height: 1.1; }
+h3.display { font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.35rem); line-height: 1.25; letter-spacing: -0.02em; }
 /* Tiny uppercase labels that borrowed .display for weight stay sans. */
 .display.uppercase {
   font-family: var(--font-sans);
@@ -157,15 +161,13 @@ a, button, [role="button"], select, summary, label {
   flex: none;
 }
 
-/* The accent moment in a headline: one italic serif word or line, in accent.
+/* The accent moment in a headline: one word or line, in accent colour only.
    Legacy `.text-flow` (was an animated gradient) and any span colored with a
    legacy brand token inside a heading both resolve to this. */
 .text-flow,
 .accent-word,
 :is(h1, h2, h3) :is(span, em)[class*="color-brand"] {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 400;
+  font-style: normal;
   color: var(--accent-text);
   background: none;
   -webkit-text-fill-color: currentColor;
@@ -181,8 +183,8 @@ a, button, [role="button"], select, summary, label {
 /* Giant ghost word behind sections — a faint hairline, purely decorative. */
 .ghost {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.04em;
   color: transparent;
   -webkit-text-stroke: 1px var(--color-hairline);
   user-select: none;
@@ -469,6 +471,37 @@ html[data-at-top]:not([data-theme="dark"]) .nav-bar img[src="/brand/logo-full-da
   color-scheme: dark;
 }
 
+/* Header tuck (Mo'Afrique #10) — never while the menu is open. */
+.site-header { transition: transform 0.45s var(--ease-out); }
+html[data-header-tucked]:not([data-menu-open]) .site-header { transform: translateY(-130%); }
+/* Menu open: the pill goes clear over the black sheet so the X sits on it. */
+html[data-menu-open] .site-pill { background: transparent; border-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+html[data-menu-open] .nav-bar { --color-fg: #ffffff; --color-fg-muted: rgba(255, 255, 255, 0.78); --color-hairline: rgba(255, 255, 255, 0.22); }
+html[data-menu-open]:not([data-theme="dark"]) .nav-bar img[src="/brand/logo-full.png"] { display: none; }
+html[data-menu-open]:not([data-theme="dark"]) .nav-bar img[src="/brand/logo-full-dark.png"] { display: block; }
+
+/* Rising glow (library #15): the accent's one ambient appearance, at the
+   foot of a true-black band. */
+.rising-glow { position: absolute; inset: auto 0 0 0; height: 70%; pointer-events: none;
+  background: radial-gradient(55% 70% at 50% 100%, rgba(255, 107, 44, 0.3), transparent 70%); }
+
+/* Footer links: hairline underline draws in on hover (library #14). */
+.footer-link { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.35s var(--ease-out), color 0.2s ease; }
+@media (hover: hover) { .footer-link:hover { background-size: 100% 1px; } }
+
+/* Split-letter wordmark rise (library #21). Animation with fill-mode
+   backwards (not a transition) so the hover lift still works afterwards. */
+.footer-word { display: flex; overflow: hidden; line-height: 0.82; }
+.footer-word span { display: inline-block; transition: transform 0.4s var(--ease-out), color 0.3s ease; }
+html.js .footer-word:not(.is-in) span { transform: translateY(108%); opacity: 0; }
+.footer-word.is-in span { animation: word-rise 1.1s cubic-bezier(0.22, 1, 0.36, 1) backwards; animation-delay: calc(0.18s + var(--i) * 0.08s); }
+@keyframes word-rise { from { transform: translateY(108%); opacity: 0; } }
+@media (hover: hover) { .footer-word span:hover { transform: translateY(-0.08em); color: var(--accent); } }
+@media (prefers-reduced-motion: reduce) {
+  html.js .footer-word:not(.is-in) span { transform: none; opacity: 1; }
+  .footer-word.is-in span { animation: none; }
+}
+
 /* The action bar steps aside while the phone menu is open. */
 .action-bar { transition: transform 0.25s var(--ease-out), opacity 0.2s ease; }
 html[data-menu-open] .action-bar { transform: translateY(120%); opacity: 0; }
@@ -577,7 +610,7 @@ html[data-theme-switching] *::after { transition: none !important; }
 /* ── Legal document prose ───────────────────────────────────────────── */
 .legal-prose h2 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 600;
   font-size: 1.6rem;
   margin-top: 2.5rem;
 }

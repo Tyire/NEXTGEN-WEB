@@ -1,6 +1,7 @@
 import { Logo } from "./Logo";
 import { Container, Arrow } from "./ui";
 import { InstallPrompt } from "./InstallPrompt";
+import { FooterWordmark } from "./FooterWordmark";
 import { site, nav, footerLinks, services, coverageZones, waLink } from "@/lib/site";
 
 const year = new Date().getFullYear();
@@ -8,7 +9,7 @@ const year = new Date().getFullYear();
 /** Server component, plain anchors — renders complete without any JS. */
 export function Footer() {
   return (
-    // data-theme="dark" scopes the dark tokens: the footer is always ink navy
+    // data-theme="dark" scopes the dark tokens: the footer is always true black
     <footer data-theme="dark" className="relative overflow-hidden bg-[var(--color-void)] text-[var(--color-fg)]">
       {/* Editorial sign-off band */}
       <Container className="relative border-b border-[var(--color-hairline)] pb-12 pt-16 md:pb-16 md:pt-24">
@@ -26,10 +27,7 @@ export function Footer() {
         </div>
       </Container>
       <Container className="relative py-14 md:py-20">
-        <span aria-hidden="true" className="ghost absolute -top-4 left-0 text-[22vw] opacity-40 md:text-[13rem]">
-          NEXTGEN
-        </span>
-
+        
         <div className="relative grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- plain <a> by design: nav must work without hydration */}
@@ -84,13 +82,13 @@ export function Footer() {
             <ul className="grid gap-2.5 text-sm">
               {nav.map((n) => (
                 <li key={n.href}>
-                  <a href={n.href} className="text-[var(--color-fg-muted)] transition-colors hover:text-[var(--color-fg)]">
+                  <a href={n.href} className="footer-link text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">
                     {n.label}
                   </a>
                 </li>
               ))}
               <li>
-                <a href={site.selfcare.login} target="_blank" rel="noopener noreferrer" className="text-[var(--color-fg-muted)] transition-colors hover:text-[var(--color-fg)]">
+                <a href={site.selfcare.login} target="_blank" rel="noopener noreferrer" className="footer-link text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">
                   Customer Login
                 </a>
               </li>
@@ -154,6 +152,10 @@ export function Footer() {
           </a>
         </div>
       </Container>
+      <div aria-hidden="true" className="rising-glow" />
+      <div className="relative overflow-hidden px-3 md:px-5">
+        <FooterWordmark />
+      </div>
     </footer>
   );
 }
