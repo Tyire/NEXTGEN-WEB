@@ -4,6 +4,7 @@ import { PageHero } from "@/components/sections/PageHero";
 import { CloudProductGrid } from "@/components/sections/CloudProductGrid";
 import { CloudReasons } from "@/components/sections/CloudReasons";
 import { CloudHowItWorks } from "@/components/sections/CloudHowItWorks";
+import { ParticleField } from "@/components/sections/ParticleField";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { CloudWaitlistForm } from "@/components/CloudWaitlistForm";
 import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/JsonLd";
@@ -86,7 +87,9 @@ export default function CloudPage() {
       </section>
 
       <section className="relative overflow-hidden py-20 md:py-28">
-        <Container>
+        {/* Ambient "network" backdrop — fits the connectivity theme, quiet enough not to fight the content above it. */}
+        <ParticleField density={2.5} pull={140} className="opacity-40" />
+        <Container className="relative">
           <SectionHead
             eyebrow="How it works"
             title={<>Three steps. No dashboards to learn.</>}
