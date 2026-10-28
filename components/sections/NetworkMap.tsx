@@ -13,7 +13,7 @@ const nodes = [
 export function NetworkMap() {
   return (
     <section className="cinema-dark relative overflow-hidden py-20 md:py-28" aria-labelledby="network-map-title">
-      <div aria-hidden="true" className="blob absolute -left-24 -top-24 h-96 w-96" style={{ "--blob-c": "rgba(212,168,67,0.12)" } as React.CSSProperties} />
+      <div aria-hidden="true" className="blob absolute -left-24 -top-24 h-96 w-96" style={{ "--blob-c": "rgba(255,255,255,0.03)" } as React.CSSProperties} />
       <Container className="relative">
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
           <div className="sr">
@@ -43,18 +43,18 @@ export function NetworkMap() {
                   <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.045)" />
                 </pattern>
                 <radialGradient id="network-glow">
-                  <stop stopColor="#d4a843" stopOpacity="0.3" />
-                  <stop offset="1" stopColor="#d4a843" stopOpacity="0" />
+                  <stop stopColor="#ff6b2c" stopOpacity="0.22" />
+                  <stop offset="1" stopColor="#ff6b2c" stopOpacity="0" />
                 </radialGradient>
               </defs>
               <rect width="520" height="420" fill="url(#network-grid)" />
-              <text x="32" y="48" fill="#d4a843" fontSize="12" letterSpacing="3">LAGOS / FIBER COVERAGE</text>
-              <path d="M 30 345 Q 150 310 260 355 T 490 325" fill="none" stroke="rgba(212,168,67,0.18)" strokeWidth="2" />
-              <path className="network-link" d="M 75 295 L 125 195 L 250 245 L 415 150 M 250 245 L 345 300 L 415 150" fill="none" stroke="#d4a843" strokeOpacity="0.65" strokeWidth="2" />
+              <text x="32" y="48" fill="rgba(255,255,255,0.5)" fontSize="12" letterSpacing="3">LAGOS / FIBER COVERAGE</text>
+              <path d="M 30 345 Q 150 310 260 355 T 490 325" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="2" />
+              <path className="network-link" d="M 75 295 L 125 195 L 250 245 L 415 150 M 250 245 L 345 300 L 415 150" fill="none" stroke="#ffffff" strokeOpacity="0.45" strokeWidth="2" />
               {nodes.map(({ label, x, y }) => (
                 <g key={label}>
                   <circle cx={x} cy={y} r="32" fill="url(#network-glow)" />
-                  <circle cx={x} cy={y} r="15" fill="none" stroke="#d4a843" strokeOpacity="0.35" />
+                  <circle cx={x} cy={y} r="15" fill="none" stroke="#ffffff" strokeOpacity="0.25" />
                   <circle cx={x} cy={y} r="6" fill="var(--color-brand-orange)" />
                   <circle cx={x} cy={y} r="2" fill="white" />
                   <text x={x + 22} y={y + 5} fill="#eef1f8" fontSize="16" fontWeight="600">{label}</text>

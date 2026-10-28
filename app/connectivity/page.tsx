@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container, Button, Arrow, SectionHead } from "@/components/ui";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { LightSpeed } from "@/components/sections/LightSpeed";
 import { BreadcrumbJsonLd, ServiceJsonLd } from "@/components/JsonLd";
 import { site, speedTiers, services } from "@/lib/site";
 
@@ -33,10 +34,10 @@ export default function ConnectivityPage() {
         video="/videos/banner-connectivity.vid"
         ghost="FIBER"
       >
-        <Button href={site.selfcare.onboard} external>
+        <Button variant="accent" href={site.selfcare.onboard} external>
           Check Coverage <Arrow />
         </Button>
-        <a href="/plans" className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10">
+        <a href="/plans" className="group btn btn-ghost-light">
           See plans <Arrow />
         </a>
       </PageHero>
@@ -108,7 +109,7 @@ export default function ConnectivityPage() {
                     {t.tier === "business" ? (
                       <a
                         href="/contact"
-                        className="group/cta mt-6 inline-flex items-center gap-2 rounded-full border-2 border-[var(--color-hairline)] px-6 py-3 text-sm font-bold text-[var(--color-fg)] transition-colors hover:border-[var(--color-brand-orange)]"
+                        className="group btn btn-ghost mt-6"
                       >
                         Talk to sales <Arrow />
                       </a>
@@ -117,7 +118,7 @@ export default function ConnectivityPage() {
                         href={site.selfcare.onboard}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group/cta grad-sunset mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold text-white transition-transform duration-300 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97]"
+                        className="group btn btn-ink mt-6"
                       >
                         Subscribe to {t.name} <Arrow />
                       </a>
@@ -163,6 +164,21 @@ export default function ConnectivityPage() {
               <li><strong className="text-[var(--color-fg)]">For {svc.audience.join(", ").toLowerCase()}.</strong> {svc.benefit}</li>
             </ul>
           </div>
+        </Container>
+      </section>
+
+      {/* Light speed — the one line this page exists to say. */}
+      <section data-theme="dark" className="relative isolate overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <LightSpeed speed={2.2} particleCount={380} />
+        </div>
+        <Container className="relative flex min-h-[40svh] flex-col items-center justify-center py-20 text-center md:py-28">
+          <p className="eyebrow mb-4 text-white/70">GPON fiber</p>
+          <h2 className="display text-4xl font-extrabold text-white sm:text-5xl md:text-6xl">
+            Speed isn&rsquo;t a feature.
+            <br />
+            <span className="text-flow">It&rsquo;s the whole network.</span>
+          </h2>
         </Container>
       </section>
 

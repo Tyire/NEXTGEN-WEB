@@ -3,9 +3,11 @@ import { site } from "@/lib/site";
 // ponytail: static-export site has no server. Form composes a mailto so the
 // user's own mail client sends it. Now a SERVER component (uncontrolled
 // inputs) — the form submits natively with zero JavaScript.
-const inputCls =
+// Shared with other mailto-based forms (e.g. CloudWaitlistForm) so every form
+// on the site looks and behaves the same way.
+export const inputCls =
   "w-full rounded-2xl border-2 border-[var(--color-hairline)] bg-[var(--color-ink)] px-4 py-3.5 text-sm text-[var(--color-fg)] placeholder:text-[var(--color-fg-faint)] focus-visible:border-[var(--color-brand-orange)]";
-const labelCls = "eyebrow mb-2 block";
+export const labelCls = "eyebrow mb-2 block";
 
 export function ContactForm() {
   return (
@@ -46,7 +48,7 @@ export function ContactForm() {
       </div>
       <button
         type="submit"
-        className="grad-sunset mt-1 inline-flex w-fit items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-white shadow-[0_12px_32px_-12px_rgba(255,60,44,0.6)] transition-transform duration-200 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97]"
+        className="btn btn-accent mt-1 w-full sm:w-fit"
       >
         Send Enquiry
       </button>
@@ -57,7 +59,7 @@ export function ContactForm() {
   );
 }
 
-function Field({
+export function Field({
   label,
   name,
   type = "text",

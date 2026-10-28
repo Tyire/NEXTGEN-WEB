@@ -40,10 +40,29 @@ export const nav = [
   { label: "Fiber Internet", href: "/connectivity" },
   { label: "Voice", href: "/voice" },
   { label: "Enterprise", href: "/enterprise" },
+  { label: "Cloud", href: "/cloud" },
   { label: "Plans", href: "/plans" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
+
+// NextGen Cloud subpages aren't in the main nav (only the /cloud hub is) but
+// still need sitemap entries — kept here so sitemap.ts has one place to read.
+export const cloudRoutes = [
+  "/cloud",
+  "/cloud/hosting",
+  "/cloud/email",
+  "/cloud/vps",
+  "/cloud/build",
+  "/cloud/enterprise",
+  "/cloud/ai-builder",
+  "/cloud/seo-scan",
+] as const;
+
+/** wa.me deep link with prefilled, URL-encoded text. Shared by every WhatsApp CTA. */
+export function waLink(text: string) {
+  return `https://wa.me/${site.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(text)}`;
+}
 
 // Secondary links — footer only.
 export const footerLinks = [

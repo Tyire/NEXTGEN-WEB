@@ -15,17 +15,30 @@ businesses into subscribers. Tone: confident, premium, human, conversion-focused
 **Removed entirely: IPTV** and anything not live on nextgen.ng today. Why: audit scope —
 the site must reflect only current, sellable services.
 
-## Design system
-- **Light theme is DEFAULT** (bright, professional, ngcomnetworks.com-level clarity — borrow
-  structure, not visuals). **Dark theme = toggle** (near-black #0E1211, editorial serif).
-  Why: default must feel trustworthy/bright to Nigerian ISP shoppers; dark is a preference.
-- Theme toggle in header: persisted (localStorage), keyboard-accessible, aria-labelled,
-  no-flash on load. Both themes AA-contrast.
-- Accent (both themes): real NextGen orange→red gradient mark (#FF1F4D→#FF6B2C→#FFA70F).
-  Isolated icon on dark surfaces, full logo on light.
-- Fonts: Fraunces (display serif) · Hanken Grotesk (body) · JetBrains Mono (labels).
-- Hero: ONE speed-first value prop + high-contrast "Check Coverage" CTA + human image.
-- Trust strip: 99.9% uptime · 2.5 Gbps top tier · 3-day install.
+## Design system — "Signal" (Oct 2026, PR #2; supersedes the gradient/serif look)
+Modelled on modishformals.com + moafrique.com (owner: "pick a lot from Modish and Mo'Afrique").
+- **Canvas:** light = true white #fff, dark = true black #000 (toggle, light default,
+  persisted, no-flash). Hairline borders instead of shadows. Heroes, CTA band, footer and
+  the cinematic sections are always black (`.on-dark`). Tokens live in `app/globals.css`.
+- **Font: DM Sans everywhere** (Hostinger's font; owner's default for formal sites —
+  serifs are for fashion only). Calm scale enforced in CSS: h1 ≤ 4rem, h2 ≤ 2.5rem.
+  Why: Instrument Serif was rejected as "not professional for an ISP".
+- **Accent rule:** NextGen orange is a signal, never a gradient or wash — eyebrow rule,
+  one coloured word per headline, link underlines, ONE conversion button per view
+  (black text on orange, 6.7:1), focus rings, live dots, rising glow on black bands.
+  Accent text on white is #d2400d (AA); on black #ff6b2c.
+- **Buttons:** 48px hairline pills (`.btn-*`); `.cta-pair` keeps pairs on one row at 375px.
+- **Header:** floating glass pill, transparent over heroes, tucks on scroll down.
+  Phone menu = two bars → X, true-black sheet opening as a circle from the button,
+  bottom Close + contact icons (`components/MenuMorph.tsx`). Phone action bar
+  (WhatsApp + Check coverage).
+- **Motion:** theme switch is a View Transitions curtain (dark falls / light rises);
+  GSAP magnetic pull on 4 primary CTAs (mouse only, lazy); Motion for the menu and globe.
+  All honour `prefers-reduced-motion`; hero H1s slide but never start invisible (LCP).
+- **Deps added:** `motion@12`, `cobe@2` (backbone globe). Trade-off: phone menu needs JS
+  (footer links still cover navigation without it).
+- Hero: speed-first value prop + "Check coverage" CTA. Trust strip: 99.9% uptime ·
+  3-day install · 24/7 NOC.
 
 ## Page structure
 - `/` Home — hero, trust strip, 3 service cards, **Our Plans (pricing)**, why-NextGen,

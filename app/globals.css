@@ -3,70 +3,88 @@
 /* Manual dark mode driven by [data-theme="dark"] on <html> (not prefers-color-scheme). */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-/* ══ NEXTGEN — "INK & SIGNAL" design system ═══════════════════════════
-   Professional telecom: cool neutral surfaces grounded in deep ink navy,
-   the brand orange demoted to a single disciplined accent (buttons, edge
-   lines, links). Archivo display + Inter body.
+/* ══ NEXTGEN — "SIGNAL" design system ═════════════════════════════════
+   Editorial telecom. True white / true black canvas, hairlines instead of
+   shadows, an editorial serif for display, a quiet sans for everything else.
+
+   ACCENT RULE (the one thing to get right): NextGen orange is a signal,
+   not a surface. It appears as —
+     · the short rule before a section eyebrow,
+     · one italic word or line per headline,
+     · the underline of a text-link CTA,
+     · the single conversion button per view (black text on orange),
+     · focus rings, selection, live/status dots, the featured plan's edge.
+   Never as a gradient, a background wash, or a glow.
 
    IRON RULE: no content is EVER hidden waiting for JavaScript. Scroll
-   reveals are CSS scroll-driven animations behind @supports — browsers
-   without support simply show everything. JS only adds polish.        */
+   reveals are CSS scroll-driven animations behind @supports.          */
 
-/* Constant tokens registered with Tailwind (brand colors, fonts) — NOT theme-flipping. */
+/* Constant tokens registered with Tailwind — NOT theme-flipping. The three
+   legacy brand names all resolve to the one accent family so older
+   `text-[var(--color-brand-*)]` usages inherit the new discipline. */
 @theme {
-  --color-brand-red: #ff1f4d;
-  --color-brand-orange: #ff6b2c;
-  --color-brand-amber: #ffa70f;
-  --color-brand: #ff5a2c;
-  --font-display: var(--font-archivo), "Arial", system-ui, sans-serif;
-  --font-sans: var(--font-inter), "Segoe UI", system-ui, sans-serif;
-  --radius: 20px;
+  --color-brand-red: var(--accent-text);
+  --color-brand-orange: var(--accent-text);
+  --color-brand-amber: var(--accent-text);
+  --color-brand: var(--accent);
+  --font-display: var(--font-dm), "Segoe UI", system-ui, sans-serif;
+  --font-sans: var(--font-dm), "Segoe UI", system-ui, sans-serif;
+  --radius: 22px;
 }
 
 /* Theme-flipping semantic tokens — read via var(--color-*) in arbitrary utilities. */
 :root {
-  /* LIGHT — warm neutral paper, blue-navy ink, orange reserved for accents */
-  --color-ink: #f6f5f0;        /* warm paper background (no teal cast) */
-  --color-ink-glass: rgba(246, 245, 240, 0.92);
-  --color-void: #ecebe4;       /* quiet neutral bands */
-  --color-surface: #fdfcf7;    /* cards — warm off-white */
-  --color-surface-2: #efede5;
-  --color-hairline: #ddd9cd;
-  --color-fg: #101d30;         /* blue-navy ink (unchanged from prior) */
-  --color-fg-muted: #51617a;
-  --color-fg-faint: #8b8a83;
-  --color-success: #14915c;
-  --shadow-pop: 0 24px 48px -24px rgba(11, 28, 51, 0.22);
-  color-scheme: light;
+  /* LIGHT — true white */
+  --color-ink: #ffffff;                       /* page canvas */
+  --color-ink-glass: rgba(255, 255, 255, 0.78);
+  --color-void: #ffffff;                      /* bands = canvas; separated by hairlines */
+  --color-surface: #ffffff;                   /* cards: white + hairline */
+  --color-surface-2: #f5f5f5;                 /* chips, inputs, quiet fills */
+  --color-hairline: rgba(0, 0, 0, 0.1);
+  --color-fg: #0a0a0a;
+  --color-fg-muted: #525252;                  /* 7.8:1 on white */
+  --color-fg-faint: #737373;                  /* 4.7:1 on white */
+  --color-success: #12855a;
+  --shadow-pop: 0 1px 0 rgba(0, 0, 0, 0.04);
 
-  /* Paired solid-action tokens — blue-navy action on warm paper */
-  --action-bg: #101d30;
-  --action-fg: #fdfcf7;
-  --action-hover: #1a2c48;
+  --accent: #ff5a1f;        /* fills, rules, dots — black text on it = 6.7:1 */
+  --accent-text: #d2400d;   /* accent as TEXT on white — 4.7:1, AA at any size */
+  --on-accent: #000000;
+
+  --action-bg: #0a0a0a;
+  --action-fg: #ffffff;
+  --action-hover: #262626;
+
+  color-scheme: light;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --grad-sunset: linear-gradient(115deg, #ff1f4d, #ff6b2c 48%, #ffa70f);
+  /* Legacy name kept so nothing references an undefined var — now a flat fill. */
+  --grad-sunset: linear-gradient(var(--accent), var(--accent));
 }
 
 [data-theme="dark"] {
-  /* DARK — plum-black night market (user-preferred over navy) */
-  --color-ink: #180b12;
-  --color-ink-glass: rgba(24, 11, 18, 0.9);
-  --color-void: #0f050b;
-  --color-surface: #251320;
-  --color-surface-2: #2f1a29;
-  --color-hairline: #40263a;
-  --color-fg: #fff3ea;
-  --color-fg-muted: #c9b0ac;
-  --color-fg-faint: #91797a;
+  /* DARK — true black */
+  --color-ink: #000000;
+  --color-ink-glass: rgba(0, 0, 0, 0.72);
+  --color-void: #000000;
+  --color-surface: #0a0a0a;
+  --color-surface-2: #141414;
+  --color-hairline: rgba(255, 255, 255, 0.12);
+  --color-fg: #fafafa;
+  --color-fg-muted: #a3a3a3;                  /* 8.3:1 on black */
+  --color-fg-faint: #8f8f8f;                  /* 6.5:1 on black */
   --color-success: #3ecf8e;
-  --shadow-pop: 0 24px 56px -20px rgba(0, 0, 0, 0.5);
+  --shadow-pop: 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  --accent: #ff6b2c;        /* 7.4:1 on black */
+  --accent-text: #ff6b2c;
+
+  --action-bg: #fafafa;
+  --action-fg: #000000;
+  --action-hover: #e5e5e5;
+
   color-scheme: dark;
-  /* Inverted solid-action tokens so light buttons read on plum ground */
-  --action-bg: #fff3ea;
-  --action-fg: #180b12;
-  --action-hover: #ffe0c9;
 }
 
 * { border-color: var(--color-hairline); }
@@ -75,287 +93,437 @@ html {
   scroll-behavior: smooth;
   background: var(--color-ink);
 }
-/* When Lenis drives scrolling (desktop), native smooth would double-ease. */
-html.lenis { height: auto; }
+html.lenis { height: auto; scroll-behavior: auto !important; } /* Mo'Afrique #1: native smooth fights Lenis */
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 
 body {
   background: var(--color-ink);
   color: var(--color-fg);
   font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Snappier taps: kill the 300ms double-tap delay + intentional tap highlight. */
 a, button, [role="button"], select, summary, label {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
+/* iOS zooms any field under 16px on focus — keep them at 16px on phones. */
+@media (max-width: 767px) {
+  input, select, textarea { font-size: 16px !important; }
+}
+
 /* ── Typography ─────────────────────────────────────────────────────── */
+/* Display = DM Sans semibold, tight, Hostinger-style. Unlayered on purpose:
+   it beats Tailwind's font-bold / font-extrabold utilities, so every heading
+   on the site lands on one consistent weight. */
 .display {
   font-family: var(--font-display);
-  letter-spacing: -0.015em;
-  line-height: 1.02;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
   text-wrap: balance;
 }
+/* Calm, zoomed-out scale (Modish #6 — "the way Mo'Afrique looks zoomed out").
+   One place caps every heading, whatever size utility the markup carries. */
+h1.display { font-size: clamp(2.35rem, 1.55rem + 3.4vw, 4rem); line-height: 1.04; }
+h2.display { font-size: clamp(1.85rem, 1.45rem + 1.6vw, 2.5rem); line-height: 1.1; }
+h3.display { font-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.35rem); line-height: 1.25; letter-spacing: -0.02em; }
+/* Tiny uppercase labels that borrowed .display for weight stay sans. */
+.display.uppercase {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
 .eyebrow {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-weight: 500;
-  font-size: 0.66rem;
-  letter-spacing: 0.22em;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-fg-faint);
 }
-/* Giant ghost word behind sections — outline only, purely decorative. */
+/* Section eyebrows get the accent rule (via the <Eyebrow> component). */
+.eyebrow-rule {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.eyebrow-rule::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  flex: none;
+}
+
+/* The accent moment in a headline: one word or line, in accent colour only.
+   Legacy `.text-flow` (was an animated gradient) and any span colored with a
+   legacy brand token inside a heading both resolve to this. */
+.text-flow,
+.accent-word,
+:is(h1, h2, h3) :is(span, em)[class*="color-brand"] {
+  font-style: normal;
+  color: var(--accent-text);
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  text-shadow: none;
+  filter: none;
+  animation: none;
+}
+/* On always-dark surfaces (heroes, dark bands) the bright accent reads better. */
+.on-dark .text-flow,
+.on-dark .accent-word,
+[data-theme="dark"] .text-flow { color: #ff6b2c; }
+
+/* Giant ghost word behind sections — a faint hairline, purely decorative. */
 .ghost {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
+  letter-spacing: -0.04em;
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--color-hairline);
+  -webkit-text-stroke: 1px var(--color-hairline);
   user-select: none;
   pointer-events: none;
   white-space: nowrap;
   line-height: 1;
+  opacity: 0.7;
 }
 
-/* ── Brand surfaces ─────────────────────────────────────────────────── */
-.grad-sunset { background-image: var(--grad-sunset); }
-.grad-border {
-  border: 2px solid transparent;
-  background:
-    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
-    var(--grad-sunset) border-box;
+/* ── Buttons — pill, hairline, one-line labels (the Modish fix) ─────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3rem;              /* 48px — thumb-safe */
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;          /* 15px */
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background-color 0.25s var(--ease-out), color 0.25s var(--ease-out),
+    border-color 0.25s var(--ease-out), transform 0.2s var(--ease-out);
 }
-/* Hero text legibility over the un-scrimmed video. */
-.hero-pop { text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.6); }
+.btn:active { transform: scale(0.97); }
+.btn-accent { background: var(--accent); color: var(--on-accent); }
+.btn-ink { background: var(--action-bg); color: var(--action-fg); }
+.btn-ghost { background: transparent; color: var(--color-fg); border-color: color-mix(in srgb, var(--color-fg) 28%, transparent); }
+/* Always-dark contexts (heroes, dark bands) */
+.btn-white { background: #ffffff; color: #000000; }
+.btn-ghost-light { background: transparent; color: #ffffff; border-color: rgba(255, 255, 255, 0.45); }
+@media (hover: hover) and (pointer: fine) {
+  .btn-accent:hover { background: color-mix(in srgb, var(--accent) 86%, #000); }
+  .btn-ink:hover { background: var(--action-hover); }
+  .btn-ghost:hover { border-color: var(--color-fg); background: color-mix(in srgb, var(--color-fg) 4%, transparent); }
+  .btn-white:hover { background: #e5e5e5; }
+  .btn-ghost-light:hover { border-color: #ffffff; background: rgba(255, 255, 255, 0.08); }
+}
+/* Two buttons side by side: share the row, never squish, wrap only below ~360px. */
+.cta-pair { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.cta-pair > * { flex: 1 1 auto; }
+/* Phones: slimmer side padding so a pair fits one row at 375px. */
+@media (max-width: 639px) { .cta-pair > .btn { padding: 0 1rem; gap: 0.4rem; } }
+@media (min-width: 640px) { .cta-pair > * { flex: 0 0 auto; } }
+
+/* Text-link CTA: tracked caps with a 1px accent underline (the Moafrique link). */
+.link-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-fg);
+}
+.link-cta::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease-out);
+}
+@media (hover: hover) { .link-cta:hover::after { transform: scaleX(0.4); } }
+
+/* ── Legacy brand surfaces, neutralised ─────────────────────────────── */
+/* Was the orange gradient fill on ~20 hand-rolled CTAs and badges. Now a
+   calm inverse-ink fill; the unlayered `color` beats their `text-white`. */
+.grad-sunset { background: var(--action-bg); color: var(--action-fg); background-image: none; }
+.on-dark .grad-sunset { background: #ffffff; color: #000000; }
+/* Was a gradient ring on featured cards — now a single accent hairline. */
+.grad-border { border: 1px solid var(--accent); }
+.hero-pop { text-shadow: 0 1px 24px rgba(0, 0, 0, 0.35); }
 
 .grain::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.04;
   z-index: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Pre-blurred radial "energy blob" — NO filter:blur (mobile-GPU safe). */
 .blob {
   position: absolute;
   border-radius: 9999px;
   pointer-events: none;
-  background: radial-gradient(closest-side, var(--blob-c, rgba(255, 107, 44, 0.35)), transparent 70%);
+  background: radial-gradient(closest-side, var(--blob-c, rgba(255, 255, 255, 0.06)), transparent 70%);
 }
 
-/* ── Motion (all compositor-only: opacity/transform) ────────────────── */
-/* Hero entrance — ENDS VISIBLE, safe everywhere. Stagger via animation-delay. */
+/* ── Motion (compositor-only: opacity/transform) ────────────────────── */
 @keyframes rise-in {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: none; }
 }
-.rise { animation: rise-in 0.9s var(--ease-out) both; }
+.rise { animation: rise-in 0.8s var(--ease-out) both; }
 
-/* Scroll reveals — CSS scroll-driven only. Unsupported browsers (and any
-   JS failure — there IS no JS here) simply show the content. */
 @supports (animation-timeline: view()) {
   @keyframes sr-in {
-    from { opacity: 0.001; transform: translateY(36px); }
+    from { opacity: 0.001; transform: translateY(28px); }
     to   { opacity: 1; transform: none; }
   }
   .sr {
     animation: sr-in 1ms linear both;
     animation-timeline: view();
-    animation-range: entry 5% entry 45%;
+    animation-range: entry 5% entry 40%;
   }
   @keyframes sr-pop {
-    from { opacity: 0.001; transform: translateY(28px) scale(0.96); }
+    from { opacity: 0.001; transform: translateY(22px); }
     to   { opacity: 1; transform: none; }
   }
   .sr-pop {
     animation: sr-pop 1ms linear both;
     animation-timeline: view();
-    animation-range: entry 5% entry 40%;
+    animation-range: entry 5% entry 35%;
   }
 }
 
-/* Slow-drifting glow (transform-only). */
-@keyframes ng-orbit {
-  to { transform: rotate(1turn) translateX(108px); }
-}
 @keyframes drift {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
   50%      { transform: translate3d(4%, -5%, 0) scale(1.12); }
 }
 .drift { animation: drift 14s ease-in-out infinite; }
 
-/* Hero scroll-indicator dot */
 @keyframes scroll-dot {
   0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.9; }
   50%      { transform: translateX(-50%) translateY(20px); opacity: 0.2; }
 }
 
-/* Animated flowing gradient on text (hero accent word). */
-.text-flow {
-  background-image: linear-gradient(100deg, #ff1f4d, #ff6b2c 30%, #ffc14a 55%, #ff6b2c 80%, #ff1f4d);
-  background-size: 240% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  text-shadow: none;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.55));
-  animation: text-flow 6s linear infinite;
+/* Live/status dot — the only "glow" left, and it's tiny. */
+.live-dot {
+  position: relative;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
 }
-@keyframes text-flow { to { background-position: 240% center; } }
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: live-ping 2.4s var(--ease-out) infinite;
+}
+@keyframes live-ping { 0% { transform: scale(1); opacity: 0.55; } 100% { transform: scale(2.8); opacity: 0; } }
 
-/* ── Plans carousel (home) — CSS scroll-snap, swipe on touch. On hover-
-   capable devices the hovered card stays in focus while siblings soften.
-   Touch devices never get the blur (hover:hover guard). ─────────────── */
+/* ── Plans carousel (home) — CSS scroll-snap, swipe on touch ─────────── */
 .plans-carousel {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  /* top padding clears the floating "Most popular" badge (overflow-x clips y) */
   padding: 1.25rem 0.25rem 1.5rem;
   scrollbar-width: thin;
   scrollbar-color: var(--color-hairline) transparent;
 }
 .plans-carousel > li {
   scroll-snap-align: center;
-  flex: 0 0 min(85vw, 330px);
+  flex: 0 0 min(84vw, 330px);
 }
-/* Desktop pinned sweep (Cinema adds .is-pinned): the GSAP transform drives
-   the track, so native overflow/snap turn off. JS dead → class never added →
-   desktop falls back to the same native swipe carousel as touch. */
 .plans-carousel.is-pinned {
   overflow: visible;
   scroll-snap-type: none;
 }
 
-/* Card hover lift. */
+/* Card hover — hairline darkens, tiny lift. No shadows in this system. */
 .lift {
-  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out),
-    border-color 0.4s var(--ease-out);
+  transition: transform 0.35s var(--ease-out), border-color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out);
 }
-@media (hover: hover) {
-  .lift:hover { transform: translateY(-6px); box-shadow: var(--shadow-pop); }
+@media (hover: hover) and (pointer: fine) {
+  .lift:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--color-fg) 32%, transparent);
+  }
 }
 
-/* Featured-plan breathing glow — kept quiet. */
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 14px 44px -16px rgba(255, 90, 44, 0.28); }
-  50%      { box-shadow: 0 22px 64px -18px rgba(255, 90, 44, 0.42); }
-}
-.glow-pulse { animation: glow-pulse 3.6s ease-in-out infinite; }
+/* Was a breathing orange glow on the featured plan — retired. */
+.glow-pulse { animation: none; }
 
-/* ── Header: CSS-only mobile menu (checkbox hack — zero JS required) ── */
+/* ── Header: floating pill + CSS-only mobile menu (checkbox, zero JS) ── */
 #nav-open:checked ~ .nav-panel { grid-template-rows: 1fr; }
 .nav-panel {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.35s var(--ease-out);
 }
-/* visibility keeps collapsed links out of the tab order; it transitions
-   (delayed) so the close animation still plays. */
 .nav-panel > div { overflow: hidden; visibility: hidden; transition: visibility 0.35s; }
 #nav-open:checked ~ .nav-panel > div { visibility: visible; }
-/* Keyboard focus ring on the burger when the sr-only checkbox has focus. */
 #nav-open:focus-visible ~ div .burger {
-  outline: 2px solid var(--color-brand-orange);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
-/* Burger morphs to X when checked. */
-#nav-open:checked ~ div .burger .l1 { transform: translateY(7px) rotate(45deg); }
-#nav-open:checked ~ div .burger .l2 { opacity: 0; }
-#nav-open:checked ~ div .burger .l3 { transform: translateY(-7px) rotate(-45deg); }
+#nav-open:checked ~ div .burger .l1 { transform: translateY(3.5px) rotate(45deg); }
+#nav-open:checked ~ div .burger .l2 { transform: translateY(-3.5px) rotate(-45deg); }
 .burger .bl {
   display: block;
-  height: 2px;
-  width: 20px;
+  height: 1.5px;
+  width: 18px;
   border-radius: 2px;
   background: currentColor;
   transition: transform 0.3s var(--ease-out), opacity 0.2s ease;
 }
 .burger .bl + .bl { margin-top: 5px; }
 
-/* ── Transparent header at page top ───────────────────────────────────
-   JS (enhance script) sets html[data-at-top] while scrollY < 24. Every
-   page opens on a dark hero, so the bar goes transparent with white
-   foreground, then eases back to glass once scrolling starts.
-   No JS → attribute never set → header is always glass. */
-.site-header {
+/* The pill. Glass on the canvas; at the very top it sits over a dark hero,
+   so it goes dark glass with white foreground (data-at-top, set by JS). */
+.site-pill {
+  background: var(--color-ink-glass);
+  border: 1px solid var(--color-hairline);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  backdrop-filter: saturate(160%) blur(14px);
   transition: background-color 0.35s ease, border-color 0.35s ease;
 }
-html[data-at-top] .site-header {
-  background-color: transparent;
-  border-color: transparent;
-  backdrop-filter: none;
+html[data-at-top] .site-pill {
+  background: rgba(0, 0, 0, 0.22);
+  border-color: rgba(255, 255, 255, 0.16);
 }
-/* Scope the white foreground to the bar only — the dropdown panel keeps
-   normal theme colors so an opened menu stays readable. */
 html[data-at-top] .nav-bar {
   --color-fg: #ffffff;
-  --color-fg-muted: rgba(255, 255, 255, 0.82);
-  --color-hairline: rgba(255, 255, 255, 0.3);
-  --color-surface: rgba(255, 255, 255, 0.12);
+  --color-fg-muted: rgba(255, 255, 255, 0.78);
+  --color-hairline: rgba(255, 255, 255, 0.22);
+  --color-surface: rgba(255, 255, 255, 0.08);
 }
-/* Swap to the white wordmark while transparent in light theme. */
 html[data-at-top]:not([data-theme="dark"]) .nav-bar img[src="/brand/logo-full.png"] { display: none; }
 html[data-at-top]:not([data-theme="dark"]) .nav-bar img[src="/brand/logo-full-dark.png"] { display: block; }
+/* Active nav link: a small accent dot under it. */
+.nav-link { position: relative; }
+.nav-link[data-active]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--accent);
+}
 
-/* Theme toggle: CSS shows the right icon; a tiny inline script flips the attr. */
 [data-theme="dark"] .icon-moon { display: none; }
 .icon-sun { display: none; }
 [data-theme="dark"] .icon-sun { display: block; }
 
-/* ── Wash bands — light mode: pure clean white; dark mode: keeps deep tint ── */
+/* ── Bands — same canvas, separated by a hairline (editorial rhythm) ── */
 .wash {
   background: var(--color-ink);
+  border-top: 1px solid var(--color-hairline);
 }
-[data-theme="dark"] .wash {
-  --wash-base: #0f050b;
-  --wash-hot: rgba(255, 107, 44, 0.07);
-  --wash-warm: rgba(255, 31, 77, 0.04);
-  background-image:
-    radial-gradient(60% 90% at 85% 0%, var(--wash-hot) 0%, transparent 60%),
-    radial-gradient(50% 80% at 0% 100%, var(--wash-warm) 0%, transparent 55%),
-    linear-gradient(var(--wash-base), var(--wash-base));
-}
-/* Card top-edge sunset accent. The card's own rounded corners clip the
-   strip (overflow:hidden), so it always follows the card edge exactly —
-   a self-rounded strip can't match the 20px corner curve and juts out. */
-.edge-top { position: relative; overflow: hidden; }
-.edge-top::before {
-  content: "";
-  position: absolute;
-  inset: -1px -1px auto -1px;
-  height: 4px;
-  background-image: var(--grad-sunset);
+/* Was a gradient strip on card tops — retired for clean hairline cards. */
+.edge-top { position: relative; }
+
+/* Always-dark band in BOTH themes (heroes, CTA bands, footer). */
+.on-dark {
+  --color-ink: #000000;
+  --color-void: #000000;
+  --color-surface: #0a0a0a;
+  --color-surface-2: #141414;
+  --color-hairline: rgba(255, 255, 255, 0.12);
+  --color-fg: #fafafa;
+  --color-fg-muted: #a3a3a3;
+  --color-fg-faint: #8f8f8f;
+  --accent: #ff6b2c;
+  --accent-text: #ff6b2c;
+  --action-bg: #fafafa;
+  --action-fg: #000000;
+  --action-hover: #e5e5e5;
+  background: #000000;
+  color: #fafafa;
+  color-scheme: dark;
 }
 
-/* ── Scroll progress beam (GSAP scrubs scaleX; harmless static sliver without JS) ── */
+/* Header tuck (Mo'Afrique #10) — never while the menu is open. */
+.site-header { transition: transform 0.45s var(--ease-out); }
+html[data-header-tucked]:not([data-menu-open]) .site-header { transform: translateY(-130%); }
+/* Menu open: the pill goes clear over the black sheet so the X sits on it. */
+html[data-menu-open] .site-pill { background: transparent; border-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+html[data-menu-open] .nav-bar { --color-fg: #ffffff; --color-fg-muted: rgba(255, 255, 255, 0.78); --color-hairline: rgba(255, 255, 255, 0.22); }
+html[data-menu-open]:not([data-theme="dark"]) .nav-bar img[src="/brand/logo-full.png"] { display: none; }
+html[data-menu-open]:not([data-theme="dark"]) .nav-bar img[src="/brand/logo-full-dark.png"] { display: block; }
+
+/* Rising glow (library #15): the accent's one ambient appearance, at the
+   foot of a true-black band. */
+.rising-glow { position: absolute; inset: auto 0 0 0; height: 70%; pointer-events: none;
+  background: radial-gradient(55% 70% at 50% 100%, rgba(255, 107, 44, 0.3), transparent 70%); }
+
+/* Footer links: hairline underline draws in on hover (library #14). */
+.footer-link { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.35s var(--ease-out), color 0.2s ease; }
+@media (hover: hover) { .footer-link:hover { background-size: 100% 1px; } }
+
+/* Split-letter wordmark rise (library #21). Animation with fill-mode
+   backwards (not a transition) so the hover lift still works afterwards. */
+.footer-word { display: flex; overflow: hidden; line-height: 0.82; }
+.footer-word span { display: inline-block; transition: transform 0.4s var(--ease-out), color 0.3s ease; }
+html.js .footer-word:not(.is-in) span { transform: translateY(108%); opacity: 0; }
+.footer-word.is-in span { animation: word-rise 1.1s cubic-bezier(0.22, 1, 0.36, 1) backwards; animation-delay: calc(0.18s + var(--i) * 0.08s); }
+@keyframes word-rise { from { transform: translateY(108%); opacity: 0; } }
+@media (hover: hover) { .footer-word span:hover { transform: translateY(-0.08em); color: var(--accent); } }
+@media (prefers-reduced-motion: reduce) {
+  html.js .footer-word:not(.is-in) span { transform: none; opacity: 1; }
+  .footer-word.is-in span { animation: none; }
+}
+
+/* The action bar steps aside while the phone menu is open. */
+.action-bar { transition: transform 0.25s var(--ease-out), opacity 0.2s ease; }
+html[data-menu-open] .action-bar { transform: translateY(120%); opacity: 0; }
+
+/* Mobile bottom action bar clearance. */
+@media (max-width: 1023px) {
+  .has-action-bar { padding-bottom: calc(5.25rem + env(safe-area-inset-bottom)); }
+}
+
+/* ── Scroll progress — a 2px accent hairline ────────────────────────── */
 .progress-beam {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 60;
-  height: 3px;
-  background-image: var(--grad-sunset);
+  height: 2px;
+  background: var(--accent);
   transform-origin: 0 50%;
   transform: scaleX(0);
   pointer-events: none;
 }
 
-/* ── Preloader — "speed burst" curtain, 100% CSS lifecycle ────────────
-   Rendered by the server on EVERY page, but display:none unless the inline
-   <head> script sets html[data-boot] (first-EVER visit only — the flag lives
-   in localStorage so returning visitors never see it again).
-   The hide animation is pure CSS with a fixed delay, so even if every byte
-   of JS after <head> fails, the curtain ALWAYS lifts. */
+/* ── Preloader — first-ever visit only, 100% CSS lifecycle ─────────── */
 .preloader { display: none; }
 html[data-boot] .preloader {
   display: flex;
@@ -366,63 +534,71 @@ html[data-boot] .preloader {
   justify-content: center;
   flex-direction: column;
   gap: 1.4rem;
-  background: #14060e;
-  animation: preload-lift 0.75s var(--ease-in-out) 1.7s forwards;
-}
-html[data-boot] .preloader::after {
-  /* curved trailing edge that follows the curtain up */
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  height: 12vh;
-  background: #14060e;
-  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  background: #000000;
+  animation: preload-lift 0.75s var(--ease-in-out) 1.5s forwards;
 }
 @keyframes preload-lift {
-  to { transform: translateY(-114%); visibility: hidden; }
+  to { transform: translateY(-100%); visibility: hidden; }
 }
 .preloader .pl-logo {
-  width: 76px;
+  width: 64px;
   height: auto;
   animation: pl-pop 0.7s var(--ease-out) both;
 }
 @keyframes pl-pop {
-  from { opacity: 0; transform: scale(0.82) translateY(10px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: none; }
 }
-/* The "fiber beam": a gradient line that charges across, then bursts. */
 .preloader .pl-beam {
-  width: min(46vw, 240px);
-  height: 3px;
-  border-radius: 3px;
-  background-image: var(--grad-sunset);
+  width: min(40vw, 200px);
+  height: 1px;
+  background: var(--accent);
   transform-origin: 0 50%;
-  animation: pl-charge 1.3s var(--ease-in-out) 0.15s both;
+  animation: pl-charge 1.1s var(--ease-in-out) 0.15s both;
 }
 @keyframes pl-charge {
   0%   { transform: scaleX(0); }
-  70%  { transform: scaleX(1); }
-  100% { transform: scaleX(1); box-shadow: 0 0 24px 2px rgba(255, 107, 44, 0.8); }
+  100% { transform: scaleX(1); }
 }
 .preloader .pl-tag {
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-size: 0.62rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.7);
   animation: pl-pop 0.7s var(--ease-out) 0.35s both;
 }
 @media (prefers-reduced-motion: reduce) {
   html[data-boot] .preloader { display: none; }
 }
 
+/* ── Theme switch: circular reveal (View Transitions) ───────────────── */
+/* Kill the default crossfade — the clip-path circle (set from the layout
+   script) is the whole transition. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(root) { z-index: 2; }
+/* Freeze colour transitions while the snapshot is taken, so the reveal
+   edge is crisp instead of revealing a half-faded page. */
+html[data-theme-switching] *,
+html[data-theme-switching] *::before,
+html[data-theme-switching] *::after { transition: none !important; }
+
+/* Hero headlines slide but are NEVER invisible at first paint (LCP). */
+@keyframes rise-slide {
+  from { transform: translateY(14px); }
+  to   { transform: none; }
+}
+.rise-slide { animation: rise-slide 0.9s var(--ease-out) both; }
+
 /* ── Reduced motion ─────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rise, .sr, .sr-pop, .drift, .glow-pulse, .text-flow { animation: none !important; }
+  .rise, .rise-slide, .sr, .sr-pop, .drift, .glow-pulse, .text-flow, .live-dot::after { animation: none !important; }
   .sr, .sr-pop { opacity: 1 !important; transform: none !important; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -434,8 +610,8 @@ html[data-boot] .preloader::after {
 /* ── Legal document prose ───────────────────────────────────────────── */
 .legal-prose h2 {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.35rem;
+  font-weight: 600;
+  font-size: 1.6rem;
   margin-top: 2.5rem;
 }
 .legal-prose p, .legal-prose li {
@@ -445,59 +621,45 @@ html[data-boot] .preloader::after {
   color: var(--color-fg-muted);
 }
 .legal-prose ul { list-style: disc; padding-left: 1.4rem; }
-.legal-prose a { color: var(--color-brand-orange); text-decoration: underline; text-underline-offset: 3px; }
+.legal-prose a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
 
-/* Anchor targets (#plans, #coverage, …) clear the fixed header on jump. */
 main [id] { scroll-margin-top: 6rem; }
 
-::selection { background: var(--color-brand-orange); color: #1a0d05; }
+::selection { background: var(--accent); color: #000000; }
 
 :where(a, button, input, textarea, select, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-brand-orange);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
-/* ══ FUSION LAYER — Kimi cinematic DNA ════════════════════════════════
-   Kimi-TRAE contributes premium dark surfaces + a warm-gold SECONDARY,
-   scoped to the hero and the four signature FX sections. Anything inside
-   .cinema-dark renders on deep ink in BOTH themes, so the wow-moments stay
-   cinematic regardless of the user's light/dark choice. The brand SUNSET
-   stays the primary accent everywhere; gold is a contained highlight
-   (gauge ticks, network-node glows, eyebrows) that never fights it. */
+/* ══ Cinematic sections (flythrough, gauge, network map) ═══════════════
+   These used to sit on a navy + gold palette. Now true black with the
+   single accent, so they read as part of the same system. */
 :root {
-  --cine-ink: #0a0e1a;   /* deep ink — Kimi navy warmed toward the brand */
-  --cine-ink-2: #141a2b; /* elevated cinematic surface (cards on ink) */
-  --gold: #d4a843;       /* Kimi warm gold — secondary highlight only */
-  --gold-20: rgba(212, 168, 67, 0.2);
+  --cine-ink: #000000;
+  --cine-ink-2: #0a0a0a;
+  --gold: var(--accent);
+  --gold-20: color-mix(in srgb, var(--accent) 20%, transparent);
 }
-/* Opt-in cinematic context. Overriding the semantic --color-* tokens makes
-   every existing utility (borders, text, surfaces) render dark for free. */
 .cinema-dark {
-  --color-ink: var(--cine-ink);
-  --color-void: #060912;
-  --color-surface: var(--cine-ink-2);
-  --color-surface-2: #1c2438;
-  --color-hairline: rgba(255, 255, 255, 0.08);
-  --color-fg: #eef1f8;
-  --color-fg-muted: rgba(238, 241, 248, 0.66);
-  --color-fg-faint: rgba(238, 241, 248, 0.42);
-  --wash-base: var(--cine-ink);
-  --wash-hot: rgba(255, 107, 44, 0.08);
-  --wash-warm: rgba(212, 168, 67, 0.06);
-  background: var(--cine-ink);
-  color: #eef1f8;
+  --color-ink: #000000;
+  --color-void: #000000;
+  --color-surface: #0a0a0a;
+  --color-surface-2: #141414;
+  --color-hairline: rgba(255, 255, 255, 0.12);
+  --color-fg: #fafafa;
+  --color-fg-muted: #a3a3a3;
+  --color-fg-faint: #8f8f8f;
+  --accent-text: #ff6b2c;
+  background: #000000;
+  color: #fafafa;
   color-scheme: dark;
 }
-/* Kimi signature: section eyebrows go gold inside a cinematic section. */
-.cinema-dark .eyebrow { color: var(--gold); }
-/* Gold chrome for FX internals (gauge ring track, node rings, tick marks). */
-.gold { color: var(--gold); }
-.bg-gold { background-color: var(--gold); }
-.gold-glow { box-shadow: 0 0 32px 2px var(--gold-20); }
+.gold { color: var(--accent); }
+.bg-gold { background-color: var(--accent); }
+.gold-glow { box-shadow: none; }
 
-
-/* Static content first; Cinema opts into the long scroll sequence. */
 .flythrough-panel { position: relative; min-height: 65svh; padding-block: 6rem; }
 .flythrough.is-animated { height: 200svh; }
 .flythrough.is-animated .flythrough-panel { position: sticky; top: 0; height: 100svh; }
@@ -524,40 +686,40 @@ main [id] { scroll-margin-top: 6rem; }
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 5px;
-  height: 5px;
-  margin: -2.5px 0 0 -2.5px;
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--accent);
   animation: gauge-orbit 2s linear infinite;
-  animation-play-state: paused; /* JS resumes when gauge is animating */
+  animation-play-state: paused;
   will-change: transform;
 }
 @media (prefers-reduced-motion: reduce) {
   .gauge-particle { display: none; }
 }
 
-/* ── Light paper utilities — solid actions, quiet dividers, small motion ── */
+/* ── Utility leftovers kept for existing markup ─────────────────────── */
 .button-solid, .button-light {
   background: var(--action-bg);
   color: var(--action-fg);
   border: 1px solid transparent;
-  border-radius: 0.6rem;
+  border-radius: 999px;
   box-shadow: none;
 }
-.button-solid:hover { background: var(--action-hover); box-shadow: none; }
+.button-solid:hover { background: var(--action-hover); }
 .button-light { background: var(--color-surface); color: var(--color-fg); }
-.button-ghost:hover { background: var(--color-void); border-color: var(--color-fg-muted); }
+.button-ghost:hover { background: var(--color-surface-2); border-color: var(--color-fg-muted); }
 .text-link { display: inline-flex; align-items: center; gap: 0.65rem; font-size: 0.9rem; font-weight: 600; text-underline-offset: 5px; }
-.text-link:hover { text-decoration: underline; }
-.benefit-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-brand-orange); flex: none; display: inline-block; }
+.text-link:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+.benefit-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex: none; display: inline-block; }
 .service-link { transition: border-color 220ms ease, transform 220ms var(--ease-out); }
 .service-link:hover { border-color: var(--color-fg-muted); transform: translateY(-2px); }
 .signal-mark { display: inline-flex; align-items: end; gap: 3px; height: 18px; }
 .signal-mark i { display: block; width: 3px; background: var(--color-fg); border-radius: 2px; transform-origin: bottom; animation: signal-rise 0.6s var(--ease-out) both; }
 .signal-mark i:nth-child(1) { height: 6px; animation-delay: 0.3s; }
 .signal-mark i:nth-child(2) { height: 11px; animation-delay: 0.4s; }
-.signal-mark i:nth-child(3) { height: 17px; animation-delay: 0.5s; }
+.signal-mark i:nth-child(3) { height: 17px; animation-delay: 0.5s; background: var(--accent); }
 @keyframes signal-rise { from { transform: scaleY(0.2); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
   .signal-mark i, .hero-photo { animation: none; }
