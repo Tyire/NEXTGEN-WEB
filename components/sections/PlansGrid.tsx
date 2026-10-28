@@ -14,37 +14,35 @@ function PlanCard({ p, i }: { p: Plan; i: number }) {
     <li
       className={`sr-pop lift relative flex flex-col rounded-[var(--radius)] p-7 md:p-8 ${
         p.featured
-          ? "grad-border glow-pulse bg-[var(--color-surface)]"
-          : "edge-top border border-[var(--color-hairline)] bg-[var(--color-surface)]"
+          ? "grad-border bg-[var(--color-surface)]"
+          : "border border-[var(--color-hairline)] bg-[var(--color-surface)]"
       }`}
       style={{ animationDelay: `${i * 0.05}s` }}
     >
       {p.featured && (
-        <span className="display absolute -top-3.5 left-7 rounded-full grad-sunset px-3.5 py-1.5 text-[0.6rem] font-bold uppercase tracking-[0.18em] text-white">
+        <span className="absolute -top-3 left-7 rounded-full bg-[var(--accent)] px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-black">
           Most popular
         </span>
       )}
       <p className="eyebrow">{p.speed}</p>
-      <h3 className="display mt-2 text-xl font-bold">{p.name}</h3>
+      <h3 className="display mt-2 text-[1.7rem] leading-tight">{p.name}</h3>
 
-      <p className="mt-5">
+      <p className="mt-6 flex items-baseline gap-1 border-t border-[var(--color-hairline)] pt-6">
         {amt ? (
           <>
-            <span className="display text-[var(--color-brand-orange)] align-top text-lg font-bold">₦</span>
-            <span className="display text-[var(--color-brand-orange)] text-5xl font-extrabold tracking-tight">{amt}</span>
-            <span className="ml-1 text-sm text-[var(--color-fg-faint)]">/{p.cycle}</span>
+            <span className="text-lg text-[var(--color-fg-muted)]">₦</span>
+            <span className="display text-[3.2rem] leading-none tabular-nums">{amt}</span>
+            <span className="ml-1 text-sm text-[var(--color-fg-faint)]">/ {p.cycle}</span>
           </>
         ) : (
-          <span className="display text-2xl font-bold">{formatNaira(p.priceNgn)}</span>
+          <span className="display text-3xl">{formatNaira(p.priceNgn)}</span>
         )}
       </p>
 
-      <ul className="mt-6 grid gap-2.5 text-sm text-[var(--color-fg-muted)]">
+      <ul className="mb-8 mt-6 grid flex-1 content-start gap-3 text-sm text-[var(--color-fg-muted)]">
         {p.highlights.map((h) => (
-          <li key={h} className="flex gap-2.5">
-            <svg viewBox="0 0 16 16" className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-success)]" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M2.5 8.5 6 12l7.5-8" />
-            </svg>
+          <li key={h} className="flex gap-3">
+            <span className="mt-[7px] h-[5px] w-[5px] shrink-0 rounded-full bg-[var(--color-fg-faint)]" aria-hidden="true" />
             {h}
           </li>
         ))}
@@ -53,11 +51,7 @@ function PlanCard({ p, i }: { p: Plan; i: number }) {
       <a
         href={p.checkoutUrl}
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-        className={`group mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold transition-transform duration-300 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97] ${
-          p.featured
-            ? "grad-sunset text-white shadow-[0_12px_32px_-12px_rgba(255,60,44,0.6)]"
-            : "border-2 border-[var(--color-hairline)] text-[var(--color-fg)] hover:border-[var(--color-brand-orange)]"
-        }`}
+        className={`group btn w-full ${p.featured ? "btn-accent" : "btn-ghost"}`}
       >
         {p.priceNgn == null ? "Talk to sales" : "Subscribe"} <Arrow />
       </a>

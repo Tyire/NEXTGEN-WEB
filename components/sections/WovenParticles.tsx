@@ -26,7 +26,7 @@ interface Point {
   x: number;
   y: number;
   z: number;
-  hue: number; // 0..1 position along the knot, for color
+  accent: boolean;
 }
 
 // Classic (p,q) torus-knot parametric curve, with per-point jitter around
@@ -46,28 +46,9 @@ function buildKnot(count: number): Point[] {
     const y = (R + r * Math.cos(q * t)) * Math.sin(p * t) + jitter();
     const z = r * Math.sin(q * t) + jitter();
 
-    points.push({ x, y, z, hue: (i / count) % 1 });
+    points.push({ x, y, z, accent: i % 11 === 0 });
   }
   return points;
-}
-
-/** Interpolates across NextGen's brand gradient (red → orange → amber → red). */
-function brandColor(hue: number, alpha: number): string {
-  const stops = [
-    [255, 31, 77], // red
-    [255, 107, 44], // orange
-    [255, 167, 15], // amber
-    [255, 31, 77], // back to red, so it loops cleanly
-  ];
-  const scaled = (hue % 1) * (stops.length - 1);
-  const i = Math.floor(scaled);
-  const frac = scaled - i;
-  const a = stops[i];
-  const b = stops[Math.min(i + 1, stops.length - 1)];
-  const rr = Math.round(a[0] + (b[0] - a[0]) * frac);
-  const gg = Math.round(a[1] + (b[1] - a[1]) * frac);
-  const bb = Math.round(a[2] + (b[2] - a[2]) * frac);
-  return `rgba(${rr}, ${gg}, ${bb}, ${alpha})`;
 }
 
 export function WovenParticles({ className = "" }: { className?: string }) {
@@ -123,8 +104,10 @@ export function WovenParticles({ className = "" }: { className?: string }) {
       const sinX = Math.sin(angleX);
 
       const fov = 420;
-      const cx = width / 2;
-      const cy = height / 2;
+      // Composition: right of the copy on desktop, above it on phones.
+      const wide = width >= 900;
+      const cx = wide ? width * 0.7 : width * 0.78;
+      const cy = wide ? height * 0.5 : height * 0.2;
       const scaleFit = Math.min(width, height) / 420; // keeps the knot framed at any hero size
 
       for (let i = 0; i < points.length; i++) {
@@ -146,7 +129,9 @@ export function WovenParticles({ className = "" }: { className?: string }) {
         const alpha = Math.min(0.9, Math.max(0.05, (scale - 0.55) * 1.1));
         const radius = Math.max(0.4, 1.5 * scale);
 
-        ctx.fillStyle = brandColor(pt.hue, alpha);
+        // Silver threads; roughly one particle in eleven carries the accent,
+        // so the orange reads as a signal woven through, not a wash.
+        ctx.fillStyle = pt.accent ? `rgba(255, 107, 44, ${Math.min(1, alpha + 0.15)})` : `rgba(240, 240, 240, ${alpha * 0.85})`;
         ctx.beginPath();
         ctx.arc(sx, sy, radius, 0, Math.PI * 2);
         ctx.fill();

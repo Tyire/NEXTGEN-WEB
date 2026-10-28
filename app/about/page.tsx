@@ -45,12 +45,12 @@ export default function AboutPage() {
         image="fiber"
         ghost="NEXTGEN"
       >
-        <Button href="/contact">
+        <Button variant="accent" href="/contact">
           Work with us <Arrow />
         </Button>
         <a
           href="/careers"
-          className="group inline-flex items-center gap-2 rounded-full border-2 border-white/60 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
+          className="group btn btn-ghost-light"
         >
           Join our team <Arrow />
         </a>

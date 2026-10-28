@@ -20,12 +20,12 @@ function seeded(seed: number) {
 }
 
 const COLORS = [
-  "rgba(212,168,67,VAL)",
-  "rgba(212,168,67,VAL)",
+  "rgba(255,255,255,VAL)",
+  "rgba(255,255,255,VAL)",
+  "rgba(163,163,163,VAL)",
+  "rgba(255,255,255,VAL)",
   "rgba(255,107,44,VAL)",
-  "rgba(255,107,44,VAL)",
-  "rgba(255,31,77,VAL)",
-  "rgba(238,241,248,VAL)",
+  "rgba(238,238,238,VAL)",
 ];
 const TYPES: ShapeConfig["type"][] = ["square", "diamond", "rectangle-h", "rectangle-v"];
 
@@ -114,14 +114,7 @@ export function GeometricFlythrough() {
               style={{ textShadow: "0 2px 32px rgba(0,0,0,0.7)" }}
             >
               Data in{" "}
-              <span
-                style={{
-                  background: "linear-gradient(115deg,#ff1f4d,#ff6b2c 48%,#ffa70f)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
+              <span className="accent-word">
                 motion.
               </span>
             </h2>

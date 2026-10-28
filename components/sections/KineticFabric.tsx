@@ -36,7 +36,7 @@ interface StructuralConstraint {
   length: number;
 }
 
-const BG = "#180b12"; // matches PageHero's imageless-fallback background
+const BG = "#000000"; // matches PageHero's imageless-fallback background
 const LINE_RGB = "255, 255, 255"; // resting mesh lines — dim, quiet
 const GLOW_RGB = "255, 107, 44"; // brand orange — excited lines/nodes only
 

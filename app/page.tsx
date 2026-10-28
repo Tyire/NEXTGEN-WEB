@@ -1,5 +1,7 @@
 import { Container, Button, Arrow, SectionHead } from "@/components/ui";
 import { WovenParticles } from "@/components/sections/WovenParticles";
+import { BackboneGlobe } from "@/components/sections/BackboneGlobe";
+import { backboneLandings } from "@/data/backbone";
 import { PlansGrid } from "@/components/sections/PlansGrid";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { StatsBand } from "@/components/sections/StatsBand";
@@ -22,13 +24,17 @@ const proofPoints = [
 const audienceCards = [
   {
     tag: "For homes",
-    body: "Unlimited fiber plans for streaming, remote work and smart homes — prepaid, no contract.",
+    title: "Unlimited fibre,",
+    accent: "no contract.",
+    body: "Unlimited fibre plans for streaming, remote work and smart homes — prepaid, pause any month.",
     action: "View home plans",
     href: "/plans",
   },
   {
     tag: "For business",
-    body: "Dedicated connectivity, SLA-backed uptime, and enterprise-grade support across Lagos.",
+    title: "Dedicated links,",
+    accent: "SLA-backed.",
+    body: "Dedicated connectivity, SLA-backed uptime and enterprise-grade support across Lagos.",
     action: "Talk to enterprise sales",
     href: "/enterprise",
   },
@@ -51,89 +57,89 @@ export default function Home() {
   return (
     <>
       {/* ── HERO ─────────────────────────────────────────────────────── */}
-      <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#0d0508] md:min-h-[92vh]">
-        {/* Woven-light particle backdrop — renders instantly (no video to
-            buffer), and degrades gracefully: no JS / prefers-reduced-motion
-            still shows the dark base + one static frame of the knot. */}
+      <section className="on-dark relative isolate flex min-h-[100svh] items-end overflow-hidden md:items-center">
+        {/* Woven-light particle knot — silver, with a sprinkle of accent.
+            Renders instantly; no JS / reduced motion = one static frame. */}
         <WovenParticles className="-z-20" />
 
-        {/* Scrim — legibility over the particles */}
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(105deg,rgba(10,3,7,0.88)_0%,rgba(10,3,7,0.55)_55%,transparent_85%)]" />
-        {/* Bottom fade to page bg */}
-        <div aria-hidden="true" className="absolute bottom-0 left-0 right-0 -z-10 h-40 bg-[linear-gradient(to_bottom,transparent,#0d0508)]" />
+        {/* Legibility scrims: bottom-up on phones, left-to-right on desktop. */}
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,#000_18%,rgba(0,0,0,0.55)_55%,rgba(0,0,0,0.15))] md:bg-[linear-gradient(90deg,#000_8%,rgba(0,0,0,0.7)_45%,rgba(0,0,0,0)_78%)]" />
         <div aria-hidden="true" className="grain absolute inset-0 -z-10" />
 
-        <Container className="relative pb-28 pt-32 md:pb-32 md:pt-40">
-          <p className="rise eyebrow" style={{ "--color-fg-faint": "rgba(255,255,255,0.7)" } as React.CSSProperties}>
-            GPON fiber · Lekki · Ikate · Ilasan · Ajah
+        <Container className="relative pb-28 pt-32 md:pb-24 md:pt-40 lg:pb-24">
+          <p className="rise eyebrow eyebrow-rule">
+            <span className="live-dot" aria-hidden="true" />
+            <span className="sm:hidden">GPON fibre · Lagos</span>
+            <span className="hidden sm:inline">GPON fibre · Lekki · Ikate · Ilasan · Ajah</span>
           </p>
 
           <h1
-            className="display rise hero-pop mt-5 max-w-[820px] text-[2.8rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-white sm:text-6xl md:text-7xl lg:text-[4.8rem]"
-            style={{ animationDelay: "0.08s", textShadow: "0 2px 40px rgba(10,3,7,0.6)" }}
+            className="display rise-slide mt-6 max-w-[900px] text-[3.15rem] leading-[0.96] text-white sm:text-7xl lg:text-[6.4rem]"
+            style={{ animationDelay: "0.08s" }}
           >
-            Fibre for Homes.
+            Fibre for homes.
             <br />
-            Resilient Connectivity
+            Resilient connectivity
             <br />
-            <span className="text-flow">for Business.</span>
+            <span className="accent-word">for business.</span>
           </h1>
 
-          <p className="rise hero-pop mt-7 max-w-[600px] text-base leading-relaxed text-white/80 md:text-xl" style={{ animationDelay: "0.18s" }}>
-            Truly unlimited fiber broadband, dedicated enterprise links, voice and data
+          <p className="rise mt-7 max-w-[34rem] text-[1.05rem] leading-relaxed text-white/70 md:text-xl" style={{ animationDelay: "0.18s" }}>
+            Truly unlimited fibre broadband, dedicated enterprise links, voice and data
             infrastructure across Lagos — backed by a 24/7 operations team.
           </p>
 
-          {/* CTAs */}
-          <div className="rise mt-10 flex flex-wrap items-center gap-4" style={{ animationDelay: "0.28s" }}>
-            <Button href={site.selfcare.onboard} external>
-              Check Coverage &amp; Plans <Arrow />
+          <div className="rise cta-pair mt-9 max-w-md sm:max-w-none" style={{ animationDelay: "0.28s" }}>
+            <Button href={site.selfcare.onboard} external variant="accent" magnetic>
+              Check coverage <Arrow />
             </Button>
-            <a
-              href="/enterprise"
-              className="group inline-flex items-center gap-2 rounded-full border-2 border-white/50 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
-            >
-              Enterprise solutions <Arrow />
-            </a>
+            <Button href="/enterprise" variant="ghost-light">
+              For business
+            </Button>
           </div>
 
-          {/* Proof point chips */}
-          <ul className="rise mt-12 flex flex-wrap gap-3" style={{ animationDelay: "0.36s" }} aria-label="Network highlights">
+          {/* Stats row — serif figures, tracked labels, one hairline above. */}
+          <ul className="rise mt-12 grid max-w-2xl grid-cols-3 gap-4 border-t border-white/15 pt-6 md:mt-16" style={{ animationDelay: "0.36s" }} aria-label="Network highlights">
             {proofPoints.map((p) => (
-              <li
-                key={p.label}
-                className="rounded-2xl border border-white/10 bg-black/30 px-5 py-4 backdrop-blur-sm"
-              >
-                <p className="display text-2xl font-bold text-white">{p.value}</p>
-                <p className="mt-1 text-xs text-white/60">{p.label}</p>
+              <li key={p.label}>
+                <p className="display text-[2rem] leading-none text-white md:text-5xl">{p.value}</p>
+                <p className="mt-2 text-[0.62rem] font-medium uppercase tracking-[0.16em] text-white/55 md:text-[0.68rem]">{p.label}</p>
               </li>
             ))}
           </ul>
-
-          {/* Audience split cards (Kimi's pattern) */}
-          <div className="rise mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:max-w-[720px]" style={{ animationDelay: "0.44s" }}>
-            {audienceCards.map((c) => (
-              <a
-                key={c.tag}
-                href={c.href}
-                className="group rounded-2xl border border-white/10 bg-black/28 px-5 py-5 backdrop-blur-sm transition-all duration-300 hover:border-[rgba(255,107,44,0.4)] hover:bg-black/40"
-              >
-                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white/45">{c.tag}</p>
-                <p className="mt-2 text-sm leading-relaxed text-white/80">{c.body}</p>
-                <p className="mt-4 text-sm font-semibold text-[var(--color-brand-amber)] transition-colors group-hover:text-[#ffd08a]">
-                  {c.action} →
-                </p>
-              </a>
-            ))}
-          </div>
         </Container>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-60" aria-hidden="true">
-          <div className="relative h-8 w-px bg-white/30">
-            <div className="absolute left-1/2 top-0 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-[var(--color-brand-orange)] animate-[scroll-dot_1.6s_ease-in-out_infinite]" />
+        {/* Scroll indicator — desktop only (phones have the action bar) */}
+        <div className="absolute bottom-8 right-10 hidden flex-col items-center gap-3 opacity-60 lg:flex" aria-hidden="true">
+          <div className="relative h-10 w-px bg-white/25">
+            <div className="absolute left-1/2 top-0 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-[var(--accent)] animate-[scroll-dot_1.6s_ease-in-out_infinite]" />
           </div>
-          <span className="text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-white/40">Scroll</span>
+        </div>
+      </section>
+
+      {/* ── WHO IT'S FOR — editorial split, routes homes vs business ─── */}
+      <section className="border-b border-[var(--color-hairline)]">
+        <div className="mx-auto grid max-w-6xl md:grid-cols-2">
+          {audienceCards.map((c, i) => (
+            <a
+              key={c.tag}
+              href={c.href}
+              className={`group flex flex-col justify-between gap-10 px-5 py-12 transition-colors md:px-10 md:py-16 ${
+                i === 0 ? "border-b border-[var(--color-hairline)] md:border-b-0 md:border-r" : ""
+              } hover:bg-[var(--color-surface-2)]`}
+            >
+              <div>
+                <p className="eyebrow">{c.tag}</p>
+                <h2 className="display mt-4 text-[2.4rem] leading-[1.02] md:text-[3.2rem]">
+                  {c.title} <span className="accent-word">{c.accent}</span>
+                </h2>
+                <p className="mt-4 max-w-sm text-[0.95rem] leading-relaxed text-[var(--color-fg-muted)]">{c.body}</p>
+              </div>
+              <span className="link-cta self-start">
+                {c.action} <Arrow />
+              </span>
+            </a>
+          ))}
         </div>
       </section>
 
@@ -171,7 +177,7 @@ export default function Home() {
           </div>
           <a
             href="/cloud"
-            className="group inline-flex shrink-0 items-center gap-2 rounded-full border-2 border-[var(--color-hairline)] px-6 py-3.5 text-sm font-bold text-[var(--color-fg)] transition-colors hover:border-[var(--color-brand-orange)]"
+            className="group btn btn-ghost shrink-0"
           >
             Explore NextGen Cloud <Arrow />
           </a>
@@ -327,11 +333,46 @@ export default function Home() {
               </div>
               <a
                 href="/contact"
-                className="group grad-sunset inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold text-white shadow-[0_12px_32px_-12px_rgba(255,60,44,0.6)] transition-transform duration-300 ease-[var(--ease-out)] hover:-translate-y-0.5 active:scale-[0.97]"
+                className="group btn btn-ink"
               >
                 Reach out to us <Arrow />
               </a>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── BACKBONE — Lagos to the transatlantic cables (cobe globe) ── */}
+      <section className="on-dark relative overflow-hidden py-20 md:py-28" aria-labelledby="backbone-title">
+        <Container className="relative grid items-center gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-6">
+          <div className="sr">
+            <p className="eyebrow eyebrow-rule mb-5">The backbone</p>
+            <h2 id="backbone-title" className="display text-[2.6rem] leading-[1.02] text-white sm:text-6xl md:text-7xl">
+              Lagos, wired <span className="accent-word">to the world.</span>
+            </h2>
+            <p className="mt-6 max-w-md text-base leading-relaxed text-white/65 md:text-lg">
+              Redundant links into the transatlantic submarine cables with automated failover, a
+              nationwide IP/MPLS core, and fibre into Nigeria&rsquo;s major data centres. If one path
+              goes quiet, your traffic doesn&rsquo;t.
+            </p>
+            <ul className="mt-10 border-t border-white/12">
+              {backboneLandings.map((l) => (
+                <li key={l.cable} className="flex items-baseline justify-between gap-4 border-b border-white/12 py-4">
+                  <span className="flex items-center gap-3">
+                    <span className="live-dot" aria-hidden="true" />
+                    <span className="display text-2xl text-white">{l.cable}</span>
+                  </span>
+                  <span className="text-right text-xs uppercase tracking-[0.14em] text-white/45">{l.place}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-[11px] text-white/35">Illustrative: arcs mark where each cable system lands, not exact routes.</p>
+          </div>
+          <div className="sr-pop relative mx-auto w-full max-w-[560px]">
+            <BackboneGlobe />
+            <p className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.2em] text-white/30">
+              Drag to spin
+            </p>
           </div>
         </Container>
       </section>

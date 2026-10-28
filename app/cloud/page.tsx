@@ -88,7 +88,7 @@ export default function CloudPage() {
 
       <section className="relative overflow-hidden py-20 md:py-28">
         {/* Ambient "network" backdrop — fits the connectivity theme, quiet enough not to fight the content above it. */}
-        <ParticleField density={2.5} pull={140} className="opacity-40" />
+        <ParticleField density={2.5} pull={140} color="var(--color-fg-faint)" className="opacity-50" />
         <Container className="relative">
           <SectionHead
             eyebrow="How it works"

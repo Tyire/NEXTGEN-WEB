@@ -1,22 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Inter } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { MobileActionBar } from "@/components/MobileActionBar";
+import { MagneticFX } from "@/components/MagneticFX";
 import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/JsonLd";
 import { RegisterSW } from "@/components/RegisterSW";
 import { Preloader } from "@/components/Preloader";
 import CinemaMount from "@/components/CinemaMount";
 
-const archivo = Archivo({
-  variable: "--font-archivo",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
+// DM Sans for everything — Hostinger's face, and Modish's.
+const dmSans = DM_Sans({
+  variable: "--font-dm",
   subsets: ["latin"],
   display: "swap",
 });
@@ -74,22 +71,42 @@ const enhance = `(function(){
   function syncMeta(){
     var d=document.documentElement.getAttribute('data-theme')==='dark';
     var m=document.querySelectorAll('meta[name="theme-color"]');
-    for(var k=0;k<m.length;k++){m[k].setAttribute('content',d?'#180b12':'#f6f8fb');}
+    for(var k=0;k<m.length;k++){m[k].setAttribute('content',d?'#000000':'#ffffff');}
   }
   syncMeta();
+  /* Header: transparent over the banner, glass once scrolled; tucks away
+     while scrolling down past 420px and returns on any scroll up (Mo'Afrique #10). */
+  var lastY=window.scrollY;
   function atTop(){
-    if(window.scrollY<24){document.documentElement.setAttribute('data-at-top','');}
-    else{document.documentElement.removeAttribute('data-at-top');}
+    var y=window.scrollY,h=document.documentElement;
+    if(y<24){h.setAttribute('data-at-top','');}else{h.removeAttribute('data-at-top');}
+    if(y>420&&y>lastY+6){h.setAttribute('data-header-tucked','');}
+    else if(y<lastY-6||y<=420){h.removeAttribute('data-header-tucked');}
+    lastY=y;
   }
   atTop();
   window.addEventListener('scroll',atTop,{passive:true});
+  var root=document.documentElement;
+  function setTheme(dark){
+    if(dark){root.setAttribute('data-theme','dark');}else{root.removeAttribute('data-theme');}
+    try{localStorage.setItem('theme',dark?'dark':'light');}catch(e){}
+    syncMeta();
+  }
+  /* Theme switch = a curtain (Modish #4, the owner's reference): night falls
+     from the top, day rises from the bottom, via the View Transitions API.
+     Instant swap without support or under reduced motion. */
   var btns=document.querySelectorAll('.theme-toggle');
   for(var i=0;i<btns.length;i++){btns[i].addEventListener('click',function(){
-    var d=document.documentElement.getAttribute('data-theme')==='dark';
-    if(d){document.documentElement.removeAttribute('data-theme');}
-    else{document.documentElement.setAttribute('data-theme','dark');}
-    try{localStorage.setItem('theme',d?'light':'dark');}catch(e){}
-    syncMeta();
+    var toDark=root.getAttribute('data-theme')!=='dark';
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!document.startViewTransition||reduce){setTheme(toDark);return;}
+    root.setAttribute('data-theme-switching','');
+    var t=document.startViewTransition(function(){setTheme(toDark);});
+    t.ready.then(function(){
+      root.animate({clipPath:[toDark?'inset(0 0 100% 0)':'inset(100% 0 0 0)','inset(0 0 0 0)']},
+        {duration:700,easing:'cubic-bezier(0.77, 0, 0.175, 1)',pseudoElement:'::view-transition-new(root)'});
+    });
+    t.finished.then(function(){root.removeAttribute('data-theme-switching');},function(){root.removeAttribute('data-theme-switching');});
   });}
   try{
     var p=location.pathname.replace(/\\/+$/,'')||'/';
@@ -103,22 +120,23 @@ const enhance = `(function(){
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${archivo.variable} ${inter.variable} h-full`}>
+    <html lang="en" suppressHydrationWarning className={`${dmSans.variable} h-full`}>
       <head>
         {/* Pre-paint: apply stored dark choice (light default) + arm the
             entrance curtain on the FIRST view of the session only. The
             curtain's whole lifecycle is CSS (globals.css) — this just gates it. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}
-try{var d=document.documentElement.getAttribute('data-theme')==='dark';var mc=document.createElement('meta');mc.setAttribute('name','theme-color');mc.setAttribute('content',d?'#180b12':'#f6f5f0');document.head.appendChild(mc);}catch(e){}
+            __html: `document.documentElement.classList.add('js');
+try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}
+try{var d=document.documentElement.getAttribute('data-theme')==='dark';var mc=document.createElement('meta');mc.setAttribute('name','theme-color');mc.setAttribute('content',d?'#000000':'#ffffff');document.head.appendChild(mc);}catch(e){}
 try{if(!localStorage.getItem('ng-visited')){document.documentElement.setAttribute('data-boot','1');localStorage.setItem('ng-visited','1');}}catch(e){}`,
           }}
         />
       </head>
       {/* suppressHydrationWarning: browser extensions mutate <body> before React
           hydrates — harmless. */}
-      <body id="top" className="flex min-h-full flex-col" suppressHydrationWarning>
+      <body id="top" className="has-action-bar flex min-h-full flex-col" suppressHydrationWarning>
         <Preloader />
         <div className="progress-beam" aria-hidden="true" />
         <a
@@ -133,6 +151,8 @@ try{if(!localStorage.getItem('ng-visited')){document.documentElement.setAttribut
         <Header />
         <main id="main" className="flex-1">{children}</main>
         <Footer />
+        <MobileActionBar />
+        <MagneticFX />
         <CinemaMount />
         <script dangerouslySetInnerHTML={{ __html: enhance }} />
       </body>
