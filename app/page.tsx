@@ -1,5 +1,5 @@
 import { Container, Button, Arrow, SectionHead } from "@/components/ui";
-import { WovenParticles } from "@/components/sections/WovenParticles";
+import { HeroNetwork } from "@/components/sections/HeroNetwork";
 import { BackboneGlobe } from "@/components/sections/BackboneGlobe";
 import { backboneLandings } from "@/data/backbone";
 import { PlansGrid } from "@/components/sections/PlansGrid";
@@ -43,12 +43,12 @@ export default function Home() {
     <>
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section className="on-dark relative isolate flex min-h-[100svh] items-end overflow-hidden md:items-center">
-        {/* Woven-light particle knot — silver, with a sprinkle of accent.
-            Renders instantly; no JS / reduced motion = one static frame. */}
-        <WovenParticles className="-z-20" />
+        {/* Network map: Lagos lights up, routes race across Nigeria and out to
+            the world. Phones: top of the screen; desktop: right side. */}
+        <HeroNetwork className="absolute inset-x-0 top-16 -z-20 h-[56svh] md:inset-x-auto md:right-0 md:top-0 md:h-full md:w-[64%]" />
 
         {/* Legibility scrims: bottom-up on phones, left-to-right on desktop. */}
-        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,#000_18%,rgba(0,0,0,0.55)_55%,rgba(0,0,0,0.15))] md:bg-[linear-gradient(90deg,#000_8%,rgba(0,0,0,0.7)_45%,rgba(0,0,0,0)_78%)]" />
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,#000_34%,rgba(0,0,0,0.6)_58%,rgba(0,0,0,0))] md:bg-[linear-gradient(90deg,#000_10%,rgba(0,0,0,0.75)_38%,rgba(0,0,0,0)_62%)]" />
         <div aria-hidden="true" className="grain absolute inset-0 -z-10" />
         <div aria-hidden="true" className="sun-glow" />
 
@@ -75,7 +75,14 @@ export default function Home() {
             infrastructure that goes where you are — backed by a 24/7 operations team.
           </p>
 
-          <div className="rise cta-pair mt-9 max-w-md sm:max-w-none" style={{ animationDelay: "0.28s" }}>
+          <p className="rise mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-white/80" style={{ animationDelay: "0.24s" }}>
+            <span style={{ background: "var(--grad-sunset)" }} className="rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-black">No contract</span>
+            <span>
+              Unlimited fibre from <strong className="display text-lg text-white">₦1,500</strong>/day
+            </span>
+          </p>
+
+          <div className="rise cta-pair mt-6 max-w-md sm:max-w-none" style={{ animationDelay: "0.28s" }}>
             <Button href={site.selfcare.onboard} external variant="accent" magnetic>
               Check coverage <Arrow />
             </Button>

@@ -1,0 +1,88 @@
+/* ============================================================
+   HOME HERO NETWORK MAP (components/sections/HeroNetwork.tsx)
+   Animations library #22 adapted for NextGen. Static by default: the
+   finished world view (no JS, reduced motion). html.js without .hn-play is
+   the hidden start frame; with .hn-play every animation runs `from` the
+   hidden value with `backwards` fill, so the static map is the end frame.
+   Only transform, opacity and stroke-dashoffset animate.
+   ============================================================ */
+.hn svg { overflow: visible; font-family: var(--font-display); }
+.hn-cam { transform-box: view-box; transform-origin: 0 0; }
+.hn-land { fill: #ffffff; opacity: 0.07; }
+.hn-ng-fill { fill: #ff6b2c; opacity: 0.1; }
+.hn-ng { fill: none; stroke: #ff8a4c; stroke-opacity: 0.8; stroke-width: 1.1; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.hn-lag-fill { fill: #ff6b2c; opacity: 0.55; }
+.hn-lag { fill: none; stroke: #ffb020; stroke-width: 1.4; stroke-dasharray: 1; stroke-dashoffset: 0; }
+.hn-bloom { opacity: 0.9; }
+.hn-arc { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; opacity: 0.7; }
+.hn-arc.hn-t1 { stroke-width: 1.3; opacity: 0.85; }
+.hn-arc.hn-t3 { stroke-width: 1.9; }
+.hn-pkt { fill: none; stroke: #fff4e6; stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 0.05 2; stroke-dashoffset: 0.05; opacity: 0; }
+.hn-pkt-glow { stroke: #ff6b2c; stroke-width: 8; stroke-opacity: 0.35; }
+.hn-dot { fill: #ffb020; stroke: #000; stroke-width: 2; }
+.hn-halo, .hn-ripple { fill: none; stroke: #ff6b2c; stroke-width: 1.6; opacity: 0; }
+.hn-dot, .hn-halo, .hn-ripple, .hn-hub, .hn-hub-core, .hn-bloom { transform-box: fill-box; transform-origin: center; }
+.hn-hub { fill: #000; stroke: #ffb020; stroke-width: 2.4; }
+.hn-hub-core { fill: #ffffff; }
+.hn-label { fill: rgba(255, 255, 255, 0.72); font-size: 17px; font-weight: 500; letter-spacing: 0.01em; paint-order: stroke; stroke: #000; stroke-width: 5px; stroke-linejoin: round; }
+.hn-label.hn-far { fill: rgba(255, 255, 255, 0.88); font-weight: 600; }
+.hn-label-hub { fill: #ffffff; font-size: 24px; font-weight: 700; transform-box: view-box; }
+@media (max-width: 767px) {
+  .hn-label { font-size: 24px; }
+  .hn-label-hub { font-size: 30px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* hidden start frame (JS on, intro not started) */
+  html.js .hn:not(.hn-play) .hn-cam { transform: translate(var(--hn-tx), var(--hn-ty)) scale(var(--hn-s)); }
+  html.js .hn:not(.hn-play) .hn-label-hub { transform: scale(var(--hn-inv)); }
+  html.js .hn:not(.hn-play) :is(.hn-ng, .hn-lag, .hn-arc) { stroke-dashoffset: 1; }
+  html.js .hn:not(.hn-play) :is(.hn-land, .hn-ng-fill, .hn-lag-fill, .hn-hub, .hn-hub-core, .hn-label, .hn-dot, .hn-bloom) { opacity: 0; }
+
+  /* 1. close on Lagos: border, Lagos State, hub */
+  .hn-play .hn-land { animation: hn-fade 1.2s ease-out 0.6s backwards; }
+  .hn-play .hn-ng { animation: hn-draw 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.05s backwards; }
+  .hn-play .hn-ng-fill { animation: hn-fade 0.8s ease-out 0.7s backwards; }
+  .hn-play .hn-lag { animation: hn-draw 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.35s backwards; }
+  .hn-play .hn-lag-fill { animation: hn-fade 0.6s ease-out 0.95s backwards; }
+  .hn-play :is(.hn-hub, .hn-hub-core) { animation: hn-pop 0.5s var(--ease-out) 0.8s backwards; }
+  .hn-play .hn-bloom { animation: hn-pop 0.9s var(--ease-out) 0.9s backwards, hn-breathe 4s ease-in-out 3s infinite; }
+  .hn-play .hn-label-hub { animation: hn-fade 0.6s ease-out 0.9s backwards, hn-counter 2s cubic-bezier(0.65, 0, 0.35, 1) 2.4s backwards; }
+
+  /* 2. routes shoot out; camera pulls back to the world */
+  .hn-play .hn-cam { animation: hn-cam 2s cubic-bezier(0.65, 0, 0.35, 1) 2.4s backwards; }
+  .hn-play .hn-arc { animation: hn-draw 1s cubic-bezier(0.45, 0, 0.25, 1) var(--d) backwards; }
+  .hn-play .hn-pkt { animation: hn-pkt 1s cubic-bezier(0.45, 0, 0.25, 1) var(--d) 1, hn-pkt-idle 8s ease-in-out var(--i) infinite; }
+  .hn-play .hn-dot { animation: hn-pop 0.45s var(--ease-out) calc(var(--d) + 0.85s) backwards; }
+  .hn-play .hn-label:not(.hn-label-hub) { animation: hn-rise 0.5s var(--ease-out) calc(var(--d) + 0.9s) backwards; }
+  .hn-play .hn-halo { animation: hn-halo 0.9s ease-out calc(var(--d) + 0.9s) 1; }
+
+  /* 3. idle: packets race, landings ripple, Lagos beats */
+  .hn-play .hn-halo-idle { animation: hn-halo-idle 8s ease-out var(--i) infinite; }
+  .hn-play .hn-ripple { animation: hn-ripple 3s ease-out 3.2s infinite; }
+  .hn-play .hn-ripple-2 { animation-delay: 4.7s; }
+
+  .hn-paused * { animation-play-state: paused !important; }
+}
+
+@keyframes hn-fade { from { opacity: 0; } }
+@keyframes hn-draw { from { stroke-dashoffset: 1; } }
+@keyframes hn-pop { from { opacity: 0; transform: scale(0.3); } }
+@keyframes hn-rise { from { opacity: 0; transform: translateY(6px); } }
+@keyframes hn-cam { from { transform: translate(var(--hn-tx), var(--hn-ty)) scale(var(--hn-s)); } }
+@keyframes hn-counter { from { transform: scale(var(--hn-inv)); } }
+@keyframes hn-breathe { 50% { opacity: 0.55; transform: scale(1.15); } }
+@keyframes hn-halo { from { opacity: 0.6; transform: scale(0.5); } to { opacity: 0; transform: scale(2.8); } }
+@keyframes hn-pkt { from { stroke-dashoffset: 0.05; opacity: 1; } 85% { opacity: 1; } to { stroke-dashoffset: -0.98; opacity: 0; } }
+@keyframes hn-pkt-idle {
+  0% { stroke-dashoffset: 0.05; opacity: 0; }
+  2% { opacity: 1; }
+  20% { opacity: 1; }
+  21%, 100% { stroke-dashoffset: -0.98; opacity: 0; }
+}
+@keyframes hn-halo-idle {
+  0%, 20.9% { opacity: 0; transform: scale(0.5); }
+  21% { opacity: 0.6; transform: scale(0.5); }
+  33%, 100% { opacity: 0; transform: scale(2.8); }
+}
+@keyframes hn-ripple { from { opacity: 0.7; transform: scale(1); } 70%, to { opacity: 0; transform: scale(4); } }
