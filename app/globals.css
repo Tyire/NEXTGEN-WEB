@@ -633,7 +633,7 @@ main [id] { scroll-margin-top: 6rem; }
   border-radius: 6px;
 }
 
-/* ══ Cinematic sections (flythrough, gauge, network map) ═══════════════
+/* ══ Cinematic sections (flythrough, network map) ═══════════════
    These used to sit on a navy + gold palette. Now true black with the
    single accent, so they read as part of the same system. */
 :root {
@@ -678,26 +678,6 @@ main [id] { scroll-margin-top: 6rem; }
   [data-flythrough-text] { opacity: 1 !important; transform: none !important; }
 }
 
-@keyframes gauge-orbit {
-  from { transform: rotate(var(--angle)) translateX(var(--orbit-r)) rotate(calc(-1 * var(--angle))); }
-  to   { transform: rotate(calc(var(--angle) + 360deg)) translateX(var(--orbit-r)) rotate(calc(-1 * (var(--angle) + 360deg))); }
-}
-.gauge-particle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  margin: -2px 0 0 -2px;
-  border-radius: 50%;
-  background: var(--accent);
-  animation: gauge-orbit 2s linear infinite;
-  animation-play-state: paused;
-  will-change: transform;
-}
-@media (prefers-reduced-motion: reduce) {
-  .gauge-particle { display: none; }
-}
 
 /* ── Utility leftovers kept for existing markup ─────────────────────── */
 .button-solid, .button-light {

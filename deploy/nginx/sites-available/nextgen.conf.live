@@ -1,0 +1,100 @@
+# MIRROR of the live /etc/nginx/sites-available/nextgen.conf on 102.213.77.4 (with certbot TLS lines).
+# Fetched 24 Nov 2026. nextgen.conf is the HTTP-only bootstrap that vps-install.sh puts on a fresh host;
+# certbot then turns it into this file. Edit BOTH files when you change the site block.
+
+# NextGen Telecoms static site. Installed to /etc/nginx/sites-available/nextgen.conf.
+# Owner: NextGen session. Shared-host rules: /root/SHARED-HOST.md
+# certbot --nginx adds the 443 listen lines and the HTTP->HTTPS redirect to this file.
+#
+# Names: staging nextgen.102-213-77-4.sslip.io (never indexed).
+# Add nextgen.ng and www.nextgen.ng here ONLY at the DNS cut-over (owner decision).
+
+server {
+    server_name nextgen.102-213-77-4.sslip.io;   # R8: only own names; others hit the default 444
+
+    root /var/www/nextgen;
+    index index.html;
+    charset utf-8;
+    absolute_redirect off;     # /plans -> /plans/ without leaking the internal host or port
+    autoindex off;
+
+    access_log /var/log/nginx/nextgen-access.log;
+    access_log /var/log/nginx/nextgen-junk-query.log ng_junk if=$ng_log_junk;
+    error_log  /var/log/nginx/nextgen-error.log warn;
+
+    include snippets/nextgen-headers.conf;
+    include snippets/nextgen-guard.conf;
+    include snippets/nextgen-redirects.conf;   # old WordPress addresses (301 / 410)
+
+    # F10 / R9: the real 404 page, HTTP 404, noindex, never cached.
+    error_page 404 410 /404.html;
+    location = /404.html {
+        internal;
+        include snippets/nextgen-headers.conf;
+        add_header X-Robots-Tag "noindex" always;
+        add_header Cache-Control "no-store" always;
+    }
+
+    # Hashed build assets: cache for one year.
+    location ^~ /_next/static/ {
+        include snippets/nextgen-headers.conf;
+        add_header Cache-Control "public, max-age=31536000, immutable" always;
+        try_files $uri @ng_tiny404;
+    }
+
+    # The service worker must always be fresh.
+    location = /sw.js {
+        include snippets/nextgen-headers.conf;
+        add_header Cache-Control "no-cache" always;
+        try_files $uri =404;
+    }
+
+    # Media: 30 days. A missing file gets a tiny 9-byte reply, not the full 404 page.
+    location ~* \.(avif|webp|png|jpe?g|gif|svg|ico|mp4|webm|vid|woff2?|css|js|webmanifest)$ {
+        include snippets/nextgen-headers.conf;
+        add_header Cache-Control "public, max-age=2592000" always;
+        try_files $uri @ng_tiny404;
+    }
+
+    # Pages (trailingSlash export): /plans/ -> /plans/index.html.
+    location / {
+        include snippets/nextgen-headers.conf;
+        add_header Cache-Control "no-cache" always;
+        try_files $uri $uri/ =404;
+    }
+
+    location @ng_tiny404 {
+        include snippets/nextgen-headers.conf;
+        add_header Cache-Control "no-store" always;
+        default_type text/plain;
+        return 404 "Not found";
+    }
+
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types text/plain text/css application/javascript application/json image/svg+xml application/manifest+json application/xml;
+
+    listen [::]:443 ssl ipv6only=on; # managed by Certbot
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/nextgen.102-213-77-4.sslip.io/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/nextgen.102-213-77-4.sslip.io/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+
+server {
+    if ($host = nextgen.102-213-77-4.sslip.io) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    listen [::]:80;
+    server_name nextgen.102-213-77-4.sslip.io;
+    return 404; # managed by Certbot
+
+
+}

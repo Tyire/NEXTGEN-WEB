@@ -2,6 +2,7 @@ import { site, waLink } from "@/lib/site";
 import { cloudProducts } from "@/data/cloud-plans";
 import { Field, inputCls, labelCls } from "@/components/ContactForm";
 import { Arrow } from "@/components/ui";
+import { BotTrap } from "@/components/BotTrap";
 
 // INTERIM lead capture: static-export site has no server yet, so — same as
 // ContactForm — this composes a mailto the visitor's own mail client sends.
@@ -58,6 +59,7 @@ export function CloudWaitlistForm({ product }: { product?: string }) {
         <textarea id="cwf-message" name="message" rows={4} placeholder="Optional…" className={inputCls} />
       </div>
 
+      <BotTrap />
       <div className="mt-1 flex flex-wrap items-center gap-4">
         <button
           type="submit"

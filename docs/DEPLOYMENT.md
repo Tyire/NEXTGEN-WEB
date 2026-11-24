@@ -107,3 +107,30 @@ certbot rewrites this to listen on 443 and adds the HTTP→HTTPS redirect automa
 - **Street address** in `lib/site.ts` is region-level only — add the exact HQ address (updates footer + LocalBusiness JSON-LD).
 - **Hero video licence** — confirm rights to the Kimi-V1 clip in `public/videos/`.
 - Set the production domain everywhere it matters — `site.url` / `metadataBase` are already `https://nextgen.ng`.
+
+---
+
+## Live target: shared VPS 102.213.77.4 (decided 24 Nov 2026)
+
+Host Nginx serves NextGen and NEEP. Shared rules on the server: `/root/SHARED-HOST.md` and `/root/PORTS.md`.
+Staging name: `nextgen.102-213-77-4.sslip.io` (always `noindex`). Add `nextgen.ng` only at DNS cut-over.
+
+| File | Purpose |
+|---|---|
+| `deploy/nginx/conf.d/00-host.conf` | Host-wide: no version, 444 for an unknown Host |
+| `deploy/nginx/conf.d/10-nextgen-maps.conf` | URL-guard maps and off switches (`$ng_guard_*`) |
+| `deploy/nginx/snippets/nextgen-guard.conf` | Junk query, WordPress tricks, methods, traversal, probe paths |
+| `deploy/nginx/snippets/nextgen-headers.conf` | CSP, HSTS and other headers |
+| `deploy/nginx/sites-available/nextgen.conf` | The site, caching, real 404, tiny 404 for missing files |
+| `deploy/vps-install.sh` | One-time install on the VPS (Nginx, certbot, fail2ban) |
+| `deploy/deploy-site.sh` | Build, upload, atomic swap, rollback copy |
+| `deploy/probe-nextgen.sh` | 73-check live probe of every guard |
+| `deploy/wsl-test-install.sh` | Local test of the config in WSL Ubuntu |
+
+Steps:
+1. `bash deploy/deploy-site.sh` (from Git Bash).
+2. On the VPS: `bash /root/nextgen-deploy/vps-install.sh`.
+3. On the VPS: `certbot --nginx -d nextgen.102-213-77-4.sslip.io`.
+4. From any Linux shell: `bash deploy/probe-nextgen.sh https://nextgen.102-213-77-4.sslip.io`.
+
+Off switch for a guard: set its `$ng_guard_*` value to 0 in `10-nextgen-maps.conf`, then `nginx -t && systemctl reload nginx`.

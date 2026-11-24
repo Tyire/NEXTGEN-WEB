@@ -171,35 +171,6 @@ export function Cinema() {
           // Keep copy legible throughout the sequence, including its first and last frame.
           tl.fromTo(flythrough.querySelector("[data-flythrough-text]"), { y: 12 }, { y: -12, ease: "none", duration: 1 }, 0);
         }
-
-        const gauge = document.querySelector<HTMLElement>("[data-speed-gauge]");
-        if (gauge) {
-          const ring = gauge.querySelector<SVGCircleElement>("circle[stroke-dasharray]");
-          const value = gauge.querySelector<SVGTextElement>("[data-speed-value]");
-          const target = Number(gauge.dataset.speedTarget);
-          const particles = gauge.querySelectorAll<HTMLElement>(".gauge-particle");
-          restore.push(() => particles.forEach((particle) => particle.style.removeProperty("animation-play-state")));
-          if (ring && value && Number.isFinite(target) && target > 0) {
-            const circumference = Number(ring.getAttribute("stroke-dasharray"));
-            const state = { speed: 0 };
-            const original = value.textContent;
-            restore.push(() => { value.textContent = original; ring.style.removeProperty("stroke-dashoffset"); });
-            gsap.to(state, {
-              speed: target, duration: 2, ease: "power2.inOut",
-              scrollTrigger: { trigger: gauge, start: "top 75%", once: true },
-              onUpdate: () => {
-                value.textContent = String(Math.round(state.speed));
-                ring.style.strokeDashoffset = String(circumference * (1 - state.speed / target));
-              },
-            });
-            gsap.to(gauge.querySelectorAll(".gauge-particle"), {
-              opacity: 0.7, duration: 0.3, repeat: 1, yoyo: true, repeatDelay: 1.4,
-              scrollTrigger: { trigger: gauge, start: "top 75%", once: true },
-              onStart: () => { gsap.set(gauge.querySelectorAll(".gauge-particle"), { animationPlayState: "running" }); },
-              onComplete: () => { gsap.set(gauge.querySelectorAll(".gauge-particle"), { animationPlayState: "paused" }); },
-            });
-          }
-        }
       });
 
       return () => {

@@ -9,7 +9,6 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { CoverageChecker } from "@/components/CoverageChecker";
 import { GeometricFlythrough } from "@/components/sections/GeometricFlythrough";
-import { SpeedGauge } from "@/components/sections/SpeedGauge";
 import { NetworkMap } from "@/components/sections/NetworkMap";
 import { site, purpose } from "@/lib/site";
 
@@ -295,9 +294,6 @@ export default function Home() {
           </div>
         </Container>
       </section>
-
-      {/* ── SPEED GAUGE ────────────────────────────────────────────── */}
-      <SpeedGauge />
 
       {/* ── COVERAGE ──────────────────────────────────────────────── */}
       <section className="wash relative overflow-hidden py-20 md:py-28" id="coverage">

@@ -1,4 +1,5 @@
 import { site } from "@/lib/site";
+import { BotTrap } from "@/components/BotTrap";
 
 // ponytail: static-export site has no server. Form composes a mailto so the
 // user's own mail client sends it. Now a SERVER component (uncontrolled
@@ -46,6 +47,7 @@ export function ContactForm() {
         </label>
         <textarea id="cf-message" name="message" rows={4} placeholder="Tell us what you need…" className={inputCls} />
       </div>
+      <BotTrap />
       <button
         type="submit"
         className="btn btn-accent mt-1 w-full sm:w-fit"
