@@ -27,9 +27,10 @@
 .hn-label { fill: rgba(255, 255, 255, 0.72); font-size: 17px; font-weight: 500; letter-spacing: 0.01em; paint-order: stroke; stroke: #000; stroke-width: 5px; stroke-linejoin: round; }
 .hn-label.hn-far { fill: rgba(255, 255, 255, 0.88); font-weight: 600; }
 .hn-label-hub { fill: #ffffff; font-size: 24px; font-weight: 700; transform-box: view-box; }
+/* Phones: the map sits behind the headline, so labels would fight the text. */
 @media (max-width: 767px) {
-  .hn-label { font-size: 24px; }
-  .hn-label-hub { font-size: 30px; }
+  .hn-label { display: none; }
+  .hn svg { opacity: 0.85; }
 }
 
 @media (prefers-reduced-motion: no-preference) {

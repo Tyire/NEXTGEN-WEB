@@ -45,7 +45,7 @@ export default function Home() {
       <section className="on-dark relative isolate flex min-h-[100svh] items-end overflow-hidden md:items-center">
         {/* Network map: Lagos lights up, routes race across Nigeria and out to
             the world. Phones: top of the screen; desktop: right side. */}
-        <HeroNetwork className="absolute inset-x-0 top-16 -z-20 h-[56svh] md:inset-x-auto md:right-0 md:top-0 md:h-full md:w-[64%]" />
+        <HeroNetwork className="absolute inset-x-0 top-16 -z-20 h-[56svh] md:inset-x-auto md:right-0 md:top-20 md:h-[calc(100%-6rem)] md:w-[64%]" />
 
         {/* Legibility scrims: bottom-up on phones, left-to-right on desktop. */}
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,#000_34%,rgba(0,0,0,0.6)_58%,rgba(0,0,0,0))] md:bg-[linear-gradient(90deg,#000_10%,rgba(0,0,0,0.75)_38%,rgba(0,0,0,0)_62%)]" />
