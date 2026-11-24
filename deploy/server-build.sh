@@ -16,9 +16,9 @@ exec > >(tee -a "$LOG") 2>&1
 echo "=== $(date -Is) build $BRANCH"
 
 # 1. Check out the pushed branch (as the build user, never as root).
-# The index file lives in the checkout, because the bare repo belongs to root.
-runuser -u nextgen -- env GIT_INDEX_FILE="$SRC/.git-index" \
-  git --git-dir="$GIT_DIR_BARE" --work-tree="$SRC" checkout -f "$BRANCH"
+# Export a clean copy of the branch; keep node_modules and the build cache.
+find "$SRC" -mindepth 1 -maxdepth 1 ! -name node_modules ! -name .next ! -name .lock.sum -exec rm -rf {} +
+git --git-dir="$GIT_DIR_BARE" archive "$BRANCH" | runuser -u nextgen -- tar -x -C "$SRC"
 cd "$SRC"
 
 # 2. Install packages only when the lockfile changed.
