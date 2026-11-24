@@ -6,6 +6,10 @@ set -u
 BASE="${1:?give the base URL, for example https://nextgen.102-213-77-4.sslip.io}"
 HOST="$(printf '%s' "$BASE" | sed -E 's#^[a-z]+://##; s#/.*$##')"
 fail=0; pass=0
+# On the VPS itself, run with PROBE_RESOLVE=127.0.0.1 (the router does not loop back).
+if [[ -n "${PROBE_RESOLVE:-}" ]]; then
+  curl() { command curl --resolve "$HOST:443:$PROBE_RESOLVE" --resolve "$HOST:80:$PROBE_RESOLVE" "$@"; }
+fi
 
 check() { # expected_code  description  curl-args...
   local want="$1" what="$2"; shift 2
@@ -98,7 +102,7 @@ header_has   "nosniff"                    '^x-content-type-options: nosniff'    
 header_has   "frame deny"                 '^x-frame-options: deny'                "/"
 header_has   "HSTS"                       '^strict-transport-security'            "/"
 if [[ "$HOST" == *sslip.io ]]; then header_has "staging is noindex" '^x-robots-tag: .*noindex' "/"; fi
-IP="$(getent hosts "$HOST" 2>/dev/null | awk '{print $1}' | head -1)"
+IP="${PROBE_RESOLVE:-$(getent hosts "$HOST" 2>/dev/null | awk '{print $1}' | head -1)}"
 if [[ -n "$IP" ]]; then
   code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 -H 'Host: evil.example' "http://$IP/")"
   if [[ "$code" == "000" ]]; then pass=$((pass+1)); echo "PASS bad Host gets no reply (444)"
