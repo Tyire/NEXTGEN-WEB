@@ -47,8 +47,9 @@ export function PlansCarouselNav({ total }: { total: number }) {
       <p className="display text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-fg-faint)]">
         {active + 1} <span className="text-[var(--color-fg-faint)]">of</span> {total}
       </p>
-      <div ref={dotsRef} className="flex items-center gap-2" role="tablist" aria-label="Plan navigation">
+      <div ref={dotsRef} className="flex items-center" role="tablist" aria-label="Plan navigation">
         {Array.from({ length: total }).map((_, i) => (
+          // 44px tap area around a small visual dot (owner rule: tap targets ≥ 44px).
           <button
             key={i}
             type="button"
@@ -56,12 +57,17 @@ export function PlansCarouselNav({ total }: { total: number }) {
             aria-selected={i === active}
             aria-label={`Go to plan ${i + 1}`}
             onClick={() => jumpTo(i)}
-            className={`h-2 rounded-full transition-all duration-300 ease-out ${
-              i === active
-                ? "w-6 bg-[var(--color-brand-orange)]"
-                : "w-2 bg-[var(--color-hairline)] hover:bg-[var(--color-fg-faint)]"
-            }`}
-          />
+            className="group flex h-11 min-w-11 items-center justify-center"
+          >
+            <span
+              aria-hidden="true"
+              className={`block h-2 rounded-full transition-all duration-300 ease-out ${
+                i === active
+                  ? "w-6 bg-[var(--color-brand-orange)]"
+                  : "w-2 bg-[var(--color-hairline)] group-hover:bg-[var(--color-fg-faint)]"
+              }`}
+            />
+          </button>
         ))}
       </div>
       <p className="display text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-[var(--color-fg-faint)]">

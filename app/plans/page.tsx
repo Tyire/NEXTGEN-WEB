@@ -68,8 +68,10 @@ export default function PlansPage() {
         </Button>
       </PageHero>
 
-      <section className="relative overflow-hidden py-20 md:py-28">
+      <section className="relative overflow-hidden py-20 md:py-28" aria-labelledby="plans-list-heading">
         <Container>
+          {/* Screen-reader heading so the plan names (h3) follow an h2, not the h1. */}
+          <h2 id="plans-list-heading" className="sr-only">Residential plans</h2>
           <PlansGrid />
           <p className="sr mt-8 text-sm text-[var(--color-fg-muted)]">
             All residential plans are prepaid and unlimited. Installation is free in several estates

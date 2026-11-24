@@ -29,7 +29,7 @@ export function FooterWordmark({ word = "NEXTGEN" }: { word?: string }) {
   return (
     <p
       ref={ref}
-      aria-label={word}
+      aria-hidden="true"
       className="footer-word select-none text-[22vw] font-bold tracking-[-0.06em] text-white md:text-[15.5vw]"
     >
       {word.split("").map((ch, i) => (

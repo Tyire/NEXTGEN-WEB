@@ -358,11 +358,11 @@ export default function Home() {
                     <span className="live-dot" aria-hidden="true" />
                     <span className="display text-2xl text-white">{l.cable}</span>
                   </span>
-                  <span className="text-right text-xs uppercase tracking-[0.14em] text-white/45">{l.place}</span>
+                  <span className="text-right text-xs uppercase tracking-[0.14em] text-white/65">{l.place}</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-[11px] text-white/35">Illustrative: arcs mark where each cable system lands, not exact routes.</p>
+            <p className="mt-4 text-[11px] text-white/65">Illustrative: arcs mark where each cable system lands, not exact routes.</p>
           </div>
           <div className="sr-pop relative mx-auto w-full max-w-[560px]">
             <BackboneGlobe />

@@ -97,7 +97,7 @@ export function MenuMorph() {
                     transition: { delay: reduce ? 0 : 0.18 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
                   }}
                 >
-                  <span className="w-6 text-[11px] font-medium tabular-nums text-white/40">0{i + 1}</span>
+                  <span className="w-6 text-[11px] font-medium tabular-nums text-white/65">0{i + 1}</span>
                   <span className={`text-[1.9rem] font-semibold leading-none tracking-[-0.03em] ${active ? "text-[#ff6b2c]" : "text-white"}`}>
                     {item.label}
                   </span>

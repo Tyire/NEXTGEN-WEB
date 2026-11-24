@@ -135,14 +135,14 @@ export function Footer() {
 
         <div className="relative mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--color-hairline)] pt-6 text-xs text-[var(--color-fg-faint)]">
           <p>© {year} {site.legalName}. All rights reserved.</p>
-          <p className="flex flex-wrap gap-x-4 gap-y-1">
+          <p className="flex flex-wrap gap-x-4 gap-y-0">
             {services.map((s) => (
-              <a key={s.slug} href={s.href} className="hover:text-[var(--color-fg)]">
+              <a key={s.slug} href={s.href} className="inline-flex min-h-11 min-w-11 items-center hover:text-[var(--color-fg)]">
                 {s.eyebrow}
               </a>
             ))}
             {footerLinks.map((l) => (
-              <a key={l.href} href={l.href} className="hover:text-[var(--color-fg)]">
+              <a key={l.href} href={l.href} className="inline-flex min-h-11 min-w-11 items-center hover:text-[var(--color-fg)]">
                 {l.label}
               </a>
             ))}
