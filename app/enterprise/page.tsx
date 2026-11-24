@@ -46,7 +46,6 @@ export default function EnterprisePage() {
         lede={svc.short + " Backed by a 99.9% uptime SLA and engineers who answer at 2am."}
         image="banner-enterprise"
         video="/videos/banner-enterprise.vid"
-        ghost="METRO"
       >
         <Button variant="accent" href="/contact">
           Talk to sales <Arrow />
@@ -54,9 +53,6 @@ export default function EnterprisePage() {
       </PageHero>
 
       <section className="relative overflow-hidden py-20 md:py-28">
-        <span aria-hidden="true" className="ghost absolute right-0 top-2 text-[18vw] opacity-50 md:text-[10rem]">
-          99.9%
-        </span>
         <Container className="relative">
           <SectionHead
             eyebrow="What we build"

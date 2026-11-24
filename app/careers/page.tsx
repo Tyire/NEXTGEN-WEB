@@ -47,7 +47,6 @@ export default function CareersPage() {
         }
         lede="Do you want to join the team running one of the best fiber networks in Nigeria? We're looking for people who are obsessed with reliability, honest with customers, and ready to get their hands dirty."
         image="banner-connectivity"
-        ghost="TEAM"
       >
         <Button variant="accent" href="#apply">
           See open roles <Arrow />
@@ -85,9 +84,6 @@ export default function CareersPage() {
 
       {/* ── OPEN ROLES ──────────────────────────────────────────── */}
       <section className="wash relative overflow-hidden py-20 md:py-28" id="apply">
-        <span aria-hidden="true" className="ghost absolute -top-3 right-0 text-[18vw] opacity-40 md:text-[10rem]">
-          ROLES
-        </span>
         <Container className="relative">
           <SectionHead
             eyebrow="Open positions"

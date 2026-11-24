@@ -11,9 +11,6 @@ export function CloudProductGrid() {
             href={p.href}
             className="lift group relative flex h-full flex-col overflow-hidden rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-7 md:p-8"
           >
-            <span aria-hidden="true" className="ghost absolute -right-3 -top-7 text-[7.5rem] opacity-70 transition-opacity duration-300 group-hover:opacity-100">
-              0{i + 1}
-            </span>
             <p className="eyebrow relative">{p.eyebrow}</p>
             <h3 className="display relative mt-3 text-2xl font-bold">{p.name}</h3>
             <p className="relative mt-4 flex-1 text-sm leading-relaxed text-[var(--color-fg-muted)]">{p.short}</p>

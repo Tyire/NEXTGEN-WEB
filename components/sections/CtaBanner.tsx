@@ -15,7 +15,7 @@ export function CtaBanner({
     </>
   ),
   lede = "Check your estate, pick a plan, and be streaming in 3 days.",
-  ghost = "CONNECT",
+  ghost,
   primaryHref = site.selfcare.onboard,
   primaryLabel = "Check Coverage",
   primaryExternal = true,
@@ -33,9 +33,11 @@ export function CtaBanner({
     <section data-theme="dark" className="relative isolate overflow-hidden bg-[var(--color-void)]">
       <div aria-hidden="true" className="grain absolute inset-0" />
       <div aria-hidden="true" className="rising-glow" />
-      <span aria-hidden="true" className="ghost absolute -bottom-8 left-0 text-[24vw] md:text-[14rem]" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.12)" }}>
+      {ghost && (
+<span aria-hidden="true" className="ghost absolute -bottom-8 left-0 text-[24vw] md:text-[14rem]" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.12)" }}>
         {ghost}
       </span>
+)}
       <Container className="relative py-20 text-center md:py-28">
         <h2 className="display sr mx-auto max-w-3xl text-[2.9rem] leading-[1] text-white sm:text-6xl md:text-[5.5rem]">{title}</h2>
         <p className="sr mx-auto mt-6 max-w-md text-base text-white/75 md:text-lg">{lede}</p>

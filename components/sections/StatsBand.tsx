@@ -2,17 +2,17 @@ import { trustStats } from "@/lib/site";
 import { Container, Eyebrow } from "@/components/ui";
 import { BlobVideo } from "@/components/BlobVideo";
 
-/** Why-NextGen band: image + huge gradient stats on the void surface. */
+/**
+ * "Built like a carrier" intro: headline, stats and the family photo/video.
+ * The home page renders it as the opening block of the Why-NextGen section
+ * (one section, not two). No ghost watermark.
+ */
 export function StatsBand() {
   return (
-    <section className="wash relative overflow-hidden py-20 md:py-28">
-      <span aria-hidden="true" className="ghost absolute -top-2 right-0 text-[18vw] opacity-50 md:text-[10rem]">
-        UPTIME
-      </span>
       <Container className="relative grid items-center gap-12 lg:grid-cols-2">
         <div className="sr">
           <Eyebrow>Why NextGen</Eyebrow>
-          <h2 className="display text-[2.6rem] leading-[1.02] sm:text-6xl md:text-7xl">
+          <h2 id="why-title" className="display text-[2.6rem] leading-[1.02] sm:text-6xl md:text-7xl">
             Built like a <span className="accent-word">carrier.</span>
             <br />
             Priced like a neighbour.
@@ -54,6 +54,5 @@ export function StatsBand() {
           </p>
         </div>
       </Container>
-    </section>
   );
 }

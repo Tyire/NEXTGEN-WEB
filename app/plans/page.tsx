@@ -81,9 +81,6 @@ export default function PlansPage() {
       </section>
 
       <section className="wash relative overflow-hidden py-20 md:py-28" id="coverage">
-        <span aria-hidden="true" className="ghost absolute -top-3 right-0 text-[18vw] opacity-50 md:text-[10rem]">
-          ESTATE
-        </span>
         <Container className="relative">
           <SectionHead
             eyebrow="Your estate"

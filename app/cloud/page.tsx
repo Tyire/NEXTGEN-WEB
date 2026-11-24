@@ -147,7 +147,6 @@ export default function CloudPage() {
       <CtaBanner
         title={<>Let&rsquo;s get you online.</>}
         lede="Join the NextGen Cloud waitlist — we'll reach out on WhatsApp."
-        ghost="CLOUD"
         primaryHref="/cloud#waitlist"
         primaryLabel="Join the waitlist"
         primaryExternal={false}

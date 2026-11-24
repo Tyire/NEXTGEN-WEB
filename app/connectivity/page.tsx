@@ -32,7 +32,6 @@ export default function ConnectivityPage() {
         lede="True GPON fiber to your door — symmetrical speeds, low latency, and bandwidth that doesn’t fold at 9pm. From 2 Mbps starter lines to 2.5 Gbps carrier tiers."
         image="banner-connectivity"
         video="/videos/banner-connectivity.vid"
-        ghost="FIBER"
       >
         <Button variant="accent" href={site.selfcare.onboard} external>
           Check Coverage <Arrow />
@@ -133,9 +132,6 @@ export default function ConnectivityPage() {
 
       {/* Why GPON */}
       <section className="wash relative overflow-hidden py-20 md:py-28">
-        <span aria-hidden="true" className="ghost absolute -top-3 right-0 text-[18vw] opacity-50 md:text-[10rem]">
-          GPON
-        </span>
         <Container className="relative grid items-center gap-12 lg:grid-cols-2">
           <div className="sr-pop relative order-2 lg:order-1">
             <picture>

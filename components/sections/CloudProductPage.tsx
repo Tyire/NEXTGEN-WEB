@@ -14,7 +14,6 @@ import { cloudProducts } from "@/data/cloud-plans";
 export function CloudProductPage({
   slug,
   heroTitle,
-  heroGhost,
   benefitTitle,
   whoFor,
   detail,
@@ -24,7 +23,8 @@ export function CloudProductPage({
 }: {
   slug: string;
   heroTitle: React.ReactNode;
-  heroGhost: string;
+  /** Unused since Nov 2026 (ghost watermarks only on Plans and Cloud heroes). */
+  heroGhost?: string;
   /** Short punchy heading (3–6 words) for the "What it is" section — product.benefit is shown as supporting copy, not the heading. */
   benefitTitle: React.ReactNode;
   whoFor: string[];
@@ -42,7 +42,7 @@ export function CloudProductPage({
       <CloudOfferCatalogJsonLd product={product} />
       <FaqJsonLd faqs={faqs} />
 
-      <PageHero eyebrow={`NextGen Cloud · ${product.eyebrow}`} title={heroTitle} lede={product.short} ghost={heroGhost} />
+      <PageHero eyebrow={`NextGen Cloud · ${product.eyebrow}`} title={heroTitle} lede={product.short} />
 
       <section className="relative overflow-hidden py-20 md:py-28">
         <Container>
@@ -111,7 +111,6 @@ export function CloudProductPage({
       <CtaBanner
         title={ctaTitle}
         lede={ctaLede}
-        ghost={heroGhost}
         primaryHref={`${product.href}#waitlist`}
         primaryLabel={product.comingSoon ? "Join the waitlist" : "Talk to sales"}
         primaryExternal={false}

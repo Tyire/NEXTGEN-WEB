@@ -5,10 +5,10 @@ import { backboneLandings } from "@/data/backbone";
 import { PlansGrid } from "@/components/sections/PlansGrid";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { StatsBand } from "@/components/sections/StatsBand";
+import { FiberVsWireless } from "@/components/sections/FiberVsWireless";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { CoverageChecker } from "@/components/CoverageChecker";
-import { GeometricFlythrough } from "@/components/sections/GeometricFlythrough";
 import { site, purpose } from "@/lib/site";
 
 // Hero proof points (from Kimi's design)
@@ -38,19 +38,6 @@ const audienceCards = [
   },
 ];
 
-// "Why NextGen" numbered features (from Kimi's design)
-// Six proofs that back up the mission. Rendered as a compact evidence rail
-// beneath the Mission/Vision cards in the PURPOSE section — not a section of
-// their own. Kept to one crisp line each so they read as receipts, not lede.
-const whyProofs = [
-  { title: "Unlimited Data", body: "No caps, no throttling, no hidden limits." },
-  { title: "99.9% Uptime", body: "Fully redundant network with automated failover." },
-  { title: "Symmetrical Speeds", body: "Upload as fast as you download — video calls, cloud backups, remote teams." },
-  { title: "24/7 Support", body: "Real Lagos engineers on WhatsApp and the phone — not a ticket queue." },
-  { title: "3-Day Installation", body: "Survey to streaming in about three days in every lit estate." },
-  { title: "Direct Backbone", body: "Our own metro core straight to Equiano and MainOne — not resold." },
-];
-
 export default function Home() {
   return (
     <>
@@ -63,6 +50,7 @@ export default function Home() {
         {/* Legibility scrims: bottom-up on phones, left-to-right on desktop. */}
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,#000_18%,rgba(0,0,0,0.55)_55%,rgba(0,0,0,0.15))] md:bg-[linear-gradient(90deg,#000_8%,rgba(0,0,0,0.7)_45%,rgba(0,0,0,0)_78%)]" />
         <div aria-hidden="true" className="grain absolute inset-0 -z-10" />
+        <div aria-hidden="true" className="sun-glow" />
 
         <Container className="relative pb-28 pt-32 md:pb-24 md:pt-40 lg:pb-24">
           <p className="rise eyebrow eyebrow-rule">
@@ -161,32 +149,8 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ── NEXTGEN CLOUD — compact band, links out to /cloud ─────────── */}
-      <section className="wash relative overflow-hidden py-16 md:py-20">
-        <Container className="relative flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
-          <div className="max-w-xl">
-            <p className="eyebrow mb-3">New · Pre-launch</p>
-            <h2 className="display text-3xl font-extrabold sm:text-4xl">
-              Introducing <span className="text-[var(--color-brand-orange)]">NextGen Cloud.</span>
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-[var(--color-fg-muted)]">
-              Hosting, business email, Naira-billed VPS and done-for-you websites — on our own Lagos network. A small pilot group is onboarding now.
-            </p>
-          </div>
-          <a
-            href="/cloud"
-            className="group btn btn-ghost shrink-0"
-          >
-            Explore NextGen Cloud <Arrow />
-          </a>
-        </Container>
-      </section>
-
       {/* ── PLANS ────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[var(--color-surface)] py-20 md:py-28" id="plans">
-        <span aria-hidden="true" className="ghost absolute right-0 top-4 text-[20vw] opacity-30 md:text-[11rem]">
-          SPEED
-        </span>
         <Container className="relative">
           <SectionHead
             eyebrow="Broadband plans"
@@ -212,26 +176,16 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* ── DATA IN MOTION ─────────────────────────────────────────── */}
-      <GeometricFlythrough />
+      {/* ── WHY NEXTGEN — carrier intro, then mission/vision and six proofs ── */}
+      <section className="wash relative overflow-hidden py-20 md:py-28" aria-labelledby="why-title">
+        <StatsBand />
+        <Container className="relative mt-16 md:mt-24">
+          <p className="eyebrow">Our driving force</p>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-[var(--color-fg-muted)] md:text-lg">
+            Every plan, every install, every night-shift ticket ladders back to a single purpose.
+          </p>
 
-      {/* ── PURPOSE — mission and vision lead; six proofs back them up ── */}
-      <section className="wash relative overflow-hidden py-20 md:py-28" aria-labelledby="purpose-title">
-        <span aria-hidden="true" className="ghost absolute -top-4 right-0 text-[18vw] opacity-30 md:text-[10rem]">
-          PURPOSE
-        </span>
-        <Container className="relative">
-          <div className="max-w-2xl">
-            <p className="eyebrow">Our driving force</p>
-            <h2 id="purpose-title" className="display mt-4 text-4xl font-extrabold sm:text-5xl md:text-6xl">
-              Why Choose <span className="text-[var(--color-brand-orange)]">NextGen?</span>
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-[var(--color-fg-muted)] md:text-lg">
-              Every plan, every install, every night-shift ticket ladders back to a single purpose.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-6 md:mt-16 md:grid-cols-2 md:gap-8">
+          <div className="mt-10 grid gap-6 md:mt-16 md:grid-cols-2 md:gap-8">
             {/* Mission */}
             <article className="sr-pop edge-top rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 md:p-10">
               <span className="display block text-xs font-bold uppercase tracking-[0.22em] text-[var(--color-brand-orange)]">
@@ -266,39 +220,12 @@ export default function Home() {
             </article>
           </div>
 
-          {/* Evidence rail — how the mission and vision translate into service.
-              Deliberately understated: small tiles, hairline dividers, one
-              crisp line each. Meant to read as receipts under the cards
-              above, not as its own section. */}
-          <div className="mt-14 border-t border-[var(--color-hairline)] pt-10 md:mt-20 md:pt-14">
-            <div className="mb-8 flex flex-wrap items-baseline justify-between gap-3">
-              <p className="eyebrow">How we back it up</p>
-              <p className="text-xs uppercase tracking-[0.18em] text-[var(--color-fg-faint)]">Six ways · one promise</p>
-            </div>
-            <ul className="grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
-              {whyProofs.map((p, i) => (
-                <li
-                  key={p.title}
-                  className="sr-pop group flex gap-4"
-                  style={{ animationDelay: `${i * 0.05}s` }}
-                >
-                  <span aria-hidden="true" className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[var(--color-brand-orange)]" />
-                  <div>
-                    <h4 className="display text-sm font-bold uppercase tracking-[0.08em]">{p.title}</h4>
-                    <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-fg-muted)]">{p.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FiberVsWireless />
         </Container>
       </section>
 
       {/* ── COVERAGE ──────────────────────────────────────────────── */}
-      <section className="wash relative overflow-hidden py-20 md:py-28" id="coverage">
-        <span aria-hidden="true" className="ghost absolute -top-3 left-0 text-[20vw] opacity-30 md:text-[11rem]">
-          LIVE IN
-        </span>
+      <section className="relative overflow-hidden bg-[var(--color-surface)] py-20 md:py-28" id="coverage">
         <Container className="relative">
           <SectionHead
             eyebrow="Coverage"
@@ -338,7 +265,8 @@ export default function Home() {
       </section>
 
       {/* ── BACKBONE — Lagos to the transatlantic cables (cobe globe) ── */}
-      <section className="on-dark relative overflow-hidden py-20 md:py-28" aria-labelledby="backbone-title">
+      <section className="on-dark relative isolate overflow-hidden py-20 md:py-28" aria-labelledby="backbone-title">
+        <div aria-hidden="true" className="sun-glow" />
         <Container className="relative grid items-center gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-6">
           <div className="sr">
             <p className="eyebrow eyebrow-rule mb-5">The backbone</p>
@@ -372,7 +300,6 @@ export default function Home() {
         </Container>
       </section>
 
-      <StatsBand />
       <Testimonials />
       <CtaBanner />
     </>

@@ -43,7 +43,6 @@ export default function AboutPage() {
         }
         lede="We're changing the way leading brands and consumers communicate. A forward-thinking telecoms company fueled by our commitment to addressing the specific needs of our customers."
         image="fiber"
-        ghost="NEXTGEN"
       >
         <Button variant="accent" href="/contact">
           Work with us <Arrow />
@@ -112,9 +111,6 @@ export default function AboutPage() {
 
       {/* ── MISSION & VISION ────────────────────────────────────── */}
       <section className="wash relative overflow-hidden py-20 md:py-28">
-        <span aria-hidden="true" className="ghost absolute -top-4 right-0 text-[18vw] opacity-40 md:text-[10rem]">
-          PURPOSE
-        </span>
         <Container className="relative grid gap-10 md:grid-cols-2">
           {/* Mission */}
           <div className="sr-pop edge-top rounded-[var(--radius)] border border-[var(--color-hairline)] bg-[var(--color-surface)] p-8 md:p-10">
@@ -153,9 +149,6 @@ export default function AboutPage() {
 
       {/* ── BRAND MESSAGE ───────────────────────────────────────── */}
       <section className="relative overflow-hidden py-20 md:py-28">
-        <span aria-hidden="true" className="ghost absolute -top-3 left-0 text-[18vw] opacity-40 md:text-[10rem]">
-          SIGNAL
-        </span>
         <Container className="relative">
           <SectionHead
             eyebrow="Our brand message"

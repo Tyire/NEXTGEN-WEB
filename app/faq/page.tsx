@@ -100,7 +100,6 @@ export default function FaqPage() {
         lede="Most questions are answered below in a minute. Everything else goes straight to a real engineer on WhatsApp — no ticket purgatory."
         image="banner-contact"
         video="/videos/banner-contact.vid"
-        ghost="HELP"
       >
         <Button variant="accent" href={wa} external>
           WhatsApp support <Arrow />

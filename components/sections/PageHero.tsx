@@ -25,7 +25,8 @@ export function PageHero({
   lede: string;
   image?: string;
   video?: string;
-  ghost: string;
+  /** Optional outline watermark. Owner rule (Nov 2026): Plans and Cloud heroes only. */
+  ghost?: string;
   children?: React.ReactNode;
 }) {
   return (
@@ -73,9 +74,11 @@ export function PageHero({
       )}
 
       <Container className="relative w-full pb-12 pt-10 md:pb-14">
-        <span aria-hidden="true" className="ghost absolute -bottom-6 right-0 text-[22vw] md:text-[12rem]" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.14)" }}>
+        {ghost && (
+<span aria-hidden="true" className="ghost absolute -bottom-6 right-0 text-[22vw] md:text-[12rem]" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.14)" }}>
           {ghost}
         </span>
+)}
         <div className="max-w-3xl">
           <Eyebrow className="rise !text-white/65">{eyebrow}</Eyebrow>
           <h1 className="display rise-slide text-[2.9rem] leading-[0.98] text-white sm:text-6xl md:text-[5.2rem]" style={{ animationDelay: "0.08s" }}>
