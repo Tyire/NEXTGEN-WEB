@@ -9,7 +9,6 @@ import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { CoverageChecker } from "@/components/CoverageChecker";
 import { GeometricFlythrough } from "@/components/sections/GeometricFlythrough";
-import { NetworkMap } from "@/components/sections/NetworkMap";
 import { site, purpose } from "@/lib/site";
 
 // Hero proof points (from Kimi's design)
@@ -372,8 +371,6 @@ export default function Home() {
           </div>
         </Container>
       </section>
-
-      <NetworkMap />
 
       <StatsBand />
       <Testimonials />
