@@ -7,28 +7,28 @@ const quotes = [
     quote:
       "Two years of Netflix nights and not one buffering wheel. My kids think slow internet is something from history class.",
     name: "Ada O.",
-    meta: "Resident — Lekki Phase 1",
+    meta: "Home subscriber",
     tilt: "rotate-2",
   },
   {
     quote:
       "I run video calls with clients in London every morning. NextGen's upload speed is the reason they think I work from an office.",
     name: "Tunde A.",
-    meta: "Consultant — Ikate",
+    meta: "Remote consultant",
     tilt: "-rotate-1",
   },
   {
     quote:
       "We moved the whole estate onto their fiber. Installation crew came when they said they would — twice in a row. In Lagos!",
     name: "Mrs. Bello",
-    meta: "Estate manager — Ajah",
+    meta: "Estate manager",
     tilt: "rotate-1",
   },
   {
     quote:
       "Ranked games at 12ms to the Lagos server. I switched ISPs three times before this one. I'm done switching.",
     name: "Seyi K.",
-    meta: "Gamer — Orchid Road",
+    meta: "Gamer and streamer",
     tilt: "-rotate-2",
   },
 ];

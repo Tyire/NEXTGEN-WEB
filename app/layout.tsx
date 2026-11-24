@@ -22,7 +22,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — GPON Fiber, VoIP & Metro Ethernet in Lagos`,
+    default: `${site.name} — GPON Fiber, VoIP & Metro Ethernet in Nigeria`,
     template: `%s — ${site.name}`,
   },
   description: site.description,

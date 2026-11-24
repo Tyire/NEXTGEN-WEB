@@ -199,9 +199,3 @@ export const purpose = {
 
 // Real lit coverage — the estates/areas live on the selfcare onboarding portal
 // (confirmed 2026-07-02). Broad areas first, then the specific estates.
-export const coverageZones = [
-  "Ikate", "Lekki", "Ajah", "Ilasan", "Orchid",
-  "Lekky County Homes", "Lakeview Park II", "Grandview Estate",
-  "Homestead Apartment", "Janel Apartment", "Olivia Court",
-  "MUFASA", "Camberwell 5", "Eastline Shopping Complex", "SUNSHINEVIEW",
-] as const;

@@ -40,7 +40,7 @@ export function ContactForm() {
           </select>
         </div>
       </div>
-      <Field label="Estate / address" name="address" autoComplete="street-address" placeholder="e.g. Lekki Phase 1, Lagos…" />
+      <Field label="Estate / address" name="address" autoComplete="street-address" placeholder="e.g. estate, street and city…" />
       <div>
         <label htmlFor="cf-message" className={labelCls}>
           Message

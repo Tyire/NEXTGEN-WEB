@@ -2,7 +2,7 @@ import { Logo } from "./Logo";
 import { Container, Arrow } from "./ui";
 import { InstallPrompt } from "./InstallPrompt";
 import { FooterWordmark } from "./FooterWordmark";
-import { site, nav, footerLinks, services, coverageZones, waLink } from "@/lib/site";
+import { site, nav, footerLinks, services, waLink } from "@/lib/site";
 
 const year = new Date().getFullYear();
 
@@ -13,7 +13,7 @@ export function Footer() {
     <footer data-theme="dark" className="relative overflow-hidden bg-[var(--color-void)] text-[var(--color-fg)]">
       {/* Editorial sign-off band */}
       <Container className="relative border-b border-[var(--color-hairline)] pb-12 pt-16 md:pb-16 md:pt-24">
-        <p className="eyebrow eyebrow-rule mb-6">Live across Lagos</p>
+        <p className="eyebrow eyebrow-rule mb-6">Fibre where you are</p>
         <p className="display max-w-3xl text-[2.6rem] leading-[1.02] sm:text-6xl md:text-7xl">
           Fibre that keeps up <span className="accent-word">with you.</span>
         </p>
@@ -36,7 +36,7 @@ export function Footer() {
             </a>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-[var(--color-fg-muted)]">
               {site.tagline} And people who pick up when you call — GPON fiber, business voice and
-              Metro Ethernet across Lagos and Nigeria.
+              Metro Ethernet wherever you need it.
             </p>
             <div className="mt-6 flex gap-3">
               <a
@@ -96,14 +96,14 @@ export function Footer() {
           </nav>
 
           <div>
-            <p className="eyebrow mb-4">Live in</p>
+            <p className="eyebrow mb-4">We connect</p>
             <ul className="grid gap-2.5 text-sm text-[var(--color-fg-muted)]">
-              {coverageZones.slice(0, 5).map((z) => (
+              {["Homes & estates", "Offices & campuses", "Multi-site businesses", "Carriers & data centres"].map((z) => (
                 <li key={z}>{z}</li>
               ))}
               <li>
                 <a href="/plans" className="font-semibold text-[var(--color-brand-orange)] hover:underline">
-                  Check your estate →
+                  Check your address →
                 </a>
               </li>
             </ul>

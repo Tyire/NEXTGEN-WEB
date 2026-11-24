@@ -3,7 +3,7 @@ import { Container, Button, Arrow, SectionHead } from "@/components/ui";
 import { PageHero } from "@/components/sections/PageHero";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
-import { site, trustStats, coverageZones, purpose } from "@/lib/site";
+import { site, trustStats, purpose } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About NextGen Telecoms — The NextGen Telecom Company",
@@ -15,11 +15,11 @@ export const metadata: Metadata = {
 const pillars = [
   {
     title: "Built, not resold",
-    body: "NextGen runs its own GPON fiber and metro core across Lagos. When you subscribe, you're on our glass end-to-end — not a reseller hop away from whoever actually owns the network.",
+    body: "NextGen runs its own GPON fiber and metro core. When you subscribe, you're on our glass end-to-end — not a reseller hop away from whoever actually owns the network.",
   },
   {
     title: "Estates first",
-    body: "We light estates, not just streets. Working with estate managers from Ikate to Ajah, we bring fiber to the gate and then to every door — so whole communities upgrade at once.",
+    body: "We light estates, not just streets. Working with estate managers and business owners, we bring fiber to the gate and then to every door — so whole communities upgrade at once.",
   },
   {
     title: "Engineers who pick up",
@@ -213,32 +213,18 @@ export default function AboutPage() {
             eyebrow="Where we operate"
             title={
               <>
-                Live across{" "}
-                <span className="text-[var(--color-brand-orange)]">Lagos.</span>
+                We go where{" "}
+                <span className="text-[var(--color-brand-orange)]">you are.</span>
               </>
             }
-            lede="Estate by estate across the Lekki peninsula — and growing."
+            lede="Homes, estates, offices and branch sites — we survey, build and light fibre where our customers need it."
           />
-          <div className="mt-12 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:mt-16">
-            {coverageZones.map((z, i) => (
-              <div
-                key={z}
-                className="sr flex items-center justify-between rounded-xl border border-[var(--color-hairline)] bg-[var(--color-surface)] px-5 py-4"
-                style={{ animationDelay: `${i * 0.03}s` }}
-              >
-                <span className="text-sm font-semibold">{z}</span>
-                <span className="ml-3 shrink-0 rounded-full bg-[rgba(20,145,92,0.12)] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--color-success)]">
-                  Live
-                </span>
-              </div>
-            ))}
-          </div>
           <p className="mt-8 text-sm text-[var(--color-fg-muted)]">
-            Not listed?{" "}
+            Need fibre at a new site?{" "}
             <a href="/contact" className="font-semibold text-[var(--color-brand-orange)] hover:underline">
               Contact us →
             </a>{" "}
-            We may still be able to serve your address.
+            We survey your location for the next build.
           </p>
         </Container>
       </section>

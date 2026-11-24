@@ -32,7 +32,7 @@ const audienceCards = [
     tag: "For business",
     title: "Dedicated links,",
     accent: "SLA-backed.",
-    body: "Dedicated connectivity, SLA-backed uptime and enterprise-grade support across Lagos.",
+    body: "Dedicated connectivity, SLA-backed uptime and enterprise-grade support wherever you operate.",
     action: "Talk to enterprise sales",
     href: "/enterprise",
   },
@@ -55,8 +55,8 @@ export default function Home() {
         <Container className="relative pb-28 pt-32 md:pb-24 md:pt-40 lg:pb-24">
           <p className="rise eyebrow eyebrow-rule">
             <span className="live-dot" aria-hidden="true" />
-            <span className="sm:hidden">GPON fibre · Lagos</span>
-            <span className="hidden sm:inline">GPON fibre · Lekki · Ikate · Ilasan · Ajah</span>
+            <span className="sm:hidden">GPON fibre · Homes &amp; business</span>
+            <span className="hidden sm:inline">GPON fibre · Voice · Metro Ethernet · Cloud</span>
           </p>
 
           <h1
@@ -72,7 +72,7 @@ export default function Home() {
 
           <p className="rise mt-7 max-w-[34rem] text-[1.05rem] leading-relaxed text-white/70 md:text-xl" style={{ animationDelay: "0.18s" }}>
             Truly unlimited fibre broadband, dedicated enterprise links, voice and data
-            infrastructure across Lagos — backed by a 24/7 operations team.
+            infrastructure that goes where you are — backed by a 24/7 operations team.
           </p>
 
           <div className="rise cta-pair mt-9 max-w-md sm:max-w-none" style={{ animationDelay: "0.28s" }}>
@@ -235,7 +235,7 @@ export default function Home() {
                 <span className="text-[var(--color-brand-orange)]">your estate?</span>
               </>
             }
-            lede="We build estate by estate across Lekki, Ikate, Ilasan, Orchid and Ajah. Pick yours to see live plans and the exact installation cost."
+            lede="We build where our customers are — homes, estates, offices and branch sites. Pick your estate to see live plans and the exact installation cost, or ask us to build to you."
           />
           <div className="sr-pop mt-12 md:mt-16">
             <CoverageChecker />
@@ -271,7 +271,7 @@ export default function Home() {
           <div className="sr">
             <p className="eyebrow eyebrow-rule mb-5">The backbone</p>
             <h2 id="backbone-title" className="display text-[2.6rem] leading-[1.02] text-white sm:text-6xl md:text-7xl">
-              Lagos, wired <span className="accent-word">to the world.</span>
+              Nigeria, wired <span className="accent-word">to the world.</span>
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-white/65 md:text-lg">
               Redundant links into the transatlantic submarine cables with automated failover, a
